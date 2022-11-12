@@ -7,6 +7,8 @@
     "node": "16.x"
   },
   "dependencies": {
+    "@googlemaps/react-wrapper": "^1.1.35",
+    "@react-google-maps/api": "^2.17.0",
     "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
     "cookie-session": "^2.0.0",
@@ -34,6 +36,7 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "dotenv-webpack": "^8.0.1",
     "nodemon": "^2.0.4"
   },
   "browserslist": [
