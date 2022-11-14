@@ -2,6 +2,10 @@ const express = require('express');
 const bodyParser = require('body-parser');
 require('dotenv').config();
 
+// bring in multer 
+const multer  = require('multer');
+const upload = multer({ dest: 'uploads/' });
+
 const app = express();
 
 const sessionMiddleware = require('./modules/session-middleware');
@@ -9,6 +13,7 @@ const passport = require('./strategies/user.strategy');
 
 // Route includes
 const userRouter = require('./routes/user.router');
+const multerRouter = require('./routes/multer.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -23,6 +28,9 @@ app.use(passport.session());
 
 /* Routes */
 app.use('/api/user', userRouter);
+// multer route
+app.use('/app/multer', multerRouter);
+
 
 // Serve static files
 app.use(express.static('build'));
