@@ -27,7 +27,8 @@ function MapComponent() {
   // disable UI and add in the zoom controls
   const options = {
     disableDefaultUI: true,
-    zoomControl: true
+    zoomControl: true,
+    
   }
 
   // load script load the map
@@ -78,11 +79,26 @@ function MapComponent() {
   //console.log('markers are', markers);
   }, []);
 
+  const toUserPosition = React.useCallback((evt) => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {   
+        console.log('user position is', {lat: position.coords.latitude, lng: position.coords.longitude})
+      }, 
+      () => null
+    )
+  },[]);
+
   // add mapRef function to store map for use later without re-renders
   const mapRef = React.useRef();
   const onMapLoad = React.useCallback((map) => {
     map.current = map;
   }, []);
+
+  // create a function that will pan to user location 
+  // pass in latitude and longitude
+  const panTo = React.useCallback(({lat, lng}) => {
+    mapRef.current.panTo({lat, lng});
+  }, [])
 
   if (loadError) return "Error loading Maps";
   if (!isLoaded) return "loading maps";
@@ -98,6 +114,7 @@ function MapComponent() {
       // on click, set a marker
       // onClick={onMapClick}
       onLoad={onMapLoad}
+      onClick={toUserPosition}
       >
         {/* add a marker at the center of map */}
         <Marker
