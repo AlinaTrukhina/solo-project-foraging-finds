@@ -121,9 +121,9 @@ function App() {
         {/* <Link to="/details">
           Details
         </Link> */}
-        <Route path="/details" exact>
+        {/* <Route path="/details" exact>
           <DetailsPage />
-        </Route>
+        </Route> */}
         {/* <MapComponent /> */}
         <Footer />
       </div>

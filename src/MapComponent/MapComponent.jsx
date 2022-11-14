@@ -55,16 +55,19 @@ function MapComponent() {
   // add some map markers to render
   const myMarkers = [
     {
+      id: 1,
       lat: 44.985, 
       lng: -93.31,
       title: 'King Bolete'
     },
     {     
+      id: 2,
       lat: 44.985, 
       lng: -93.33,
       title: 'Amanita Muscaria'
     },
     {     
+      id: 3,
       lat: 44.94852, 
       lng: -93.260536,
       title: 'Honey Mushroom'
@@ -170,12 +173,12 @@ function MapComponent() {
           <div>
             <h4>{selected.title}</h4>
             <p>{selected.lat}, {selected.lng}</p>
-            
+              
               <Router selected={selected} >
                 <Link selected={selected}  to='/details/' >
                   Details
                 </Link>
-                <Route path="/details/" exact>
+                <Route path="/details/" exact selected={selected}>
                   <DetailsPage selected={selected} />
                 </Route>
               </Router>
