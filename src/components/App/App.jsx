@@ -117,7 +117,7 @@ function App() {
           </Route>
         </Switch>
 
-        <MapComponent />
+        {/* <MapComponent /> */}
         <Footer />
       </div>
     </Router>

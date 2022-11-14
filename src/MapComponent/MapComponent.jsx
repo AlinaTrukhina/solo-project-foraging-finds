@@ -4,14 +4,14 @@ import { GoogleMap, useLoadScript, Marker, InfoWindow } from "@react-google-maps
 
 function MapComponent() {
 
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(position => {
-      //const { lat, lng } = position.coords;
-      // set user position to current position
-      setUserPosition({lat: position.coords.latitude, lng: position.coords.longitude})
-      console.log('user positon:', userPosition);
-    }, () => null);
-  }, []);
+  // useEffect(() => {
+  //   navigator.geolocation.getCurrentPosition(position => {
+  //     //const { lat, lng } = position.coords;
+  //     // set user position to current position
+  //     setUserPosition({lat: position.coords.latitude, lng: position.coords.longitude})
+  //     console.log('user positon:', userPosition);
+  //   }, () => null);
+  // }, []);
 
   // map options
   // make map take up the whole window
@@ -21,8 +21,8 @@ function MapComponent() {
   };
   // create a center point
   const center = {
-    lat: 44.9573059,
-    lng: -93.25617
+    lat: 44.986255478183345, 
+    lng: -93.32462156101973
   };
   // disable UI and add in the zoom controls
   const options = {
@@ -30,7 +30,7 @@ function MapComponent() {
     zoomControl: true
   }
 
-  
+  // load script load the map
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
   });
@@ -45,6 +45,24 @@ function MapComponent() {
   // store selected marker state
   const [selected, setSelected] = React.useState(null);
 
+  // add some map markers to render
+  const myMarkers = [
+    {
+      lat: 44.985, 
+      lng: -93.31,
+      title: 'King Bolete'
+    },
+    {     
+      lat: 44.985, 
+      lng: -93.33,
+      title: 'Amanita Muscaria'
+    },
+    {     
+      lat: 44.94852, 
+      lng: -93.260536,
+      title: 'Honey Mushroom'
+    }
+  ]
 
   // useCallback ishook to avoid re-rendering the map all the time on any action
   // onMapClick will add a marker at position of click to markers array
@@ -75,27 +93,61 @@ function MapComponent() {
       <GoogleMap 
       mapContainerStyle={mapContainerStyle} 
       zoom={12} 
-      center={userPosition ? userPosition : center}
+      center={center}
       options={options}
-      onClick={onMapClick}
+      // on click, set a marker
+      // onClick={onMapClick}
       onLoad={onMapLoad}
       >
         {/* add a marker at the center of map */}
         <Marker
-        position={userPosition ? userPosition : center}
+        position={center}
         />
 
         {markers.map(marker => (
-          <Marker key={marker.time} position={{lat: marker.lat, lng: marker.lng}}  
+          <Marker key={marker.time} 
+          position={{lat: marker.lat, lng: marker.lng}}
+          // change the icon to a mushroom
+          icon={{
+            url: '/svg/mushroom-bolete.svg',
+            scaledSize: new window.google.maps.Size(30,30),
+            // sets origin to the point where user clicked
+            origin: new window.google.maps.Point(0, 0),
+            // sets anchor to half the size so that the icon appears on t
+            anchor: new window.google.maps.Point(15, 15)
+          }}  
           // set the clicked marker as selected
           onClick={()=>{
             setSelected(marker)
           }}
           />
         ))}
+
+        {/* map my markers */}
+        {myMarkers.map(marker => (
+          <Marker key={marker.title} 
+          position={{lat: marker.lat, lng: marker.lng}}
+          // change the icon to a mushroom
+          icon={{
+            url: '/svg/mushroom-bolete.svg',
+            scaledSize: new window.google.maps.Size(30,30),
+            // sets origin to the point where user clicked
+            origin: new window.google.maps.Point(0, 0),
+            // sets anchor to half the size so that the icon appears on t
+            anchor: new window.google.maps.Point(15, 15)
+          }}  
+          // set the clicked marker as selected
+          onClick={()=>{
+            setSelected(marker)
+          }}
+          />
+        ))}
+        {/* opens up info window for the selected marker*/}
         {selected ? (<InfoWindow position={{lat: selected.lat, lng: selected.lng}} onCloseClick={() => setSelected(null)}>
-          <h2>{selected.lat}, {selected.lng}</h2>
-          <p></p>
+          <div>
+            <h4>{selected.title}</h4>
+            <p>{selected.lat}, {selected.lng}</p>
+          </div>
         </InfoWindow>) : null}
       </GoogleMap>
     </>

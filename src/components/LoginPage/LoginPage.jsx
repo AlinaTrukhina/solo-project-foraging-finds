@@ -1,7 +1,7 @@
 import React from 'react';
 import LoginForm from '../LoginForm/LoginForm';
 import { useHistory } from 'react-router-dom';
-
+import MapComponent from '../../MapComponent/MapComponent';
 
 
 function LoginPage() {
@@ -48,6 +48,7 @@ function LoginPage() {
         </button>
       </center>
     </div>
+    <MapComponent />
     </>
   );
 }
