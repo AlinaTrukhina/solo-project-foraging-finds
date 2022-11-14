@@ -19,6 +19,7 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import MapComponent from '../../MapComponent/MapComponent';
 
 import './App.css';
 
@@ -115,6 +116,8 @@ function App() {
             <h1>404</h1>
           </Route>
         </Switch>
+
+        <MapComponent />
         <Footer />
       </div>
     </Router>
