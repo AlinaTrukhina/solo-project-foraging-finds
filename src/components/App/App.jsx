@@ -4,6 +4,7 @@ import {
   Redirect,
   Route,
   Switch,
+  Link
 } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -20,6 +21,7 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import MapComponent from '../../MapComponent/MapComponent';
+import DetailsPage from '../DetailsPage/DetailsPage';
 
 import './App.css';
 
@@ -116,7 +118,12 @@ function App() {
             <h1>404</h1>
           </Route>
         </Switch>
-
+        {/* <Link to="/details">
+          Details
+        </Link> */}
+        <Route path="/details" exact>
+          <DetailsPage />
+        </Route>
         {/* <MapComponent /> */}
         <Footer />
       </div>

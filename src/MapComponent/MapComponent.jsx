@@ -1,6 +1,12 @@
 import React from "react";
 import { useMemo, useEffect } from "react";
 import { GoogleMap, useLoadScript, Marker, InfoWindow } from "@react-google-maps/api";
+import { 
+  Link,
+  HashRouter as Router,
+  Route,
+  } from 'react-router-dom';
+import DetailsPage from "../components/DetailsPage/DetailsPage";
 
 function MapComponent() {
 
@@ -28,10 +34,10 @@ function MapComponent() {
   const options = {
     disableDefaultUI: true,
     zoomControl: true,
-    
+    // TODO: add map style
   }
 
-  // load script load the map
+  // load script - load the map, or show error message
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
   });
@@ -164,6 +170,16 @@ function MapComponent() {
           <div>
             <h4>{selected.title}</h4>
             <p>{selected.lat}, {selected.lng}</p>
+            
+              <Router selected={selected} >
+                <Link selected={selected}  to='/details/' >
+                  Details
+                </Link>
+                <Route path="/details/" exact>
+                  <DetailsPage selected={selected} />
+                </Route>
+              </Router>
+            
           </div>
         </InfoWindow>) : null}
       </GoogleMap>
