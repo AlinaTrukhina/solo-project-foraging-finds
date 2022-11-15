@@ -13,6 +13,7 @@ const passport = require('./strategies/user.strategy');
 
 // Route includes
 const userRouter = require('./routes/user.router');
+const pinsRouter = require('./routes/pins.router');
 const multerRouter = require('./routes/multer.router');
 
 // Body parser middleware
@@ -28,8 +29,10 @@ app.use(passport.session());
 
 /* Routes */
 app.use('/api/user', userRouter);
+// pins route
+app.use('/api/pins', pinsRouter);
 // multer route
-app.use('/app/multer', multerRouter);
+app.use('/api/multer', multerRouter);
 
 
 // Serve static files

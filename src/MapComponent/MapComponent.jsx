@@ -6,9 +6,12 @@ import {
   HashRouter as Router,
   Route,
   } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import DetailsPage from "../components/DetailsPage/DetailsPage";
 
 function MapComponent() {
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(position => {
@@ -17,6 +20,10 @@ function MapComponent() {
       setUserPosition({lat: position.coords.latitude, lng: position.coords.longitude})
       console.log('user positon, page load:', userPosition);
     }, () => null);
+
+    dispatch({
+      type: 'FETCH_PINS'
+    })
   }, []);
 
   // map options
@@ -133,7 +140,7 @@ function MapComponent() {
       center={userPosition.lat ? userPosition : center}
       options={options}
       // on click, set a marker
-      onClick={onMapClick}
+      // onClick={onMapClick}
       onLoad={onMapLoad}
       //onClick={toUserPosition}
       >
