@@ -8,7 +8,7 @@ CREATE TABLE "user" (
 	"id" serial NOT NULL,
 	"username" varchar(255) UNIQUE NOT NULL,
 	"password" varchar(255) NOT NULL,
-	"avatar" varchar(255),
+	"avatar" varchar(1024),
 	CONSTRAINT "user_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
@@ -18,7 +18,7 @@ CREATE TABLE "user" (
 CREATE TABLE "location" (
 	"id" serial NOT NULL,
 	"lat" varchar(255) NOT NULL,
-	"long" varchar(255) NOT NULL,
+	"lng" varchar(255) NOT NULL,
 	CONSTRAINT "location_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
@@ -73,12 +73,9 @@ ALTER TABLE "comments" ADD CONSTRAINT "comments_fk0" FOREIGN KEY ("user_id") REF
 ALTER TABLE "comments" ADD CONSTRAINT "comments_fk1" FOREIGN KEY ("pin_id") REFERENCES "pins"("id");
 
 
-INSERT INTO "pins" ("title", "latin name", "date", "image_id", "text entry", "user_id", "location_id")
-VALUES ('White Mushroom', 'unknown', '2021-08-14', 1, 'mushroom found in BWCA', 1, 1)
-;
-
 INSERT INTO "images" ("img_url")
-VALUES ('https://www.mushroomexpert.com/images/kuo4/boletus_edulis_01.jpg'),
+VALUES ('https://live.staticflickr.com/65535/52499112900_5463c4e832_b.jpg'),
+		('https://www.mushroomexpert.com/images/kuo4/boletus_edulis_01.jpg'),
 		('https://www.mushroomexpert.com/images/kuo/morchella_prava_01_thumb.jpg'),
 		('https://www.mushroomexpert.com/images/kuo3/cantharellus_cf_cibarius_01.jpg'),
 		('https://mushrooms.bigbadmole.com/wp-content/uploads/2014/11/1011a-106.jpg'),
@@ -89,8 +86,8 @@ VALUES ('https://www.mushroomexpert.com/images/kuo4/boletus_edulis_01.jpg'),
 		('https://www.mushroomexpert.com/images/kuo2/amanita_muscaria_muscaria_06.jpg')
 		;
 
-INSERT INTO "location" ("lat", "long")
-VALUES  
+INSERT INTO "location" ("lat", "lng")
+VALUES  (44.9572739, -93.2561296),
 		(44.985, -93.33),
 		(44.94852, -93.260536),
 		(44.94306991431049, -93.30413328554685),
@@ -103,7 +100,8 @@ VALUES
 ;
 
 INSERT INTO "pins" ("title", "latin name", "date", "image_id", "text entry", "user_id", "location_id")
-VALUES ('King Bolete', 'Boletus Edulis', '2022-08-14', 2, 'A large King Bolete', 1, 2),
+VALUES ('White Mushroom', 'unknown', '2021-08-14', 1, 'mushroom found in BWCA', 1, 1),
+('King Bolete', 'Boletus Edulis', '2022-08-14', 2, 'A large King Bolete', 1, 2),
 ('Morel', 'Morchella esculenta', '2022-04-10', 3, 'baby morel', 1, 3),
 ('Golden Chanterelle', 'Cantharellus cibarius', '2021-07-29', 4, 'beautiful golden chanterelle, delicious on their own', 1, 4),
 ('Hat-food Russula', 'Russula vesca', '2021-08-13', 5, 'good to fry up in a stir fry', 1, 5),
@@ -120,4 +118,9 @@ CREATE TABLE "test-images" (
 	"img_url" varchar NOT NULL,
 	"destination" varchar,
 	);
-
+	
+SELECT "pins"."id", "title", "latin name", "date", "text_entry", "lat", "lng"
+FROM "pins"
+JOIN "location" ON location.id = pins.location_id
+GROUP BY pins.id
+;
