@@ -20,7 +20,7 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
-import MapComponent from '../../MapComponent/MapComponent';
+import MapComponent from '../MapComponent/MapComponent';
 import DetailsPage from '../DetailsPage/DetailsPage';
 
 import './App.css';

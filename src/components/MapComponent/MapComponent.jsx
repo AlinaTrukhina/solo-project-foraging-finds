@@ -7,7 +7,7 @@ import {
   Route,
   } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import DetailsPage from "../components/DetailsPage/DetailsPage";
+import DetailsPage from "../DetailsPage/DetailsPage";
 import mapStyles from "./mapStyles"
 
 function MapComponent() {
@@ -26,7 +26,7 @@ function MapComponent() {
     dispatch({
       type: 'FETCH_PINS'
     })
-    console.log('pins', pins);
+
   }, []);
 
   // map options
@@ -162,13 +162,13 @@ function MapComponent() {
             anchor: new window.google.maps.Point(15, 15)
           }}  
         />}
-
-        {markers.map(marker => (
-          <Marker key={marker.time} 
-          position={{lat: marker.lat, lng: marker.lng}}
+        {/* render all pins from store on map */}
+        {allPins.map(marker => (
+          <Marker key={marker.id} 
+          position={{lat: Number(marker.lat), lng: Number(marker.lng)}}
           // change the icon to a mushroom
           icon={{
-            url: '/svg/mushroom-bolete.svg',
+            url: '/svg/mushrooms-2-mushrooms.svg',
             scaledSize: new window.google.maps.Size(30,30),
             // sets origin to the point where user clicked
             origin: new window.google.maps.Point(0, 0),
@@ -177,7 +177,7 @@ function MapComponent() {
           }}  
           // set the clicked marker as selected
           onClick={()=>{
-            setSelected(marker)
+            setSelected(marker);
           }}
           />
         ))}
@@ -202,13 +202,13 @@ function MapComponent() {
           />
         ))}
         {/* opens up info window for the selected marker*/}
-        {selected ? (<InfoWindow position={{lat: selected.lat, lng: selected.lng}} onCloseClick={() => setSelected(null)}>
+        {selected ? (<InfoWindow position={{lat: Number(selected.lat), lng: Number(selected.lng)}} onCloseClick={() => setSelected(null)}>
           <div>
             <h4>{selected.title}</h4>
             <p>{selected.lat}, {selected.lng}</p>
               
               <Router selected={selected} >
-                <Link selected={selected}  to="/details" >
+                <Link selected={selected}  to="/details/:id" >
                   Details
                 </Link>
               </Router>
