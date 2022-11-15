@@ -8,10 +8,12 @@ import {
   } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import DetailsPage from "../components/DetailsPage/DetailsPage";
+import mapStyles from "./mapStyles"
 
 function MapComponent() {
 
   const dispatch = useDispatch();
+  const allPins = useSelector(store => store.pins);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(position => {
@@ -24,6 +26,7 @@ function MapComponent() {
     dispatch({
       type: 'FETCH_PINS'
     })
+    console.log('pins', pins);
   }, []);
 
   // map options
@@ -41,7 +44,7 @@ function MapComponent() {
   const options = {
     disableDefaultUI: true,
     zoomControl: true,
-    // TODO: add map style
+    styles: mapStyles,
   }
 
   // load script - load the map, or show error message
@@ -213,7 +216,6 @@ function MapComponent() {
           </div>
         </InfoWindow>) : null}
       </GoogleMap>
-
     </>
   );
 }

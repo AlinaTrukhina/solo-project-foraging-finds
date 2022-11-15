@@ -1,6 +1,6 @@
 const pinsReducer = (state = [], action) => {
   switch (action.type) {
-    case 'SET_PINS':
+    case 'SET_ALL_PINS':
       return action.payload;
     default:
       return state;
