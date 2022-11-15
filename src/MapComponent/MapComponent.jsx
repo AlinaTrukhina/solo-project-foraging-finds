@@ -118,6 +118,12 @@ function MapComponent() {
   return (
     <>
       <h2>User Position: {userPosition.lat}, {userPosition.lng}</h2>
+      {/* navigation for search, add pin, my pins */}
+      <nav>
+        <button>Search</button>
+        <button>Add Pin</button>
+        <button>My Pins</button>
+      </nav>
       {/* <CenterMap panTo={panTo} userPosition={userPosition }  /> */}
       <GoogleMap 
       mapContainerStyle={mapContainerStyle} 
@@ -195,9 +201,6 @@ function MapComponent() {
                 <Link selected={selected}  to="/details" >
                   Details
                 </Link>
-                <Route path="/details" exact selected={selected}>
-                  <DetailsPage selected={selected} />
-                </Route>
               </Router>
             
           </div>
