@@ -51,6 +51,10 @@ function App() {
             <AboutPage />
           </Route>
 
+          <Route path="/details" exact>
+            <DetailsPage />
+          </Route>
+
           {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
@@ -121,10 +125,8 @@ function App() {
         {/* <Link to="/details">
           Details
         </Link> */}
-        {/* <Route path="/details" exact>
-          <DetailsPage />
-        </Route> */}
-        {/* <MapComponent /> */}
+
+        <MapComponent />
         <Footer />
       </div>
     </Router>

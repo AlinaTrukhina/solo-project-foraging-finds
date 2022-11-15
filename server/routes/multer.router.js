@@ -12,9 +12,9 @@ router.get('/', (req, res) => {
 /**
  * POST route template
  */
-router.post('/', upload.single('mushroomImage'), (req, res) => {
-  // POST route code here
-  
-});
+// router.post('/', upload.single('mushroomImage'), (req, res) => {
+//   // POST route code here
+
+// });
 
 module.exports = router;

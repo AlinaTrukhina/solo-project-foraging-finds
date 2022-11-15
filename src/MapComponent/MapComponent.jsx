@@ -10,14 +10,14 @@ import DetailsPage from "../components/DetailsPage/DetailsPage";
 
 function MapComponent() {
 
-  // useEffect(() => {
-  //   navigator.geolocation.getCurrentPosition(position => {
-  //     //const { lat, lng } = position.coords;
-  //     // set user position to current position
-  //     setUserPosition({lat: position.coords.latitude, lng: position.coords.longitude})
-  //     console.log('user positon:', userPosition);
-  //   }, () => null);
-  // }, []);
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(position => {
+      //const { lat, lng } = position.coords;
+      // set user position to current position
+      setUserPosition({lat: position.coords.latitude, lng: position.coords.longitude})
+      console.log('user positon, page load:', userPosition);
+    }, () => null);
+  }, []);
 
   // map options
   // make map take up the whole window
@@ -92,15 +92,18 @@ function MapComponent() {
     navigator.geolocation.getCurrentPosition(
       (position) => {   
         console.log('user position is', {lat: position.coords.latitude, lng: position.coords.longitude})
+        console.log(position);
+        setUserPosition({lat: position.coords.latitude, lng: position.coords.longitude});
       }, 
       () => null
     )
-  },[]);
+  }, []);
 
   // add mapRef function to store map for use later without re-renders
   const mapRef = React.useRef();
   const onMapLoad = React.useCallback((map) => {
     map.current = map;
+    toUserPosition();
   }, []);
 
   // create a function that will pan to user location 
@@ -109,26 +112,40 @@ function MapComponent() {
     mapRef.current.panTo({lat, lng});
   }, [])
 
-  if (loadError) return "Error loading Maps";
-  if (!isLoaded) return "loading maps";
+  if (loadError) return "Error loading Map";
+  if (!isLoaded) return "Loading map";
 
   return (
     <>
-      <p>Map goes here</p>
+      <h2>User Position: {userPosition.lat}, {userPosition.lng}</h2>
+      {/* <CenterMap panTo={panTo} userPosition={userPosition }  /> */}
       <GoogleMap 
       mapContainerStyle={mapContainerStyle} 
       zoom={12} 
-      center={center}
+      // conditional rendering: if userPosition is loaded, center map on user; 
+      // otherwise, use center object defined above
+      center={userPosition.lat ? userPosition : center}
       options={options}
       // on click, set a marker
-      // onClick={onMapClick}
+      onClick={onMapClick}
       onLoad={onMapLoad}
-      onClick={toUserPosition}
+      //onClick={toUserPosition}
       >
         {/* add a marker at the center of map */}
+        { userPosition && 
         <Marker
-        position={center}
-        />
+        position={
+          userPosition.lat ? {lat: userPosition.lat, lng: userPosition.lng} : 
+          center}
+          icon={{
+            url: '/svg/yep-icon.svg',
+            scaledSize: new window.google.maps.Size(30,30),
+            // sets origin to the point where user clicked
+            origin: new window.google.maps.Point(0, 0),
+            // sets anchor to half the size so that the icon appears on t
+            anchor: new window.google.maps.Point(15, 15)
+          }}  
+        />}
 
         {markers.map(marker => (
           <Marker key={marker.time} 
@@ -139,7 +156,7 @@ function MapComponent() {
             scaledSize: new window.google.maps.Size(30,30),
             // sets origin to the point where user clicked
             origin: new window.google.maps.Point(0, 0),
-            // sets anchor to half the size so that the icon appears on t
+            // sets anchor to half the size so that the icon center appears on the origin point
             anchor: new window.google.maps.Point(15, 15)
           }}  
           // set the clicked marker as selected
@@ -155,7 +172,7 @@ function MapComponent() {
           position={{lat: marker.lat, lng: marker.lng}}
           // change the icon to a mushroom
           icon={{
-            url: '/svg/mushroom-bolete.svg',
+            url: '/svg/mushroom-colorful-amanita.svg',
             scaledSize: new window.google.maps.Size(30,30),
             // sets origin to the point where user clicked
             origin: new window.google.maps.Point(0, 0),
@@ -175,10 +192,10 @@ function MapComponent() {
             <p>{selected.lat}, {selected.lng}</p>
               
               <Router selected={selected} >
-                <Link selected={selected}  to='/details/' >
+                <Link selected={selected}  to="/details" >
                   Details
                 </Link>
-                <Route path="/details/" exact selected={selected}>
+                <Route path="/details" exact selected={selected}>
                   <DetailsPage selected={selected} />
                 </Route>
               </Router>
@@ -186,8 +203,20 @@ function MapComponent() {
           </div>
         </InfoWindow>) : null}
       </GoogleMap>
+
     </>
   );
 }
+
+// does not work yet
+// function CenterMap({ panTo, toUserPosition }) {
+//   return (
+//   <button onClick={() => {
+//     toUserPosition();
+//     panTo({lng: userPosition.lat, lng: userPosition.lng})
+//   }}>
+//   Center Map</button>
+//   );
+// }
 
 export default MapComponent;

@@ -48,7 +48,7 @@ function LoginPage() {
         </button>
       </center>
     </div>
-    <MapComponent />
+
     </>
   );
 }
