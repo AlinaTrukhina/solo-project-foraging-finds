@@ -1,19 +1,14 @@
-
--- USER is a reserved keyword with Postgres
--- You must use double quotes in every query that user is in:
--- ex. SELECT * FROM "user";
--- Otherwise you will have errors!
+-- create database 'foraging-finds'
 
 CREATE TABLE "user" (
 	"id" serial NOT NULL,
-	"username" varchar(255) UNIQUE NOT NULL,
+	"username" varchar(255) NOT NULL UNIQUE,
 	"password" varchar(255) NOT NULL,
-	"avatar" varchar(1024),
+	"avatar" varchar(255),
 	CONSTRAINT "user_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
 );
-
 
 CREATE TABLE "location" (
 	"id" serial NOT NULL,
@@ -24,25 +19,25 @@ CREATE TABLE "location" (
   OIDS=FALSE
 );
 
-
 CREATE TABLE "pins" (
 	"id" serial NOT NULL,
 	"title" TEXT NOT NULL,
-	"latin name" TEXT,
+	"latin_name" TEXT,
 	"date" DATE NOT NULL,
 	"image_id" int NOT NULL,
-	"text entry" varchar(255) NOT NULL,
+	"text_entry" varchar(1024) NOT NULL,
 	"user_id" int NOT NULL,
 	"permalink" varchar(255),
-	"cap features" TEXT,
-	"cap color" TEXT,
-	"stipe color" TEXT,
+	"cap_features" TEXT,
+	"cap_color" TEXT,
+	"stipe_color" TEXT,
+	"growing_on" TEXT,
 	"location_id" int NOT NULL,
+	"private" BOOLEAN NOT NULL DEFAULT 'false',
 	CONSTRAINT "pins_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
 );
-
 
 CREATE TABLE "comments" (
 	"id" serial NOT NULL,
@@ -55,10 +50,9 @@ CREATE TABLE "comments" (
   OIDS=FALSE
 );
 
-
 CREATE TABLE "images" (
 	"id" serial NOT NULL,
-	"img_url" varchar NOT NULL,
+	"img_url" varchar(255) NOT NULL,
 	CONSTRAINT "images_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
@@ -99,7 +93,7 @@ VALUES  (44.9572739, -93.2561296),
 		(44.87273544742319, -93.2938064029297)
 ;
 
-INSERT INTO "pins" ("title", "latin name", "date", "image_id", "text entry", "user_id", "location_id")
+INSERT INTO "pins" ("title", "latin_name", "date", "image_id", "text_entry", "user_id", "location_id")
 VALUES ('White Mushroom', 'unknown', '2021-08-14', 1, 'mushroom found in BWCA', 1, 1),
 ('King Bolete', 'Boletus Edulis', '2022-08-14', 2, 'A large King Bolete', 1, 2),
 ('Morel', 'Morchella esculenta', '2022-04-10', 3, 'baby morel', 1, 3),
@@ -119,8 +113,8 @@ CREATE TABLE "test-images" (
 	"destination" varchar,
 	);
 	
-SELECT "pins"."id", "title", "latin name", "date", "text_entry", "lat", "lng"
+SELECT "pins"."id", "title", "latin name", "date", "text entry", "lat", "lng", "img_url"
 FROM "pins"
 JOIN "location" ON location.id = pins.location_id
-GROUP BY pins.id
+JOIN "images" ON images.id = pins.image_id
 ;

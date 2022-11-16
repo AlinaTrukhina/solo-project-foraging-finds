@@ -8,6 +8,7 @@ function DetailsPage() {
   
   const params = useParams();
   const history = useHistory();
+  const dispatch = useDispatch();
 
   //TODO: figure out how to pass the selected object to DetailsPage
   const allPins = useSelector(store => store.pins);
@@ -24,14 +25,19 @@ function DetailsPage() {
 
   const addComment = (evt) => {
     evt.preventDefault();
-    
     // build object to send
     const newComment = {
       comment: evt.target.commentInputTextarea.value,
+      date: new Date().toISOString(),
       user_id: user.id,
       pin_id: selected.id
     }
     console.log('new comment:', newComment);
+
+    dispatch({
+      type: 'ADD_COMMENT',
+      payload: newComment
+    })
   }
 
   return (
@@ -49,10 +55,9 @@ function DetailsPage() {
       <h2>Comments</h2>
       <form id='addCommentform' action='post'
         onSubmit={addComment}>
-        <label for='commentInputTextarea'>Add Comment</label>
+        <label htmlFor='commentInputTextarea'>Add Comment</label>
         <textarea id='commentInputTextarea' name='comment' placeholder='add comment'
         rows="5" cols="33">
-
         </textarea>
         <button>Add comment</button>
       </form>

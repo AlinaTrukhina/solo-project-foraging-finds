@@ -5,9 +5,9 @@ const router = express.Router();
 /**
  * GET all pins from database
  */
- router.get('/', (req, res) => {
+router.get('/', (req, res) => {
   // GET route code here
-  const sqlText = `SELECT "pins"."id", "title", "latin name", "date", "text entry", "lat", "lng", "img_url"
+  const sqlText = `SELECT "pins"."id", "title", "latin_name", "date", "text_entry", "lat", "lng", "img_url"
   FROM "pins"
   JOIN "location" ON location.id = pins.location_id
   JOIN "images" ON images.id = pins.image_id
