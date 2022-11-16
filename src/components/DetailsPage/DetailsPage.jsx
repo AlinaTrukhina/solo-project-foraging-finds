@@ -11,17 +11,27 @@ function DetailsPage() {
 
   //TODO: figure out how to pass the selected object to DetailsPage
   const allPins = useSelector(store => store.pins);
+  const user = useSelector(store => store.user);
 
   // get selected pin object from store - search using id stored in params
   const selected = (allPins.filter(pin => pin.id == params.id))[0];
-  console.log('date:', format(parseISO(selected.date), 'yyyy-MM-dd'));
-  //let newdate=selected.date; 
-  //console.log('date is:', (newdate).toDateString())
 
   const closeDetails = (evt) => {
     evt.preventDefault();
     console.log('in close details');
     history.push('/');
+  }
+
+  const addComment = (evt) => {
+    evt.preventDefault();
+    
+    // build object to send
+    const newComment = {
+      comment: evt.target.commentInputTextarea.value,
+      user_id: user.id,
+      pin_id: selected.id
+    }
+    console.log('new comment:', newComment);
   }
 
   return (
@@ -37,9 +47,11 @@ function DetailsPage() {
         <p>Description: {selected["text entry"]}</p>
       </section>
       <h2>Comments</h2>
-      <form id='addCommentform' action='post'>
+      <form id='addCommentform' action='post'
+        onSubmit={addComment}>
         <label for='commentInputTextarea'>Add Comment</label>
-        <textarea id='commentInputTextarea' name='comment'>
+        <textarea id='commentInputTextarea' name='comment' placeholder='add comment'
+        rows="5" cols="33">
 
         </textarea>
         <button>Add comment</button>
