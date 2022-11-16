@@ -51,7 +51,7 @@ function App() {
             <AboutPage />
           </Route>
 
-          <Route path="/details" exact>
+          <Route path="/details/:id" exact>
             <DetailsPage />
           </Route>
 

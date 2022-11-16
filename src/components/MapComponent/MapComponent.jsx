@@ -5,14 +5,16 @@ import {
   Link,
   HashRouter as Router,
   Route,
+  useHistory
   } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import DetailsPage from "../DetailsPage/DetailsPage";
-import mapStyles from "./mapStyles"
+import mapStyles from "./mapStyles";
 
 function MapComponent() {
 
   const dispatch = useDispatch();
+  const history = useHistory();
   const allPins = useSelector(store => store.pins);
 
   useEffect(() => {
@@ -26,7 +28,6 @@ function MapComponent() {
     dispatch({
       type: 'FETCH_PINS'
     })
-
   }, []);
 
   // map options
@@ -120,7 +121,13 @@ function MapComponent() {
   // pass in latitude and longitude
   const panTo = React.useCallback(({lat, lng}) => {
     mapRef.current.panTo({lat, lng});
-  }, [])
+  }, []);
+
+  const toDetails = (evt) => {
+    evt.preventDefault();
+
+    history.push(`/details/${selected.id}`);
+  }
 
   if (loadError) return "Error loading Map";
   if (!isLoaded) return "Loading map";
@@ -202,13 +209,15 @@ function MapComponent() {
           />
         ))}
         {/* opens up info window for the selected marker*/}
-        {selected ? (<InfoWindow position={{lat: Number(selected.lat), lng: Number(selected.lng)}} onCloseClick={() => setSelected(null)}>
+        {selected ? (<InfoWindow position={{lat: Number(selected.lat), lng: Number(selected.lng)}} 
+        onCloseClick={() => setSelected(null)}>
           <div>
             <h4>{selected.title}</h4>
             <p>{selected.lat}, {selected.lng}</p>
               
               <Router selected={selected} >
-                <Link selected={selected}  to="/details/:id" >
+                <Link selected={selected}  to={`/details/${selected.id}`} 
+                onClick={(evt)=>toDetails(evt)}>
                   Details
                 </Link>
               </Router>
@@ -216,6 +225,7 @@ function MapComponent() {
           </div>
         </InfoWindow>) : null}
       </GoogleMap>
+
     </>
   );
 }
