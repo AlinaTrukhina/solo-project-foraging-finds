@@ -110,3 +110,12 @@ input {
   margin: 5px;
   margin-bottom: 10px;
 }
+
+/* 
+img
+*/
+
+img {
+  max-width: 250px;
+  max-height: 250px;
+}

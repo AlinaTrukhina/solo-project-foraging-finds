@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { format } from 'date-fns';
@@ -13,15 +13,19 @@ function DetailsPage() {
   // react hooks
   // TODO: prevent page errors on reload
   useEffect(()=> {
-
+    dispatch({
+      type: 'FETCH_PIN_COMMENTS',
+      payload: params.id
+    })
   }, [params.id]);
 
   //TODO: figure out how to pass the selected object to DetailsPage
   const allPins = useSelector(store => store.pins);
   const user = useSelector(store => store.user);
+  const comments = useSelector(store => store.comments);
 
   // get selected pin object from store - search using id stored in params
-    const selected = (allPins.filter(pin => pin.id == params.id))[0];
+  const selected = (allPins.filter(pin => pin.id == params.id))[0];
 
   const closeDetails = (evt) => {
     evt.preventDefault();
@@ -52,13 +56,16 @@ function DetailsPage() {
       <button onClick={(evt)=>{closeDetails(evt)}}>Close Details</button>
       <section>
         <h2>{selected.title}</h2>
-        <h3>{selected['latin name']}</h3>
+        <h3>{selected.latin_name}</h3>
         <h4>{format(parseISO(selected.date), 'yyyy-MM-dd')}</h4>
-        <h4>{selected.date}</h4>
         <img src={selected.img_url} />
-        <p>Description: {selected["text entry"]}</p>
+        <p>Description: {selected.text_entry}</p>
       </section>
       <h2>Comments</h2>
+      <ul>
+        {comments.map(comment => (
+          <li key={comment.id}>{comment.comment}</li>))}
+      </ul>
       <form id='addCommentform' action='post'
         onSubmit={addComment}>
         <label htmlFor='commentInputTextarea'>Add Comment</label>

@@ -1,4 +1,5 @@
 import { all } from 'redux-saga/effects';
+import commentsSaga from './comments.saga';
 import loginSaga from './login.saga';
 import pinsSaga from './pins.saga';
 import registrationSaga from './registration.saga';
@@ -17,5 +18,6 @@ export default function* rootSaga() {
     registrationSaga(),
     userSaga(),
     pinsSaga(),
+    commentsSaga(),
   ]);
 }
