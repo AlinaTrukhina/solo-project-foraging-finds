@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { format } from 'date-fns';
@@ -10,12 +10,18 @@ function DetailsPage() {
   const history = useHistory();
   const dispatch = useDispatch();
 
+  // react hooks
+  // TODO: prevent page errors on reload
+  useEffect(()=> {
+
+  }, [params.id]);
+
   //TODO: figure out how to pass the selected object to DetailsPage
   const allPins = useSelector(store => store.pins);
   const user = useSelector(store => store.user);
 
   // get selected pin object from store - search using id stored in params
-  const selected = (allPins.filter(pin => pin.id == params.id))[0];
+    const selected = (allPins.filter(pin => pin.id == params.id))[0];
 
   const closeDetails = (evt) => {
     evt.preventDefault();

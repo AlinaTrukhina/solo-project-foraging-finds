@@ -1,13 +1,12 @@
 import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
-
 // worker Saga: will be fired on "REGISTER" actions
 function* fetchPins(action) {
   console.log('in fetch pins');
   try {
     // request to server to get all pins from database
-    const dbResponse = yield axios.get('/api/pins');
+    const dbResponse = yield axios.get('/pins');
     console.log('db response after GET request is:', dbResponse);
 
     // set reducer to the data we got from database
