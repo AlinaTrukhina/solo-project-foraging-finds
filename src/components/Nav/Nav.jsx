@@ -17,6 +17,8 @@ function Nav() {
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
+  // TODO: research MUI menu as a different nav option
+
   return (
     <div className="nav-container" id="landing-page">
     <Drawer 
