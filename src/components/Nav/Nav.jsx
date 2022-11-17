@@ -3,11 +3,27 @@ import { Link } from 'react-router-dom';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import { useSelector } from 'react-redux';
+// drop-down list for navigation
+import Box from '@mui/material/Box';
+import Drawer from '@mui/material/Drawer';
+import Button from '@mui/material/Button';
+import List from '@mui/material/List';
+import Divider from '@mui/material/Divider';
+import ListItem from '@mui/material/ListItem';
 
 function Nav() {
   const user = useSelector((store) => store.user);
 
+  const list = (anchor) => (
+    <Box>
+
+    </Box>
+  )
+
   return (
+    <>
+
+    
     <div className="nav">
       <Link to="/home">
         <h2 className="nav-title">Foraging Finds</h2>
@@ -41,6 +57,7 @@ function Nav() {
         </Link>
       </div>
     </div>
+    </>
   );
 }
 
