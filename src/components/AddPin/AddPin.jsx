@@ -26,6 +26,8 @@ function AddPin() {
   const [textEntryInput, setTextInput] = useState('');
   const [isPrivate, setIsPrivate] = useState(false);
 
+
+
   const handleCancel = (evt) => {
     evt.preventDefault();
     history.push('/info');
@@ -61,6 +63,11 @@ function AddPin() {
       text_entry: textEntryInput
     }
     console.log('new pin is', newPin);
+
+    dispatch({
+      type: 'ADD_PIN',
+      payload: newPin
+    })
   }
 
   return (

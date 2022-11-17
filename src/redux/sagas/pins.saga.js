@@ -18,8 +18,24 @@ function* fetchPins(action) {
   }
 }
 
+function* addPin(action) {
+  try {
+    yield axios.post('/pins', action.payload);
+
+    const dbResponse = yield axios.get('/pins');
+
+    // set reducer to the data we got from database
+    yield put({ type: 'SET_ALL_PINS', payload: dbResponse.data });    
+  } catch (error) {
+    console.log('Error adding pin:', error);
+    alert('could not add pin!');
+  }
+}
+
 function* pinsSaga() {
   yield takeLatest('FETCH_PINS', fetchPins);
+
+  yield takeLatest('ADD_PIN', addPin);
 }
 
 export default pinsSaga;
