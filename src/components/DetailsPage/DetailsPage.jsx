@@ -66,8 +66,8 @@ function DetailsPage() {
         }}>
         {comments.map(comment => (
           <div style={{display: 'flex', flexDirection: 'row', justifyContent:'space-around', alignItems:'center'}} 
-          key={comment.id} > 
-            <h5>{comment.user_id}</h5>
+          key={comment.date} > 
+            <h5>{comment.username}</h5>
             <p>{comment.comment}</p>
           </div>))}
       </section>

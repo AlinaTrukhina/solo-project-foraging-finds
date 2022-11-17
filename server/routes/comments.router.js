@@ -10,9 +10,11 @@ const {
  */
 router.get('/:id', (req, res) => {
   // GET route code here
-  const sqlText = `SELECT *
-  FROM comments
+  const sqlText = `SELECT "user".id, "user".username, "user".avatar, "comments".id AS "comment_id", "comments".date, "comments"."comment", "comments".pin_id
+  FROM "comments"
+  JOIN "user" ON "user".id = user_id
   WHERE pin_id = $1
+;
   `;
 
   const sqlParams = [req.params.id];
