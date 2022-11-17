@@ -40,6 +40,9 @@ function Nav() {
         <ListItem>
           <Link to='/user'>My Profile</Link>
         </ListItem>
+        <ListItem>
+          <Link to='/info'>Map</Link>
+        </ListItem>
       </List>
       <Button
         onClick={() => setIsDrawerOpen(false)}
@@ -56,12 +59,13 @@ function Nav() {
     <Link to="/home">
       <h2 className="nav-title">Foraging Finds</h2>
     </Link>
-    {!user.id && (
+    {user.id ? <LogOutButton /> : (
     // If there's no user, show login/registration links
       <Link className="navLink" to="/login">
         Login / Register
       </Link>
-    )}
+    )
+    }
   </div>
   );
 }
