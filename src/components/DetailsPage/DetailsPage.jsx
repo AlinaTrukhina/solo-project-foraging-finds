@@ -29,7 +29,6 @@ function DetailsPage() {
 
   const closeDetails = (evt) => {
     evt.preventDefault();
-    console.log('in close details');
     history.push('/');
   }
 
@@ -96,13 +95,12 @@ function DetailsPage() {
         { user.id ? 
         <button>Add comment</button>
         : 
-        <>
         <h5>        
           <Router>
             <Link to="/login"
             >Log In</Link>
-          </Router> In to add comment</h5>
-        </>
+          </Router> In to add comment
+        </h5>
         }
       </form>
     </>

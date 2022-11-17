@@ -134,13 +134,7 @@ function MapComponent() {
 
   return (
     <>
-      <h2>User Position: {userPosition.lat}, {userPosition.lng}</h2>
-      {/* navigation for search, add pin, my pins */}
-      <nav>
-        <button>Search</button>
-        <button>Add Pin</button>
-        <button>My Pins</button>
-      </nav>
+      <h5>User Position: {userPosition.lat}, {userPosition.lng}</h5>
       {/* <CenterMap panTo={panTo} userPosition={userPosition }  /> */}
       <GoogleMap 
       mapContainerStyle={mapContainerStyle} 
