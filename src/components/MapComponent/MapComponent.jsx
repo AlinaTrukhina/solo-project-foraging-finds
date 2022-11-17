@@ -182,27 +182,7 @@ function MapComponent() {
           }}
           />
         ))}
-
-        {/* map my markers */}
-        {myMarkers.map(marker => (
-          <Marker key={marker.title} 
-          position={{lat: marker.lat, lng: marker.lng}}
-          // change the icon to a mushroom
-          icon={{
-            url: '/svg/mushroom-colorful-amanita.svg',
-            scaledSize: new window.google.maps.Size(30,30),
-            // sets origin to the point where user clicked
-            origin: new window.google.maps.Point(0, 0),
-            // sets anchor to half the size so that the icon appears on t
-            anchor: new window.google.maps.Point(15, 15)
-          }}  
-          // set the clicked marker as selected
-          onClick={()=>{
-            setSelected(marker)
-          }}
-          />
-        ))}
-        {/* opens up info window for the selected marker*/}
+        {/* opens up info window for the selected marker */}
         {selected ? (<InfoWindow position={{lat: Number(selected.lat), lng: Number(selected.lng)}} 
         onCloseClick={() => setSelected(null)}>
           <div>
@@ -219,7 +199,6 @@ function MapComponent() {
           </div>
         </InfoWindow>) : null}
       </GoogleMap>
-
     </>
   );
 }
