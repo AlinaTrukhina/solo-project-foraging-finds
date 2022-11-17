@@ -24,6 +24,7 @@ import MapComponent from '../MapComponent/MapComponent';
 import DetailsPage from '../DetailsPage/DetailsPage';
 
 import './App.css';
+import AddPin from '../AddPin/AddPin';
 
 function App() {
   const dispatch = useDispatch();
@@ -116,7 +117,13 @@ function App() {
               <LandingPage />
             }
           </Route>
-
+          
+          <Route 
+            exact
+            path="/addpin"
+          >
+            {user.id ? <AddPin /> : <Redirect to="/login" />}
+          </Route>  
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
             <h1>404</h1>
