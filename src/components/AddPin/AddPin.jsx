@@ -142,7 +142,8 @@ function AddPin() {
           type="submit"
           variant="contained"
           size="small"
-          >Submit
+          >
+            Submit
         </Button>
       </Box>
     </Container>

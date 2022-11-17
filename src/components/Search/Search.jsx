@@ -5,58 +5,57 @@ import { useHistory } from "react-router-dom";
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import { Container } from "@mui/system";
 
 function Search() {
-  const [searchBy, setsearchBy] = useState('');
 
-  const handleSelect = (event) => {
-    setsearchBy(event.target.value);
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const dispatch = useDispatch();
+
+  const handleChange = (event) => {
+    setSearchTerm(event.target.value);
   };
+
+  const submitSearch = (evt) => {
+    evt.preventDefault();
+
+    const searchParams = {
+      searchTerm: searchTerm.toLowerCase(),
+    }
+
+    dispatch({
+      type: 'SEARCH_PINS',
+      payload: searchParams
+    })
+  }
 
   return (
     <>
+    <Container>
       <Typography>Search</Typography>
-      <Box component="form" noValidate sx={{ mt: 1 }}>
-      <TextField
+      <Box component="form" onSubmit={(evt)=>submitSearch(evt)}>
+      <TextField onChange={handleChange}
         size="small"
         fullWidth
         required
-        id="searchInput"
+        id="searchTerm"
         label="Search term"
-        name="searchterm"
+        value={searchTerm}
         autoFocus
-            />
-      <FormControl sx={{ marginTop: 1, width: '100vw' }} size='small'>
-        <InputLabel id="selectSearchBy">Search By</InputLabel>
-        <Select
-          fullWidth
-          labelId="selectSearchBy"
-          id="SearchBySelect"
-          value={searchBy}
-          label="Search By"
-          onChange={handleSelect}
-        >
-          <MenuItem value={'title'}>Mushroom Name</MenuItem>
-          <MenuItem value={'latin-name'}>Latin Name</MenuItem>
-        </Select>
-      </FormControl>
+      />
       <Button
+        onClick={(evt)=>submitSearch(evt)}
         type="submit"
         fullWidth
         variant="contained"
-        sx={{ mt: 3, mb: 2 }}
       >
         Search
       </Button>
       </Box>
+      </Container>
     </>
   )
 }

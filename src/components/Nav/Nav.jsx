@@ -54,7 +54,7 @@ function Nav() {
     <Button
       onClick={() => setIsDrawerOpen(true)}
     >
-      Hamburger
+      Menu
     </Button>
     <Link to="/home">
       <h2 className="nav-title">Foraging Finds</h2>

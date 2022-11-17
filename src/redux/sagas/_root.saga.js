@@ -3,6 +3,7 @@ import commentsSaga from './comments.saga';
 import loginSaga from './login.saga';
 import pinsSaga from './pins.saga';
 import registrationSaga from './registration.saga';
+import searchSaga from './search.saga';
 import userSaga from './user.saga';
 
 // rootSaga is the primary saga.
@@ -19,5 +20,6 @@ export default function* rootSaga() {
     userSaga(),
     pinsSaga(),
     commentsSaga(),
+    searchSaga(),
   ]);
 }
