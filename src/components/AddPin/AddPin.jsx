@@ -25,7 +25,7 @@ function AddPin() {
   const [imgInput, setUrl] = useState('');
   const [textEntryInput, setTextInput] = useState('');
   const [isPrivate, setIsPrivate] = useState(false);
-
+  const [userPosition, setUserPosition] = useState({});
 
 
   const handleCancel = (evt) => {
@@ -53,14 +53,32 @@ function AddPin() {
     setIsPrivate(current=>!current);
   };
 
-  // add movie to database
-  const addPin = (evt) => {
+  function getUserPosition() {
+    return new Promise(resolve => {navigator.geolocation.getCurrentPosition(
+      (position) => {   
+        setUserPosition({lat: position.coords.latitude, lng: position.coords.longitude});
+      }, 
+      () => null
+    )
+    resolve(userPosition);
+    })
+  }
+
+  // add pin to database
+  // date is today's date
+  // coordinates are from user position
+  async function addPin(evt) {
     evt.preventDefault();
-    const newPin = {
+    await getUserPosition();
+      const newPin = {
       title: titleInput,
       latin_name: latinNameInput,
+      date: new Date().toISOString(),
       img_url: imgInput,
-      text_entry: textEntryInput
+      text_entry: textEntryInput,
+      lat: userPosition.lat,
+      lng: userPosition.lng
+      // lat: userLocation.lat
     }
     console.log('new pin is', newPin);
 
