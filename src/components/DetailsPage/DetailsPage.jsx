@@ -57,7 +57,7 @@ function DetailsPage() {
         <h2>{selected.title}</h2>
         <h3>{selected.latin_name}</h3>
         <h4>{format(parseISO(selected.date), 'yyyy-MM-dd')}</h4>
-        <img src={selected.img_url} />
+        <img src={selected.img_url} alt={selected.title}/>
         <p>Description: {selected.text_entry}</p>
       </section>
       <h2>Comments</h2>

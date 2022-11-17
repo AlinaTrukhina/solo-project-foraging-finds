@@ -17,6 +17,8 @@ function Nav() {
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
+  // TODO: research MUI menu as a different nav option
+
   return (
     <div className="nav-container" id="landing-page">
     <Drawer 
@@ -38,6 +40,9 @@ function Nav() {
         <ListItem>
           <Link to='/user'>My Profile</Link>
         </ListItem>
+        <ListItem>
+          <Link to='/info'>Map</Link>
+        </ListItem>
       </List>
       <Button
         onClick={() => setIsDrawerOpen(false)}
@@ -49,17 +54,18 @@ function Nav() {
     <Button
       onClick={() => setIsDrawerOpen(true)}
     >
-      Hamburger
+      Menu
     </Button>
     <Link to="/home">
       <h2 className="nav-title">Foraging Finds</h2>
     </Link>
-    {!user.id && (
+    {user.id ? <LogOutButton /> : (
     // If there's no user, show login/registration links
       <Link className="navLink" to="/login">
         Login / Register
       </Link>
-    )}
+    )
+    }
   </div>
   );
 }

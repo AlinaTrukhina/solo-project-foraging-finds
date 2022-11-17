@@ -22,6 +22,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import MapComponent from '../MapComponent/MapComponent';
 import DetailsPage from '../DetailsPage/DetailsPage';
+import Search from '../Search/Search';
 
 import './App.css';
 import AddPin from '../AddPin/AddPin';
@@ -56,6 +57,21 @@ function App() {
             <DetailsPage />
           </Route>
 
+          <Route
+            // logged in shows InfoPage else shows LoginPage
+            exact
+            path="/info"
+          >
+            <InfoPage />
+          </Route>
+
+          <Route
+            // logged in shows InfoPage else shows LoginPage
+            exact
+            path="/search"
+          >
+            <Search />
+          </Route>
           {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
@@ -66,14 +82,6 @@ function App() {
             path="/user"
           >
             <UserPage />
-          </ProtectedRoute>
-
-          <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
-            exact
-            path="/info"
-          >
-            <InfoPage />
           </ProtectedRoute>
 
           <Route
@@ -133,7 +141,6 @@ function App() {
           Details
         </Link> */}
 
-        <MapComponent />
         <Footer />
       </div>
     </Router>

@@ -1,4 +1,5 @@
 import React from 'react';
+import MapComponent from '../MapComponent/MapComponent';
 
 // This is one of our simplest components
 // It doesn't have local state
@@ -7,9 +8,12 @@ import React from 'react';
 
 function InfoPage() {
   return (
+    <>
     <div className="container">
-      <p>Info Page</p>
+      <p>Everyone can see this page with map</p>
     </div>
+    <MapComponent />
+    </>
   );
 }
 

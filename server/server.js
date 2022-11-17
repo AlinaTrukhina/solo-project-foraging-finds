@@ -14,7 +14,8 @@ const passport = require('./strategies/user.strategy');
 // Route includes
 const userRouter = require('./routes/user.router');
 const pinsRouter = require('./routes/pins.router');
-const commentsRouter = require('./routes/comments.router')
+const commentsRouter = require('./routes/comments.router');
+const searchRouter = require('./routes/search.router');
 const multerRouter = require('./routes/multer.router');
 
 // Body parser middleware
@@ -33,7 +34,9 @@ app.use('/api/user', userRouter);
 // pins route
 app.use('/pins', pinsRouter);
 // comments
-app.use('/comments', commentsRouter)
+app.use('/comments', commentsRouter);
+// search route
+app.use('/search', searchRouter);
 // multer route
 app.use('/api/multer', multerRouter);
 
