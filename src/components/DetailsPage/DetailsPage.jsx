@@ -62,10 +62,15 @@ function DetailsPage() {
         <p>Description: {selected.text_entry}</p>
       </section>
       <h2>Comments</h2>
-      <ul>
+      <section id="commentSection" style={{display: 'flex', flexDirection: 'column', alignContent: 'space-around'
+        }}>
         {comments.map(comment => (
-          <li key={comment.id}>{comment.comment}</li>))}
-      </ul>
+          <div style={{display: 'flex', flexDirection: 'row', justifyContent:'space-around', alignItems:'center'}} 
+          key={comment.id} > 
+            <h5>{comment.user_id}</h5>
+            <p>{comment.comment}</p>
+          </div>))}
+      </section>
       <form id='addCommentform' action='post'
         onSubmit={addComment}>
         <label htmlFor='commentInputTextarea'>Add Comment</label>
