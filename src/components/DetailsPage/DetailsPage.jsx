@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory, useParams,   HashRouter as Router, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { format } from 'date-fns';
 import { parseISO } from 'date-fns/esm';
@@ -29,7 +29,6 @@ function DetailsPage() {
 
   const closeDetails = (evt) => {
     evt.preventDefault();
-    console.log('in close details');
     history.push('/');
   }
 
@@ -66,7 +65,7 @@ function DetailsPage() {
         }}>
         {comments.map(comment => (
           <div style={{display: 'flex', flexDirection: 'row', justifyContent:'space-around', alignItems:'center'}} 
-          key={comment.date} > 
+          key={comment.comment_id} > 
             <h5>{comment.username}</h5>
             <p>{comment.comment}</p>
           </div>))}
@@ -74,10 +73,35 @@ function DetailsPage() {
       <form id='addCommentform' action='post'
         onSubmit={addComment}>
         <label htmlFor='commentInputTextarea'>Add Comment</label>
-        <textarea id='commentInputTextarea' name='comment' placeholder='add comment'
-        rows="5" cols="33">
-        </textarea>
+        { user.id ?
+          <textarea 
+            id='commentInputTextarea' 
+            name='comment' 
+            placeholder='add comment'
+            rows="5" cols="33"
+            >
+          </textarea>
+           :
+          <textarea 
+            id='commentInputTextarea' 
+            name='comment' 
+            placeholder='add comment'
+            rows="5" cols="33"
+            disabled
+            >
+          </textarea>
+        }
+        {/* conditional rendering depending on whether user is logged in */}
+        { user.id ? 
         <button>Add comment</button>
+        : 
+        <h5>        
+          <Router>
+            <Link to="/login"
+            >Log In</Link>
+          </Router> In to add comment
+        </h5>
+        }
       </form>
     </>
   );
