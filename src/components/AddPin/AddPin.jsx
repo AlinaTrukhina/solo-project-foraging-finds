@@ -80,6 +80,7 @@ function AddPin() {
       lng: userPosition.lng
       // lat: userLocation.lat
     }
+    console.log('lat is:', newPin.lat, 'lng is:', newPin.lng);
     console.log('new pin is', newPin);
 
     dispatch({

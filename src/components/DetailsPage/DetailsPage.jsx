@@ -24,9 +24,9 @@ function DetailsPage() {
   const user = useSelector(store => store.user);
   const comments = useSelector(store => store.comments);
 
-
   const closeDetails = (evt) => {
     evt.preventDefault();
+    dispatch({type: 'SET_SELECTED_PIN', payload: {}});
     history.push('/');
   }
 

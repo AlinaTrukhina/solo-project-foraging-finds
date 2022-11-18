@@ -1,8 +1,8 @@
 import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
-// worker Saga: will be fired on "REGISTER" actions
-function* fetchPins(action) {
+// Saga: will be fired on FETCH_PINS
+function* fetchPins() {
   console.log('in fetch pins');
   try {
     // request to server to get all pins from database

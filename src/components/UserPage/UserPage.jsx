@@ -1,6 +1,6 @@
 import React from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useHistory } from "react-router-dom";
 
 function UserPage() {
@@ -9,8 +9,7 @@ function UserPage() {
   const user = useSelector((store) => store.user);
 
   return (
-    alert(`Welcome, ${user.username}! Your ID is: ${user.id}`)
-    
+    <p>Welcome, {user.username}! Your ID is: {user.id}</p>  
   );
 }
 

@@ -16,6 +16,7 @@ const userRouter = require('./routes/user.router');
 const pinsRouter = require('./routes/pins.router');
 const commentsRouter = require('./routes/comments.router');
 const searchRouter = require('./routes/search.router');
+const myPinsRouter = require('./routes/mypins.router')
 const multerRouter = require('./routes/multer.router');
 
 // Body parser middleware
@@ -37,6 +38,8 @@ app.use('/pins', pinsRouter);
 app.use('/comments', commentsRouter);
 // search route
 app.use('/search', searchRouter);
+// user pins router
+app.use('/mypins', myPinsRouter);
 // multer route
 app.use('/api/multer', multerRouter);
 

@@ -15,14 +15,19 @@ function MyPins() {
     // declare hooks here
     const dispatch = useDispatch();
 
+    // redux state for user pins
+
     // fetch pins added by logged in user
     useEffect(() => {
-        
+        dispatch({
+            type: 'FETCH_USER_PINS'
+        })
     }, []);
 
     return (
         // render pins in a list of Material UI cards
         <>
+
         </>
     )
 }

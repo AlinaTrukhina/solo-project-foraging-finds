@@ -190,8 +190,9 @@ function MapComponent() {
           />
         ))}
         {/* opens up info window for the selected marker */}
-        {selectedPin ? (<InfoWindow position={{lat: Number(selectedPin.lat), lng: Number(selectedPin.lng)}} 
-        onCloseClick={() => setSelected(null)}>
+        {selectedPin.id ? (<InfoWindow position={{lat: Number(selectedPin.lat), lng: Number(selectedPin.lng)}} 
+        onCloseClick={() => dispatch({type: 'SET_SELECTED_PIN', payload: {}
+                      })}>
           <div>
             <h4>{selectedPin.title}</h4>
             <p>{selectedPin.lat}, {selectedPin.lng}</p>
