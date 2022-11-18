@@ -5,7 +5,8 @@ import {
   Link,
   HashRouter as Router,
   Route,
-  useHistory
+  useHistory,
+  useParams
   } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import DetailsPage from "../DetailsPage/DetailsPage";
@@ -16,7 +17,7 @@ function MapComponent() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  // selector
+  // selectors
   const allPins = useSelector(store => store.pins);
   const selectedPin = useSelector(store => store.selectedPin);
   const userPins = useSelector(store => store.userPins);
@@ -168,13 +169,15 @@ function MapComponent() {
             anchor: new window.google.maps.Point(15, 15)
           }}  
         />}
-        {/* render all pins from store on map */}
-        {allPins.map(marker => (
+
+{/* Conditional rendering to either put user pins or all pins on map */}
+          {/* puts user pins on map */}
+          {userPins.map(marker => (
           <Marker key={marker.id} 
           position={{lat: Number(marker.lat), lng: Number(marker.lng)}}
           // change the icon to a mushroom
           icon={{
-            url: '/svg/mushrooms-2-mushrooms.svg',
+            url: '/svg/musroom-colored-mypin.svg',
             scaledSize: new window.google.maps.Size(30,30),
             // sets origin to the point where user clicked
             origin: new window.google.maps.Point(0, 0),
@@ -189,30 +192,32 @@ function MapComponent() {
             })
           }}
           />
-        ))}
+          ))}
 
-        {/* puts user pins on map */}
-        {userPins.map(marker => (
-        <Marker key={marker.id} 
-        position={{lat: Number(marker.lat), lng: Number(marker.lng)}}
-        // change the icon to a mushroom
-        icon={{
-          url: '/svg/musroom-colored-mypin.svg',
-          scaledSize: new window.google.maps.Size(30,30),
-          // sets origin to the point where user clicked
-          origin: new window.google.maps.Point(0, 0),
-          // sets anchor to half the size so that the icon center appears on the origin point
-          anchor: new window.google.maps.Point(15, 15)
-        }}  
-        // set the clicked marker as selected
-        onClick={()=>{
-          dispatch({
-            type: 'SET_SELECTED_PIN',
-            payload: marker
-          })
-        }}
-        />
-        ))}
+          {/* render all pins from store on map */}
+          {allPins.map(marker => (
+            <Marker key={marker.id} 
+            position={{lat: Number(marker.lat), lng: Number(marker.lng)}}
+            // change the icon to a mushroom
+            icon={{
+              url: '/svg/mushrooms-2-mushrooms.svg',
+              scaledSize: new window.google.maps.Size(30,30),
+              // sets origin to the point where user clicked
+              origin: new window.google.maps.Point(0, 0),
+              // sets anchor to half the size so that the icon center appears on the origin point
+              anchor: new window.google.maps.Point(15, 15)
+            }}  
+            // set the clicked marker as selected
+            onClick={()=>{
+              dispatch({
+                type: 'SET_SELECTED_PIN',
+                payload: marker
+              })
+            }}
+            />
+          ))}
+        
+
         {/* opens up info window for the selected marker */}
         {selectedPin.id ? (<InfoWindow position={{
           lat: Number(selectedPin.lat), lng: Number(selectedPin.lng)}} 
