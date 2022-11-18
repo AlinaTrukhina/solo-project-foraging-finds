@@ -5,6 +5,7 @@ import pinsSaga from './pins.saga';
 import registrationSaga from './registration.saga';
 import searchSaga from './search.saga';
 import userSaga from './user.saga';
+import userPinsSaga from './userPins.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -21,5 +22,6 @@ export default function* rootSaga() {
     pinsSaga(),
     commentsSaga(),
     searchSaga(),
+    userPinsSaga(),
   ]);
 }

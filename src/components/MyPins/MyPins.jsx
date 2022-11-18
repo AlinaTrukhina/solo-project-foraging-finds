@@ -16,7 +16,7 @@ function MyPins() {
     const dispatch = useDispatch();
 
     // redux state for user pins
-
+    const myPins = useSelector(store => store.userPins);
     // fetch pins added by logged in user
     useEffect(() => {
         dispatch({
@@ -27,7 +27,7 @@ function MyPins() {
     return (
         // render pins in a list of Material UI cards
         <>
-
+            
         </>
     )
 }

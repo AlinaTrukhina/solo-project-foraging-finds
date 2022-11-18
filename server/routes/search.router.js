@@ -4,10 +4,12 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
   console.log('search term is', req.body.searchTerm);
-  const sqlText = `SELECT "pins"."id", LOWER("title"), LOWER("latin_name"), "date", "text_entry", "lat", "lng", "img_url"
+  const sqlText = `SELECT "pins"."id", LOWER("title"), 
+  LOWER("latin_name"), "date", "text_entry", 
+  "lat", "lng", "img_url"
   FROM "pins"
   JOIN "images" ON images.id = pins.image_id
-  WHERE "title" LIKE $1
+  WHERE LOWER("title") LIKE %$1%
   ;`;
   const sqlParams = [req.body.searchTerm];
   pool.query(sqlText, sqlParams)

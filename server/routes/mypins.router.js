@@ -18,7 +18,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   WHERE "user"."id" = $1
   ;`;
   pool
-    .query(sqlText)
+    .query(sqlText, sqlParams)
     .then(dbResponse=> {
       res.send(dbResponse.rows)
     })
