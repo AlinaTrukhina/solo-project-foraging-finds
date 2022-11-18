@@ -15,15 +15,18 @@ function MapComponent() {
 
   const dispatch = useDispatch();
   const history = useHistory();
+
+  // selector
   const allPins = useSelector(store => store.pins);
+  const selectedPin = useSelector(store => store.selectedPin);
 
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(position => {
-      //const { lat, lng } = position.coords;
-      // set user position to current position
-      setUserPosition({lat: position.coords.latitude, lng: position.coords.longitude})
-      console.log('user positon, page load:', userPosition);
-    }, () => null);
+    // navigator.geolocation.getCurrentPosition(position => {
+    //   //const { lat, lng } = position.coords;
+    //   // set user position to current position
+    //   setUserPosition({lat: position.coords.latitude, lng: position.coords.longitude})
+    //   console.log('user positon, page load:', userPosition);
+    // }, () => null);
 
     dispatch({
       type: 'FETCH_PINS'
@@ -58,10 +61,10 @@ function MapComponent() {
   const [userPosition, setUserPosition] = React.useState({});
 
   // store markers array in state - will be used when user clicks a point on the map
-  const [markers, setMarkers] = React.useState([]);
+  //const [markers, setMarkers] = React.useState([]);
   
   // store selected marker state
-  const [selected, setSelected] = React.useState(null);
+  //const [selected, setSelected] = React.useState(null);
 
   // add some map markers to render
   const myMarkers = [
@@ -122,12 +125,12 @@ function MapComponent() {
   const panTo = React.useCallback(({lat, lng}) => {
     mapRef.current.panTo({lat, lng});
   }, []);
+  
+  // const toDetails = (evt) => {
+  //   evt.preventDefault();
 
-  const toDetails = (evt) => {
-    evt.preventDefault();
-
-    history.push(`/details/${selected.id}`);
-  }
+  //   history.push(`/details/${selected.id}`);
+  // }
 
   if (loadError) return "Error loading Map";
   if (!isLoaded) return "Loading map";
@@ -136,6 +139,7 @@ function MapComponent() {
     <>
       <h5>User Position: {userPosition.lat}, {userPosition.lng}</h5>
       {/* <CenterMap panTo={panTo} userPosition={userPosition }  /> */}
+      <button>Center Map</button>
       <GoogleMap 
       mapContainerStyle={mapContainerStyle} 
       zoom={12} 
@@ -178,20 +182,23 @@ function MapComponent() {
           }}  
           // set the clicked marker as selected
           onClick={()=>{
-            setSelected(marker);
+            dispatch({
+              type: 'SET_SELECTED_PIN',
+              payload: marker
+            })
           }}
           />
         ))}
         {/* opens up info window for the selected marker */}
-        {selected ? (<InfoWindow position={{lat: Number(selected.lat), lng: Number(selected.lng)}} 
+        {selectedPin ? (<InfoWindow position={{lat: Number(selectedPin.lat), lng: Number(selectedPin.lng)}} 
         onCloseClick={() => setSelected(null)}>
           <div>
-            <h4>{selected.title}</h4>
-            <p>{selected.lat}, {selected.lng}</p>
+            <h4>{selectedPin.title}</h4>
+            <p>{selectedPin.lat}, {selectedPin.lng}</p>
               
-              <Router selected={selected} >
-                <Link selected={selected}  to={`/details/${selected.id}`} 
-                onClick={(evt)=>toDetails(evt)}>
+              <Router>
+                <Link  to={`/details/${selectedPin.id}`}> 
+                {/* onClick={(evt)=>toDetails(evt)} */}
                   Details
                 </Link>
               </Router>
@@ -203,15 +210,5 @@ function MapComponent() {
   );
 }
 
-// does not work yet
-// function CenterMap({ panTo, toUserPosition }) {
-//   return (
-//   <button onClick={() => {
-//     toUserPosition();
-//     panTo({lng: userPosition.lat, lng: userPosition.lng})
-//   }}>
-//   Center Map</button>
-//   );
-// }
 
 export default MapComponent;

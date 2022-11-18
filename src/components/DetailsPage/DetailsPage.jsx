@@ -5,7 +5,7 @@ import { format } from 'date-fns';
 import { parseISO } from 'date-fns/esm';
 
 function DetailsPage() {
-  
+  // declare hooks here
   const params = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
@@ -20,12 +20,10 @@ function DetailsPage() {
   }, [params.id]);
 
   //TODO: figure out how to pass the selected object to DetailsPage
-  const allPins = useSelector(store => store.pins);
+  const selectedPin = useSelector(store => store.selectedPin);
   const user = useSelector(store => store.user);
   const comments = useSelector(store => store.comments);
 
-  // get selected pin object from store - search using id stored in params
-  const selected = (allPins.filter(pin => pin.id == params.id))[0];
 
   const closeDetails = (evt) => {
     evt.preventDefault();
@@ -39,7 +37,7 @@ function DetailsPage() {
       comment: evt.target.commentInputTextarea.value,
       date: new Date().toISOString(),
       user_id: user.id,
-      pin_id: selected.id
+      pin_id: selectedPin.id
     }
     console.log('new comment:', newComment);
 
@@ -54,11 +52,11 @@ function DetailsPage() {
       <h1>Details Page</h1>
       <button onClick={(evt)=>{closeDetails(evt)}}>Close Details</button>
       <section>
-        <h2>{selected.title}</h2>
-        <h3>{selected.latin_name}</h3>
-        <h4>{format(parseISO(selected.date), 'yyyy-MM-dd')}</h4>
-        <img src={selected.img_url} alt={selected.title}/>
-        <p>Description: {selected.text_entry}</p>
+        <h2>{selectedPin.title}</h2>
+        <h3>{selectedPin.latin_name}</h3>
+        {/* <h4>{format(parseISO(selectedPin.date), 'yyyy-MM-dd')}</h4> */}
+        <img src={selectedPin.img_url} alt={selectedPin.title}/>
+        <p>Description: {selectedPin.text_entry}</p>
       </section>
       <h2>Comments</h2>
       <section id="commentSection" style={{display: 'flex', flexDirection: 'column', alignContent: 'space-around'
@@ -67,6 +65,7 @@ function DetailsPage() {
           <div style={{display: 'flex', flexDirection: 'row', justifyContent:'space-around', alignItems:'center'}} 
           key={comment.comment_id} > 
             <h5>{comment.username}</h5>
+            <h6>{comment.date}</h6>
             <p>{comment.comment}</p>
           </div>))}
       </section>

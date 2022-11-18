@@ -7,7 +7,7 @@ function UserPage() {
   const history = useHistory();
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
-  history.push('/info');
+
   return (
     alert(`Welcome, ${user.username}! Your ID is: ${user.id}`)
     

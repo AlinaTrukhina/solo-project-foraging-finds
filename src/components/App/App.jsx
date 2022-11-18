@@ -26,6 +26,7 @@ import Search from '../Search/Search';
 
 import './App.css';
 import AddPin from '../AddPin/AddPin';
+import MyPins from '../MyPins/MyPins';
 
 function App() {
   const dispatch = useDispatch();
@@ -65,6 +66,13 @@ function App() {
             <InfoPage />
           </Route>
 
+          <Route 
+            exact
+            path="/addpin"
+          >
+            {user.id ? <AddPin /> : <Redirect to="/login" />}
+          </Route> 
+
           <Route
             // logged in shows InfoPage else shows LoginPage
             exact
@@ -72,6 +80,15 @@ function App() {
           >
             <Search />
           </Route>
+
+          <ProtectedRoute
+            // logged in shows UserPage else shows LoginPage
+            exact
+            path="/mypins"
+          >
+            <MyPins />
+          </ProtectedRoute>
+
           {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
@@ -125,13 +142,7 @@ function App() {
               <LandingPage />
             }
           </Route>
-          
-          <Route 
-            exact
-            path="/addpin"
-          >
-            {user.id ? <AddPin /> : <Redirect to="/login" />}
-          </Route>  
+           
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
             <h1>404</h1>
@@ -140,7 +151,7 @@ function App() {
         {/* <Link to="/details">
           Details
         </Link> */}
-
+        <MapComponent />
         <Footer />
       </div>
     </Router>

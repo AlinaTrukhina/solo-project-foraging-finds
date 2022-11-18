@@ -9,10 +9,8 @@ import MapComponent from '../MapComponent/MapComponent';
 function InfoPage() {
   return (
     <>
-    <div className="container">
-      <p>Everyone can see this page with map</p>
-    </div>
-    <MapComponent />
+
+    {/* <MapComponent /> */}
     </>
   );
 }

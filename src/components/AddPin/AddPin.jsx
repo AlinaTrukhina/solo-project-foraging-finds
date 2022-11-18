@@ -30,7 +30,7 @@ function AddPin() {
 
   const handleCancel = (evt) => {
     evt.preventDefault();
-    history.push('/info');
+    history.push('/');
   }
 
   const handleTitleChange = (evt) => {
