@@ -19,6 +19,7 @@ function MapComponent() {
   // selector
   const allPins = useSelector(store => store.pins);
   const selectedPin = useSelector(store => store.selectedPin);
+  const userPins = useSelector(store => store.userPins);
 
   useEffect(() => {
     // navigator.geolocation.getCurrentPosition(position => {
@@ -189,10 +190,36 @@ function MapComponent() {
           }}
           />
         ))}
+
+        {/* puts user pins on map */}
+        {userPins.map(marker => (
+        <Marker key={marker.id} 
+        position={{lat: Number(marker.lat), lng: Number(marker.lng)}}
+        // change the icon to a mushroom
+        icon={{
+          url: '/svg/musroom-colored-mypin.svg',
+          scaledSize: new window.google.maps.Size(30,30),
+          // sets origin to the point where user clicked
+          origin: new window.google.maps.Point(0, 0),
+          // sets anchor to half the size so that the icon center appears on the origin point
+          anchor: new window.google.maps.Point(15, 15)
+        }}  
+        // set the clicked marker as selected
+        onClick={()=>{
+          dispatch({
+            type: 'SET_SELECTED_PIN',
+            payload: marker
+          })
+        }}
+        />
+        ))}
         {/* opens up info window for the selected marker */}
-        {selectedPin.id ? (<InfoWindow position={{lat: Number(selectedPin.lat), lng: Number(selectedPin.lng)}} 
-        onCloseClick={() => dispatch({type: 'SET_SELECTED_PIN', payload: {}
-                      })}>
+        {selectedPin.id ? (<InfoWindow position={{
+          lat: Number(selectedPin.lat), lng: Number(selectedPin.lng)}} 
+        onCloseClick={() => dispatch({
+          type: 'SET_SELECTED_PIN', 
+          payload: {}
+          })}>
           <div>
             <h4>{selectedPin.title}</h4>
             <p>{selectedPin.lat}, {selectedPin.lng}</p>

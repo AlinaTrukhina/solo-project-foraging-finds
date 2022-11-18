@@ -48,6 +48,7 @@ function LoginForm() {
         <label htmlFor="password">
           Password:
           <input
+            autoComplete='current-password'
             type="password"
             name="password"
             required

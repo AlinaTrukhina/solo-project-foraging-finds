@@ -10,26 +10,45 @@ import Collapse from '@mui/material/Collapse';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
+import { format } from 'date-fns';
+import { parseISO } from 'date-fns/esm';
 
 function MyPins() {
-    // declare hooks here
-    const dispatch = useDispatch();
+  // declare hooks here
+  const dispatch = useDispatch();
 
-    // redux state for user pins
-    const myPins = useSelector(store => store.userPins);
-    // fetch pins added by logged in user
-    useEffect(() => {
-        dispatch({
-            type: 'FETCH_USER_PINS'
-        })
-    }, []);
+  // redux state for user pins
+  const myPins = useSelector(store => store.userPins);
+  // fetch pins added by logged in user
+  useEffect(() => {
+    dispatch({
+        type: 'FETCH_USER_PINS'
+    })
+  }, []);
 
-    return (
-        // render pins in a list of Material UI cards
-        <>
-            
-        </>
-    )
+  return (
+    // render pins in a list of Material UI cards
+    <>  {myPins.map(pin => (
+      <Card key={pin.id}>
+        <CardHeader 
+        title={pin.title} 
+        subheader={format(parseISO(pin.date), 'yyyy-MM-dd')}
+        />
+        <CardMedia 
+        component="img"
+        image={pin.img_url}
+        alt={pin.title} />
+        <CardContent>
+          <Typography>
+            {pin.latin_name}
+          </Typography>
+          <Typography paragraph>
+            {pin.text_entry}
+          </Typography>
+        </CardContent>
+      </Card>))}
+    </>
+  )
 }
 
 export default MyPins;
