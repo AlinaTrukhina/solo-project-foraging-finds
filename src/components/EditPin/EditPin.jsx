@@ -2,6 +2,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -34,10 +35,15 @@ function EditPin() {
 
   return (
     <>
-      <Typography component="h1" variant="h5">
+      <Typography component="h1" variant="h5" align='center'>
         Edit Pin # {params.id}
       </Typography>
-      {pinToEdit.id && (<Box component="form" onSubmit={(evt)=>handleSubmit(evt)}>
+      {pinToEdit.id && (
+        <Box component="form"
+        sx={{
+          '& .MuiTextField-root': { marginBottom: 1},
+        }}
+        onSubmit={(evt)=>handleSubmit(evt)}>
         <TextField 
           value={pinToEdit.title}
           onChange={(evt) => dispatch({
@@ -46,6 +52,7 @@ function EditPin() {
           })}
           fullWidth
           id="titleInput"
+          label="title"
           size="small"
         />
         <TextField
@@ -56,6 +63,7 @@ function EditPin() {
           })}
           fullWidth
           id="latinNameInput"
+          label="latin name"
           size="small"
         />
         <TextField
@@ -66,24 +74,27 @@ function EditPin() {
           })}
           fullWidth
           id="textEntryInput"
+          label="text entry"
           size="small"
           multiline
         />
-        <Button
-          onClick={(evt)=>handleCancel(evt)}
-          type="button"
-          variant="outlined"
-          size="small"
-          >Close
-        </Button>
-        <Button
-          onClick={(evt)=>handleSubmit(evt)}
-          type="submit"
-          variant="contained"
-          size="small"
-          >
-            Submit
-        </Button>
+        <Stack direction='row' justifyContent="space-evenly">
+          <Button
+            onClick={(evt)=>handleCancel(evt)}
+            type="button"
+            variant="outlined"
+            size="small"
+            >Close
+          </Button>
+          <Button
+            onClick={(evt)=>handleSubmit(evt)}
+            type="submit"
+            variant="contained"
+            size="small"
+            >
+              Submit
+          </Button>
+        </Stack>
       </Box>)}
     </>
   )
