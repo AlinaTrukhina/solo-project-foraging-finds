@@ -34,6 +34,9 @@ function* deletePin(action) {
   }
 }
 
+// edit a pin
+
+
 function* userPinsSaga() {
   yield takeLatest('FETCH_USER_PINS', fetchUserPins);
 

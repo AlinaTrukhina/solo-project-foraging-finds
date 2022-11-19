@@ -55,7 +55,7 @@ function MyPins() {
         </CardContent>
         <CardActions>
           <Button size="small">Share</Button>
-          <Button size="small">Edit</Button>
+          <Button size="small" onClick={(evt)=>editPin(evt, pin)}>Edit</Button>
           <Button size="small" onClick={(evt)=>deletePin(evt, pin)}>Delete</Button>
         </CardActions>
       </Card>))}
