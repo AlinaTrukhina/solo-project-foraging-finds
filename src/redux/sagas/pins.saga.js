@@ -18,6 +18,7 @@ function* fetchPins() {
   }
 }
 
+// add a pin
 function* addPin(action) {
   try {
     yield axios.post('/pins', action.payload);

@@ -4,6 +4,7 @@ const router = express.Router();
 const {
   rejectUnauthenticated,
 } = require('../modules/authentication-middleware');
+const { response } = require('express');
 
 /**
  * GET all pins from database
@@ -62,10 +63,10 @@ router.post('/', rejectUnauthenticated, (req, res) => {
           })
       }).catch(err => {
         // catch for second query
-        console.log('error in first adding pin query',err);
+        console.log('error in first adding pin query', err);
         res.sendStatus(500);
       })
-
 });
+
 
 module.exports = router;

@@ -28,4 +28,22 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     });
 });
 
+// delete a pin if user is logged in
+router.delete('/', rejectUnauthenticated, (req, res) => {
+  console.log('delete request for pin', req.body.id);
+  const sqlDeleteText = `DELETE FROM "pins" 
+  WHERE pins.id= $1 ;`;
+  const sqlDeleteParams = [req.body.id];
+
+  pool.query(sqlDeleteText, sqlDeleteParams)
+  .then(response => {
+    res.sendStatus(203);
+  })
+  .catch(err => {
+    // catch for delete pin
+    console.log('error deleting pin', err);
+    res.sendStatus(500);
+  })
+});
+
 module.exports = router;
