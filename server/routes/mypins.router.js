@@ -34,7 +34,7 @@ router.delete('/', rejectUnauthenticated, (req, res) => {
   console.log('delete request for pin', req.body.id);
   const sqlDeleteText = `DELETE FROM "pins" 
   WHERE pins.id= $1 AND pins.user_id = $2;`;
-  const sqlDeleteParams = [req.body.id];
+  const sqlDeleteParams = [req.body.id, req.user.id];
 
   pool.query(sqlDeleteText, sqlDeleteParams)
   .then(response => {
