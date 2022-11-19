@@ -12,6 +12,7 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { format } from 'date-fns';
 import { parseISO } from 'date-fns/esm';
+import { Button } from '@mui/material';
 
 function MyPins() {
   // declare hooks here
@@ -25,6 +26,12 @@ function MyPins() {
         type: 'FETCH_USER_PINS'
     })
   }, []);
+
+  const deletePin = (evt, pin) => {
+    evt.preventDefault();
+    console.log('in delete pin id', pin.id);
+    dispatch({type: 'DELETE_PIN', payload: pin})
+  }
 
   return (
     // render pins in a list of Material UI cards
@@ -46,6 +53,11 @@ function MyPins() {
             {pin.text_entry}
           </Typography>
         </CardContent>
+        <CardActions>
+          <Button size="small">Share</Button>
+          <Button size="small">Edit</Button>
+          <Button size="small" onClick={(evt)=>deletePin(evt, pin)}>Delete</Button>
+        </CardActions>
       </Card>))}
     </>
   )

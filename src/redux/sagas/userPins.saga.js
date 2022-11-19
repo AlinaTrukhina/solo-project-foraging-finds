@@ -18,9 +18,26 @@ function* fetchUserPins() {
   }
 }
 
+// delete a pin
+function* deletePin(action) {
+  try {
+    console.log('in delete pin saga, pin is', action.payload);
+    yield axios.delete(`/mypins`, {data: action.payload});
+
+    yield put({
+      type: 'FETCH_PINS'
+    });    
+    yield put ({type: 'FETCH_USER_PINS'})
+  } catch (error) {
+    console.log('Error deleting pin:', error);
+    alert('could not delete pin!');
+  }
+}
+
 function* userPinsSaga() {
   yield takeLatest('FETCH_USER_PINS', fetchUserPins);
 
+  yield takeLatest('DELETE_PIN', deletePin);
 }
 
 export default userPinsSaga;
