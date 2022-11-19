@@ -1,5 +1,5 @@
 import { useHistory, useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Button from '@mui/material/Button';
@@ -7,12 +7,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-
 
 function EditPin() {
   const dispatch = useDispatch();
@@ -24,17 +18,6 @@ function EditPin() {
   }, [params.id])
 
   const pinToEdit = useSelector(store => store.pinToEdit);
-
-  // set original open state for the delete dialog window to false
-  const [open, setOpen] = useState(false);
-  //open the delete diolog
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-  // close the delete dialog
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   const handleCancel = (evt) => {
     evt.preventDefault();
@@ -94,8 +77,7 @@ function EditPin() {
           >Close
         </Button>
         <Button
-          onClick={handleClickOpen}
-          //onClick={(evt)=>handleSubmit(evt)}
+          onClick={(evt)=>handleSubmit(evt)}
           type="submit"
           variant="contained"
           size="small"

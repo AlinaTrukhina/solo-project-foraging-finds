@@ -9,6 +9,11 @@ import CardActions from '@mui/material/CardActions';
 import Collapse from '@mui/material/Collapse';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 import Typography from '@mui/material/Typography';
 import { format } from 'date-fns';
 import { parseISO } from 'date-fns/esm';
@@ -28,9 +33,21 @@ function MyPins() {
     })
   }, []);
 
+  // set original open state for the delete dialog window to false
+  const [open, setOpen] = useState(false);
+  //open the delete diolog
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  // close the delete dialog
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const deletePin = (evt, pin) => {
     evt.preventDefault();
     dispatch({type: 'DELETE_PIN', payload: pin})
+    setOpen(false);
   }
 
   const editPin = (evt, pin) => {
@@ -61,11 +78,34 @@ function MyPins() {
         <CardActions>
           <Button size="small">Share</Button>
           <Button size="small" onClick={(evt)=>editPin(evt, pin)}>Edit</Button>
-          <Button size="small" onClick={(evt)=>deletePin(evt, pin)}>Delete</Button>
+          <Button size="small" onClick={handleClickOpen}>Delete</Button>
+            <Dialog
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="delete-dialog"
+            aria-describedby="delete-dialog-description"
+            >
+            <DialogTitle id="delete-dialog">
+              {"Are you sure you want to delete this?"}
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText id="delete-dialog-description">
+                Are you sure you want to delete this pin? It will be gone forever!
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClose}>Nope, keep it</Button>
+              <Button onClick={(evt)=>deletePin(evt, pin)} autoFocus>
+                Yes, delete it
+              </Button>
+            </DialogActions>
+            </Dialog>
         </CardActions>
-      </Card>))}
+      </Card>
+    ))}
     </>
   )
 }
 
 export default MyPins;
+
