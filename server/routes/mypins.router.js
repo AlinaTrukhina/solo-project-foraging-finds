@@ -48,7 +48,23 @@ router.delete('/', rejectUnauthenticated, (req, res) => {
 
 // edit pin if user is logged in
 router.put('/:id', rejectUnauthenticated, (req, res) => {
-  res.sendStatus(200);
+  const sqlEditText =`
+  UPDATE "pins"
+  SET "title" = $2, "latin_name" = $3, "text_entry" = $4
+  WHERE pins.id = $1
+  ;
+  `;
+  const sqlEditParams = [req.params.id, req.body.title, req.body.latin_name, req.body.text_entry]
+
+  pool.query(sqlEditText, sqlEditParams)
+  .then(dBres => {
+    res.sendStatus(200);
+  })
+  .catch(err => {
+    // catch for delete pin
+    console.log('error editing pin', err);
+    res.sendStatus(500);
+  })
 });
 
 module.exports = router;

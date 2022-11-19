@@ -29,7 +29,7 @@ function MyPins() {
 
   const deletePin = (evt, pin) => {
     evt.preventDefault();
-    console.log('in delete pin id', pin.id);
+    // console.log('in delete pin id', pin.id);
     dispatch({type: 'DELETE_PIN', payload: pin})
   }
 
