@@ -35,7 +35,15 @@ function* deletePin(action) {
 }
 
 // edit a pin
-
+function* editPin(action){
+  try {
+    console.log('editing pin id', action.payload.id);
+    
+  } catch (error) {
+    console.log('Error edit pin:', error);
+    alert('could not edit pin!');
+  }
+}
 
 function* userPinsSaga() {
   yield takeLatest('FETCH_USER_PINS', fetchUserPins);
