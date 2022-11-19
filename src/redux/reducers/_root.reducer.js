@@ -5,6 +5,7 @@ import pins from './pins.reducer';
 import comments from './comments.reducer';
 import selectedPin from './selectedPin.reducer';
 import userPins from './userPins.reducer';
+import pinToEdit from './editPin.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
   pins,
   comments,
   selectedPin,
-  userPins
+  userPins,
+  pinToEdit,
 });
 
 export default rootReducer;

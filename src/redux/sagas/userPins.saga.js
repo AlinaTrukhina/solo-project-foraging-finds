@@ -43,7 +43,17 @@ function* editPin(action){
     yield put ({type: 'SET_EDIT PIN', payload: pinToEdit.data})
   } catch (error) {
     console.log('Error edit pin:', error);
-    // alert('could not edit pin!');
+    alert('could not edit pin!');
+  }
+}
+
+function* saveEditedPin(action){
+  try {
+    yield axios.put(`/mypins/${action.payload.id}/edit`, action.payload)
+    alert('your pin is updated!')
+  } catch (error) {
+    console.log('Error saving updated pin:', error);
+    alert('could not save updated pin!');
   }
 }
 
@@ -52,7 +62,9 @@ function* userPinsSaga() {
 
   yield takeLatest('DELETE_PIN', deletePin);
 
-  yield takeEvery('FETCH_EDIT_PIN', editPin);
+  yield takeLatest('FETCH_EDIT_PIN', editPin);
+
+  yield takeLatest('SAVE_PIN', saveEditedPin);
 }
 
 export default userPinsSaga;
