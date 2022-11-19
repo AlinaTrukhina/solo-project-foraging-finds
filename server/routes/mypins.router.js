@@ -37,13 +37,18 @@ router.delete('/', rejectUnauthenticated, (req, res) => {
 
   pool.query(sqlDeleteText, sqlDeleteParams)
   .then(response => {
-    res.sendStatus(203);
+    res.sendStatus(200);
   })
   .catch(err => {
     // catch for delete pin
     console.log('error deleting pin', err);
     res.sendStatus(500);
   })
+});
+
+// edit pin if user is logged in
+router.put('/:id', rejectUnauthenticated, (req, res) => {
+  res.sendStatus(200);
 });
 
 module.exports = router;
