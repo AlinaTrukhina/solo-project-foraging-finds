@@ -5,7 +5,9 @@ function* searchPins(action) {
 console.log('in search pins');
 try {
     // request to server to get searched pins from database
-  const dbResponse = yield axios.get('/search', action.payload);
+  const dbResponse = yield axios.get(`/search`, {
+    params: action.payload
+  });
   console.log('db response after get request is:', dbResponse);
 
   // set reducer to the data we got from database
