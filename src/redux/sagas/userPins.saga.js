@@ -1,4 +1,4 @@
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, takeEvery, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
 // worker Saga: will be fired on "REGISTER" actions
@@ -38,7 +38,7 @@ function* deletePin(action) {
 function* editPin(action){
   try {
     console.log('editing pin id', action.payload.id);
-    
+
   } catch (error) {
     console.log('Error edit pin:', error);
     alert('could not edit pin!');
@@ -49,6 +49,8 @@ function* userPinsSaga() {
   yield takeLatest('FETCH_USER_PINS', fetchUserPins);
 
   yield takeLatest('DELETE_PIN', deletePin);
+
+  yield takeEvery('FETCH_EDIT_PIN', editPin);
 }
 
 export default userPinsSaga;

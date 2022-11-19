@@ -17,6 +17,7 @@ import { Button } from '@mui/material';
 function MyPins() {
   // declare hooks here
   const dispatch = useDispatch();
+  const history = useHistory();
 
   // redux state for user pins
   const myPins = useSelector(store => store.userPins);
@@ -29,8 +30,12 @@ function MyPins() {
 
   const deletePin = (evt, pin) => {
     evt.preventDefault();
-    // console.log('in delete pin id', pin.id);
     dispatch({type: 'DELETE_PIN', payload: pin})
+  }
+
+  const editPin = (evt, pin) => {
+    evt.preventDefault();
+    history.push(`/mypins/${pin.id}/edit`);
   }
 
   return (
@@ -55,7 +60,7 @@ function MyPins() {
         </CardContent>
         <CardActions>
           <Button size="small">Share</Button>
-          <Button size="small"  >Edit</Button>
+          <Button size="small" onClick={(evt)=>editPin(evt, pin)}>Edit</Button>
           <Button size="small" onClick={(evt)=>deletePin(evt, pin)}>Delete</Button>
         </CardActions>
       </Card>))}

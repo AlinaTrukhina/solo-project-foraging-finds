@@ -23,10 +23,11 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import MapComponent from '../MapComponent/MapComponent';
 import DetailsPage from '../DetailsPage/DetailsPage';
 import Search from '../Search/Search';
-
-import './App.css';
 import AddPin from '../AddPin/AddPin';
 import MyPins from '../MyPins/MyPins';
+import EditPin from '../EditPin/EditPin';
+import './App.css';
+
 
 function App() {
   const dispatch = useDispatch();
@@ -89,6 +90,13 @@ function App() {
             <MyPins />
           </ProtectedRoute>
 
+          <ProtectedRoute
+            // logged in shows UserPage else shows LoginPage
+            exact
+            path="/mypins/:id/edit"
+          >
+            <EditPin />
+          </ProtectedRoute>
           {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
