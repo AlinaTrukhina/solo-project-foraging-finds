@@ -47,8 +47,27 @@ router.delete('/', rejectUnauthenticated, (req, res) => {
   })
 });
 
+router.get('/:id', rejectUnauthenticated, (req, res) => { 
+  sqlParams = [req.params.id];
+  // GET route code here
+  const sqlText = `SELECT "pins"."id", "title", "latin_name", "date", "text_entry", "lat", "lng", "img_url", "user_id"
+  FROM "pins"
+  JOIN "images" ON images.id = pins.image_id
+  WHERE "pins"."id" = $1
+  ;`;
+  pool
+    .query(sqlText, sqlParams)
+    .then(dbResponse=> {
+      res.send(dbResponse.rows[0])
+    })
+    .catch((err) => {
+      console.log('get pin to edit failed', err);
+      res.sendStatus(500);
+    });
+})
+
 // edit pin if user is logged in
-router.put('/:id', rejectUnauthenticated, (req, res) => {
+router.put('/:id/edit', rejectUnauthenticated, (req, res) => {
   const sqlEditText =`
   UPDATE "pins"
   SET "title" = $2, "latin_name" = $3, "text_entry" = $4

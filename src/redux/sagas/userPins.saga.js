@@ -37,11 +37,13 @@ function* deletePin(action) {
 // edit a pin
 function* editPin(action){
   try {
-    console.log('editing pin id', action.payload.id);
+    const pinToEdit = yield axios.get(`/mypins/${action.payload}`);
+    console.log('pin to edit is', {pinToEdit});
 
+    yield put ({type: 'SET_EDIT PIN', payload: pinToEdit.data})
   } catch (error) {
     console.log('Error edit pin:', error);
-    alert('could not edit pin!');
+    // alert('could not edit pin!');
   }
 }
 
