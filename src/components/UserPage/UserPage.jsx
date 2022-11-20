@@ -9,7 +9,11 @@ function UserPage() {
   const user = useSelector((store) => store.user);
 
   return (
+    <>
     <p>Welcome, {user.username}! Your ID is: {user.id}</p>  
+    <p>Your avatar:</p>
+    <img src={user.avatar} />
+    </>
   );
 }
 
