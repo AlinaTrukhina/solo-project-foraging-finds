@@ -16,7 +16,7 @@ import { Container } from "@mui/system";
 function Search() {
 
   const [searchTerm, setSearchTerm] = useState('');
-  const [searchBy, setSearchBy] = useState('');
+  const [searchBy, setSearchBy] = useState('name');
 
   const dispatch = useDispatch();
 
@@ -24,13 +24,19 @@ function Search() {
     setSearchTerm(event.target.value);
   };
 
+  const handleSearchByChange = (evt) => {
+    console.log('search by', evt.target.value);
+    setSearchBy(evt.target.value);
+  }
+
   const submitSearch = (evt) => {
     evt.preventDefault();
 
     const searchParams = {
       searchTerm: searchTerm.toLowerCase(),
+      searchBy: searchBy
     }
-
+    console.log('search params are', searchParams)
     dispatch({
       type: 'SEARCH_PINS',
       payload: searchParams
@@ -51,11 +57,12 @@ function Search() {
         value={searchTerm}
         autoFocus
       />
-      <FormControl sx={{ marginTop: 0.5, marginBottom: 0.5, width: '100%'}} size="small">
+      <FormControl sx={{ marginTop: 1, marginBottom: 1, width: '100%'}} size="small">
       <InputLabel id="searchByLabel">Search By</InputLabel>
-        <Select labelId="searchByLabel" id="select" value={searchBy} >
-          <MenuItem value="title">Name</MenuItem>
-          <MenuItem value="latin-name">Latin Name</MenuItem>
+        <Select labelId="searchByLabel" id="select" 
+        onChange={handleSearchByChange} >
+          <MenuItem value={"title"}>Name</MenuItem>
+          <MenuItem value={"latin_name"}>Latin Name</MenuItem>
         </Select>
       </FormControl>
       <Button
