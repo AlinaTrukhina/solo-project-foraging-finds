@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from "react-router-dom";
 
+import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -88,10 +89,13 @@ function AddPin() {
 
   return (
     <Container>
-      <Typography component="h1" variant="h5">
+      <Typography component="h1" variant="h5" align='center'>
         Add Pin
       </Typography>
-      <Box component="form" onSubmit={(evt)=>addPin(evt)}>
+      <Box component="form" onSubmit={(evt)=>addPin(evt)}
+      sx={{
+        '& .MuiTextField-root': { marginBottom: 1},
+      }}>
         <TextField onChange={handleTitleChange}
           value={titleInput}
           required
@@ -122,27 +126,30 @@ function AddPin() {
           size="small"
           multiline
         />
-        <FormControlLabel onClick={handlePrivateCheck}
+        <FormControlLabel 
+          onClick={handlePrivateCheck}
           disabled 
           control={<Checkbox />} 
-          label="Private" 
+          label="Make Pin Private?" 
           size="small"
         />
-        <Button
-          onClick={(evt)=>handleCancel(evt)}
-          type="button"
-          variant="outlined"
-          size="small"
-          >Cancel
-        </Button>
-        <Button
-          onClick={(evt)=>addPin(evt)}
-          type="submit"
-          variant="contained"
-          size="small"
-          >
-            Submit
-        </Button>
+        <Stack direction='row' justifyContent="space-evenly">
+          <Button
+            onClick={(evt)=>handleCancel(evt)}
+            type="button"
+            variant="outlined"
+            size="small"
+            >Cancel
+          </Button>
+          <Button
+            onClick={(evt)=>addPin(evt)}
+            type="submit"
+            variant="contained"
+            size="small"
+            >
+              Submit
+          </Button>
+        </Stack>
       </Box>
     </Container>
   );
