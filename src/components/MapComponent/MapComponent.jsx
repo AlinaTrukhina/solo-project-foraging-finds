@@ -124,13 +124,17 @@ function MapComponent() {
 
   // create a function that will pan to user location 
   // pass in latitude and longitude
-  const panTo = React.useCallback(({lat, lng}) => {
-    mapRef.current.panTo({lat, lng});
+  const panTo = React.useCallback(({ lat, lng }) => {
+    mapRef.current.panTo({ lat, lng });
   }, []);
   
   function Locate({ panTo }) {
     return (
       <button className="locate"
+      onClick={()=>{panTo({
+        lat: userPosition.lat,
+        lng: userPosition.lng,
+      })}}
       >
         Center Map
       </button>
@@ -148,7 +152,7 @@ function MapComponent() {
     <>
       {/* <h5>User Position: {userPosition.lat}, {userPosition.lng}</h5> */}
       {/* <CenterMap panTo={panTo} userPosition={userPosition }  /> */}
-      <Locate />
+      <Locate panTo={panTo} />
       <GoogleMap 
       mapContainerStyle={mapContainerStyle} 
       zoom={12} 
