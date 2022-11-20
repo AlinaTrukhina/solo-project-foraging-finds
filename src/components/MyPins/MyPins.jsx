@@ -57,7 +57,8 @@ function MyPins() {
 
   return (
     // render pins in a list of Material UI cards
-    <>  {myPins.map(pin => (
+    <>  
+    {myPins.map(pin => (
       <Card key={pin.id}>
         <CardHeader 
         title={pin.title} 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from "react-router-dom";
 
@@ -12,13 +12,25 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { Container } from "@mui/system";
+import Card from '@mui/material/Card';
+import CardHeader from '@mui/material/CardHeader';
+import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
+import { format } from 'date-fns';
+import { parseISO } from 'date-fns/esm';
 
 function Search() {
+
+  const dispatch = useDispatch();
 
   const [searchTerm, setSearchTerm] = useState('');
   const [searchBy, setSearchBy] = useState('name');
 
-  const dispatch = useDispatch();
+  const pins = useSelector(store => store.pins);
+
+  // useEffect(() => {
+  //   dispatch({type: 'SET_SEARCHED_PINS', payload: {}})
+  // }, []);
 
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
@@ -75,6 +87,27 @@ function Search() {
       </Button>
       </Box>
       </Container>
+
+      {pins.map(pin => (
+      <Card key={pin.id}>
+        <CardHeader 
+        title={pin.title} 
+        subheader={format(parseISO(pin.date), 'yyyy-MM-dd')}
+        />
+        <CardMedia sx={{maxWidth: '100px'}}
+        component="img"
+        image={pin.img_url}
+        alt={pin.title} />
+        <CardContent>
+          <Typography>
+            {pin.latin_name}
+          </Typography>
+          <Typography paragraph>
+            {pin.text_entry}
+          </Typography>
+        </CardContent>
+      </Card>
+    ))}
     </>
   )
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import { useMemo, useEffect } from "react";
+import { useMemo, useEffect, useCallback } from "react";
 import { GoogleMap, useLoadScript, Marker, InfoWindow } from "@react-google-maps/api";
 import { 
   Link,
@@ -118,7 +118,7 @@ function MapComponent() {
   // add mapRef function to store map for use later without re-renders
   const mapRef = React.useRef();
   const onMapLoad = React.useCallback((map) => {
-    map.current = map;
+    mapRef.current = map;
     toUserPosition();
   }, []);
 
@@ -128,9 +128,16 @@ function MapComponent() {
     mapRef.current.panTo({lat, lng});
   }, []);
   
+  function Locate({ panTo }) {
+    return (
+      <button className="locate"
+      >
+        Center Map
+      </button>
+    )
+  }
   // const toDetails = (evt) => {
   //   evt.preventDefault();
-
   //   history.push(`/details/${selected.id}`);
   // }
 
@@ -141,7 +148,7 @@ function MapComponent() {
     <>
       {/* <h5>User Position: {userPosition.lat}, {userPosition.lng}</h5> */}
       {/* <CenterMap panTo={panTo} userPosition={userPosition }  /> */}
-      <button>Center Map</button>
+      <Locate />
       <GoogleMap 
       mapContainerStyle={mapContainerStyle} 
       zoom={12} 
