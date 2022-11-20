@@ -78,7 +78,6 @@ function Search() {
         </Select>
       </FormControl>
       <Button
-        onClick={(evt)=>submitSearch(evt)}
         type="submit"
         fullWidth
         variant="contained"
@@ -89,7 +88,9 @@ function Search() {
       </Container>
 
       {pins.map(pin => (
-      <Card key={pin.id}>
+      <Card key={pin.id}
+        onClick={()=>dispatch({type: 'SET_SELECTED_PIN', payload: pin})}
+      >
         <CardHeader 
         title={pin.title} 
         subheader={format(parseISO(pin.date), 'yyyy-MM-dd')}
