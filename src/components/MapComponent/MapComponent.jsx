@@ -139,7 +139,7 @@ function MapComponent() {
 
   return (
     <>
-      <h5>User Position: {userPosition.lat}, {userPosition.lng}</h5>
+      {/* <h5>User Position: {userPosition.lat}, {userPosition.lng}</h5> */}
       {/* <CenterMap panTo={panTo} userPosition={userPosition }  /> */}
       <button>Center Map</button>
       <GoogleMap 

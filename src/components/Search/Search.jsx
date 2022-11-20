@@ -7,11 +7,16 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 import { Container } from "@mui/system";
 
 function Search() {
 
   const [searchTerm, setSearchTerm] = useState('');
+  const [searchBy, setSearchBy] = useState('');
 
   const dispatch = useDispatch();
 
@@ -35,7 +40,7 @@ function Search() {
   return (
     <>
     <Container>
-      <Typography>Search</Typography>
+      <Typography component="h1" variant="h5" align="center">Search</Typography>
       <Box component="form" onSubmit={(evt)=>submitSearch(evt)}>
       <TextField onChange={handleChange}
         size="small"
@@ -46,6 +51,13 @@ function Search() {
         value={searchTerm}
         autoFocus
       />
+      <FormControl sx={{ marginTop: 0.5, marginBottom: 0.5, width: '100%'}} size="small">
+      <InputLabel id="searchByLabel">Search By</InputLabel>
+        <Select labelId="searchByLabel" id="select" value={searchBy} >
+          <MenuItem value="title">Name</MenuItem>
+          <MenuItem value="latin-name">Latin Name</MenuItem>
+        </Select>
+      </FormControl>
       <Button
         onClick={(evt)=>submitSearch(evt)}
         type="submit"
