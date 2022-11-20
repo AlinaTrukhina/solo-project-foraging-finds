@@ -1,5 +1,5 @@
 import React from "react";
-import { useMemo, useEffect } from "react";
+import { useMemo, useEffect, useCallback } from "react";
 import { GoogleMap, useLoadScript, Marker, InfoWindow } from "@react-google-maps/api";
 import { 
   Link,
@@ -118,19 +118,30 @@ function MapComponent() {
   // add mapRef function to store map for use later without re-renders
   const mapRef = React.useRef();
   const onMapLoad = React.useCallback((map) => {
-    map.current = map;
+    mapRef.current = map;
     toUserPosition();
   }, []);
 
   // create a function that will pan to user location 
   // pass in latitude and longitude
-  const panTo = React.useCallback(({lat, lng}) => {
-    mapRef.current.panTo({lat, lng});
+  const panTo = React.useCallback(({ lat, lng }) => {
+    mapRef.current.panTo({ lat, lng });
   }, []);
   
+  function Locate({ panTo }) {
+    return (
+      <button className="locate"
+      onClick={()=>{panTo({
+        lat: userPosition.lat,
+        lng: userPosition.lng,
+      })}}
+      >
+        Center Map
+      </button>
+    )
+  }
   // const toDetails = (evt) => {
   //   evt.preventDefault();
-
   //   history.push(`/details/${selected.id}`);
   // }
 
@@ -139,9 +150,9 @@ function MapComponent() {
 
   return (
     <>
-      <h5>User Position: {userPosition.lat}, {userPosition.lng}</h5>
+      {/* <h5>User Position: {userPosition.lat}, {userPosition.lng}</h5> */}
       {/* <CenterMap panTo={panTo} userPosition={userPosition }  /> */}
-      <button>Center Map</button>
+      <Locate panTo={panTo} />
       <GoogleMap 
       mapContainerStyle={mapContainerStyle} 
       zoom={12} 

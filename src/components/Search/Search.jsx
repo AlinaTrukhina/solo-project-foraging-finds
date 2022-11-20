@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from "react-router-dom";
 
@@ -7,25 +7,48 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 import { Container } from "@mui/system";
+import Card from '@mui/material/Card';
+import CardHeader from '@mui/material/CardHeader';
+import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
+import { format } from 'date-fns';
+import { parseISO } from 'date-fns/esm';
 
 function Search() {
 
-  const [searchTerm, setSearchTerm] = useState('');
-
   const dispatch = useDispatch();
+
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchBy, setSearchBy] = useState('name');
+
+  const pins = useSelector(store => store.pins);
+
+  // useEffect(() => {
+  //   dispatch({type: 'SET_SEARCHED_PINS', payload: {}})
+  // }, []);
 
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
   };
+
+  const handleSearchByChange = (evt) => {
+    console.log('search by', evt.target.value);
+    setSearchBy(evt.target.value);
+  }
 
   const submitSearch = (evt) => {
     evt.preventDefault();
 
     const searchParams = {
       searchTerm: searchTerm.toLowerCase(),
+      searchBy: searchBy
     }
-
+    console.log('search params are', searchParams)
     dispatch({
       type: 'SEARCH_PINS',
       payload: searchParams
@@ -35,7 +58,7 @@ function Search() {
   return (
     <>
     <Container>
-      <Typography>Search</Typography>
+      <Typography component="h1" variant="h5" align="center">Search</Typography>
       <Box component="form" onSubmit={(evt)=>submitSearch(evt)}>
       <TextField onChange={handleChange}
         size="small"
@@ -46,8 +69,15 @@ function Search() {
         value={searchTerm}
         autoFocus
       />
+      <FormControl sx={{ marginTop: 1, marginBottom: 1, width: '100%'}} size="small">
+      <InputLabel id="searchByLabel">Search By</InputLabel>
+        <Select labelId="searchByLabel" id="select" 
+        onChange={handleSearchByChange} >
+          <MenuItem value={"title"}>Name</MenuItem>
+          <MenuItem value={"latin_name"}>Latin Name</MenuItem>
+        </Select>
+      </FormControl>
       <Button
-        onClick={(evt)=>submitSearch(evt)}
         type="submit"
         fullWidth
         variant="contained"
@@ -56,6 +86,29 @@ function Search() {
       </Button>
       </Box>
       </Container>
+
+      {pins.map(pin => (
+      <Card key={pin.id}
+        onClick={()=>dispatch({type: 'SET_SELECTED_PIN', payload: pin})}
+      >
+        <CardHeader 
+        title={pin.title} 
+        subheader={format(parseISO(pin.date), 'yyyy-MM-dd')}
+        />
+        <CardMedia sx={{maxWidth: '100px'}}
+        component="img"
+        image={pin.img_url}
+        alt={pin.title} />
+        <CardContent>
+          <Typography>
+            {pin.latin_name}
+          </Typography>
+          <Typography paragraph>
+            {pin.text_entry}
+          </Typography>
+        </CardContent>
+      </Card>
+    ))}
     </>
   )
 }
