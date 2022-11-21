@@ -24,13 +24,9 @@ function Search() {
   const dispatch = useDispatch();
 
   const [searchTerm, setSearchTerm] = useState('');
-  const [searchBy, setSearchBy] = useState('name');
+  const [searchBy, setSearchBy] = useState('title');
 
   const pins = useSelector(store => store.pins);
-
-  // useEffect(() => {
-  //   dispatch({type: 'SET_SEARCHED_PINS', payload: {}})
-  // }, []);
 
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
@@ -71,7 +67,7 @@ function Search() {
       />
       <FormControl sx={{ marginTop: 1, marginBottom: 1, width: '100%'}} size="small">
       <InputLabel id="searchByLabel">Search By</InputLabel>
-        <Select labelId="searchByLabel" id="select" 
+        <Select labelId="searchByLabel" id="select" value={searchBy}
         onChange={handleSearchByChange} >
           <MenuItem value={"title"}>Name</MenuItem>
           <MenuItem value={"latin_name"}>Latin Name</MenuItem>

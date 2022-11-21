@@ -9,8 +9,7 @@ import MapComponent from '../MapComponent/MapComponent';
 function InfoPage() {
   return (
     <>
-
-    {/* <MapComponent /> */}
+    <div data-testid='infopage-test'></div>
     </>
   );
 }

@@ -9,7 +9,6 @@ import {
   useParams
   } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import DetailsPage from "../DetailsPage/DetailsPage";
 import mapStyles from "./mapStyles";
 
 function MapComponent() {
@@ -151,7 +150,7 @@ function MapComponent() {
   return (
     <>
       {/* <h5>User Position: {userPosition.lat}, {userPosition.lng}</h5> */}
-      {/* <CenterMap panTo={panTo} userPosition={userPosition }  /> */}
+      <button onClick={toUserPosition}>Test center map</button>
       <Locate panTo={panTo} />
       <GoogleMap 
       mapContainerStyle={mapContainerStyle} 
@@ -232,7 +231,7 @@ function MapComponent() {
         {/* opens up info window for the selected marker */}
         {selectedPin.id ? (<InfoWindow position={{
           lat: Number(selectedPin.lat), lng: Number(selectedPin.lng)}} 
-        onCloseClick={() => dispatch({
+          onCloseClick={() => dispatch({
           type: 'SET_SELECTED_PIN', 
           payload: {}
           })}>
@@ -242,7 +241,6 @@ function MapComponent() {
               
               <Router>
                 <Link  to={`/details/${selectedPin.id}`}> 
-                {/* onClick={(evt)=>toDetails(evt)} */}
                   Details
                 </Link>
               </Router>

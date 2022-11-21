@@ -30,7 +30,6 @@ router.get('/:id', (req, res) => {
     });
 });
 
-
 /**
  * POST route to post one comment to database
  */

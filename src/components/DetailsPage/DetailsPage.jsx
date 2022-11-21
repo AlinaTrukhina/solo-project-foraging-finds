@@ -37,7 +37,7 @@ function DetailsPage() {
       comment: evt.target.commentInputTextarea.value,
       date: new Date().toISOString(),
       user_id: user.id,
-      pin_id: selectedPin.id
+      pin_id: params.id
     }
     console.log('new comment:', newComment);
 
@@ -65,7 +65,7 @@ function DetailsPage() {
           <div style={{display: 'flex', flexDirection: 'row', justifyContent:'space-around', alignItems:'center'}} 
           key={comment.comment_id} > 
             <h5>{comment.username}</h5>
-            <h6>{comment.date}</h6>
+            <h6>{format(parseISO(comment.date), 'yyyy-MM-dd')}</h6>
             <p>{comment.comment}</p>
           </div>))}
       </section>
