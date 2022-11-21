@@ -20,7 +20,8 @@ function UploadForm(){
     return (
         <>
         <form onSubmit={uploadImage}>
-          <input type="file" className="form-file-input" 
+          <input type="file" name="uploaded_file"
+            className="form-file-input" 
             onChange={(evt)=>setSelectedFile(evt.target.files)}/>
           <input type="text" className="form-desc-input" name="photo_description" />
           <button type="submit">Add Photo</button>
