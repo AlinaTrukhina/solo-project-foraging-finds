@@ -14,6 +14,7 @@ router.get('/', (req, res) => {
   const sqlText = `SELECT "pins"."id", "title", "latin_name", "date", "text_entry", "lat", "lng", "img_url"
   FROM "pins"
   JOIN "images" ON images.id = pins.image_id
+  ORDER BY pins ASC
   ;`;
   pool
     .query(sqlText)

@@ -61,12 +61,6 @@ function MapComponent() {
   // store user position in state
   const [userPosition, setUserPosition] = React.useState({});
 
-  // store markers array in state - will be used when user clicks a point on the map
-  //const [markers, setMarkers] = React.useState([]);
-  
-  // store selected marker state
-  //const [selected, setSelected] = React.useState(null);
-
   // add some map markers to render
   const myMarkers = [
     {
@@ -139,10 +133,6 @@ function MapComponent() {
       </button>
     )
   }
-  // const toDetails = (evt) => {
-  //   evt.preventDefault();
-  //   history.push(`/details/${selected.id}`);
-  // }
 
   if (loadError) return "Error loading Map";
   if (!isLoaded) return "Loading map";
@@ -150,8 +140,9 @@ function MapComponent() {
   return (
     <>
       {/* <h5>User Position: {userPosition.lat}, {userPosition.lng}</h5> */}
-      <button onClick={toUserPosition}>Test center map</button>
-      <Locate panTo={panTo} />
+      {/* <Locate panTo={panTo} /> */}
+      <button>{allPins[0].id ? "Show All Pins" : "Hide All Pins"}</button>
+      
       <GoogleMap 
       mapContainerStyle={mapContainerStyle} 
       zoom={12} 
@@ -164,6 +155,7 @@ function MapComponent() {
       onLoad={onMapLoad}
       //onClick={toUserPosition}
       >
+        <Locate />
         {/* add a marker at the center of map */}
         { userPosition && 
         <Marker

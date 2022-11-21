@@ -16,6 +16,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   JOIN "images" ON images.id = pins.image_id
   JOIN "user" ON user_id = "user".id
   WHERE "user"."id" = $1
+  ORDER BY pins ASC
   ;`;
   pool
     .query(sqlText, sqlParams)
