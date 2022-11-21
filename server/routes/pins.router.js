@@ -69,5 +69,24 @@ router.post('/', rejectUnauthenticated, (req, res) => {
       })
 });
 
+// get selected pin
+router.get('/:id', rejectUnauthenticated, (req, res) => { 
+  sqlParams = [req.params.id];
+  // GET route code here
+  const sqlText = `SELECT "pins"."id", "title", "latin_name", "date", "text_entry", "lat", "lng", "img_url", "user_id"
+  FROM "pins"
+  JOIN "images" ON images.id = pins.image_id
+  WHERE "pins"."id" = $1
+  ;`;
+  pool
+    .query(sqlText, sqlParams)
+    .then(dbResponse=> {
+      res.send(dbResponse.rows[0])
+    })
+    .catch((err) => {
+      console.log('get selected pin failed', err);
+      res.sendStatus(500);
+    });
+})
 
 module.exports = router;

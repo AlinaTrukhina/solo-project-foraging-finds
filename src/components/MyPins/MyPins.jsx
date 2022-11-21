@@ -44,6 +44,11 @@ function MyPins() {
     setOpen(false);
   };
 
+  const goToDeteails = (evt, pin) => {
+    evt.preventDefault();
+    history.push(`/details/${pin.id}`);
+  }
+
   const deletePin = (evt, pin) => {
     evt.preventDefault();
     dispatch({type: 'DELETE_PIN', payload: pin})
@@ -58,6 +63,7 @@ function MyPins() {
   return (
     // render pins in a list of Material UI cards
     <>  
+      <Typography component="h1" variant="h5" align="center">My Pins</Typography>
     {myPins.map(pin => (
       <Card key={pin.id}>
         <CardHeader 
@@ -77,6 +83,7 @@ function MyPins() {
           </Typography>
         </CardContent>
         <CardActions>
+          <Button size="small" onClick={(evt)=>goToDeteails(evt, pin)}>Details</Button>
           <Button size="small">Share</Button>
           <Button size="small" onClick={(evt)=>editPin(evt, pin)}>Edit</Button>
           <Button size="small" onClick={handleClickOpen}>Delete</Button>

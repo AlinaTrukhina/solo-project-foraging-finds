@@ -48,6 +48,7 @@ router.delete('/', rejectUnauthenticated, (req, res) => {
   })
 });
 
+// get pin to edit
 router.get('/:id', rejectUnauthenticated, (req, res) => { 
   sqlParams = [req.params.id];
   // GET route code here

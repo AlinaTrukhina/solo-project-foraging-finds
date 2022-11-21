@@ -13,6 +13,8 @@ function DetailsPage() {
   // react hooks
   // TODO: prevent page errors on reload
   useEffect(()=> {
+    dispatch({type: 'FETCH_SELECTED_PIN', payload: params.id})
+
     dispatch({
       type: 'FETCH_PIN_COMMENTS',
       payload: params.id

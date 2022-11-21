@@ -142,7 +142,7 @@ function MapComponent() {
       {/* <h5>User Position: {userPosition.lat}, {userPosition.lng}</h5> */}
       {/* <Locate panTo={panTo} /> */}
       <button>{allPins[0].id ? "Show All Pins" : "Hide All Pins"}</button>
-      
+
       <GoogleMap 
       mapContainerStyle={mapContainerStyle} 
       zoom={12} 
@@ -218,7 +218,6 @@ function MapComponent() {
             }}
             />
           ))}
-        
 
         {/* opens up info window for the selected marker */}
         {selectedPin.id ? (<InfoWindow position={{
