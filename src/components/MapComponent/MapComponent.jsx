@@ -141,7 +141,7 @@ function MapComponent() {
     <>
       {/* <h5>User Position: {userPosition.lat}, {userPosition.lng}</h5> */}
       {/* <Locate panTo={panTo} /> */}
-      <button>{allPins[0].id ? "Show All Pins" : "Hide All Pins"}</button>
+      {/* <button>{(allPins[0].id === 'undefined') ? "Show All Pins" : "Hide All Pins"}</button> */}
 
       <GoogleMap 
       mapContainerStyle={mapContainerStyle} 

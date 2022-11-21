@@ -11,6 +11,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import UploadForm from "../UploadForm/UploadForm";
 
 function AddPin() {
 
@@ -87,6 +88,7 @@ function AddPin() {
   }
 
   return (
+    <>
     <Container>
       <Typography component="h1" variant="h5" align='center'>
         Add Pin
@@ -132,6 +134,7 @@ function AddPin() {
           label="Make Pin Private?" 
           size="small"
         />
+        
         <Stack direction='row' justifyContent="space-evenly">
           <Button
             onClick={(evt)=>handleCancel(evt)}
@@ -151,6 +154,8 @@ function AddPin() {
         </Stack>
       </Box>
     </Container>
+    <UploadForm />
+    </>
   );
 }
 

@@ -8,9 +8,18 @@ function UploadForm(){
 
     const [selectedFile, setSelectedFile] = useState('');
 
+    const uploadImage = (evt) => {
+      evt.preventDefault();
+      alert('the selected file is', selectedFile);
+      dispatch({
+        type: 'UPLOAD_IMAGE',
+        payload: selectedFile
+      })
+    }
+
     return (
         <>
-        <form>
+        <form onSubmit={uploadImage}>
           <input type="file" className="form-file-input" 
             onChange={(evt)=>setSelectedFile(evt.target.files)}/>
           <input type="text" className="form-desc-input" name="photo_description" />
