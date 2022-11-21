@@ -44,14 +44,14 @@ function Nav() {
           <Link to='/info'>Map</Link>
         </ListItem>
       </List>
-      <Button
+      <Button 
         onClick={() => setIsDrawerOpen(false)}
       >
         Close
       </Button>
     </Drawer>
-
-    <Button
+    <div className='navTopContainer'>
+    <Button sx={{ color: 'white' }}
       onClick={() => setIsDrawerOpen(true)}
     >
       Menu
@@ -59,6 +59,7 @@ function Nav() {
     <Link to="/home">
       <h2 className="nav-title">Foraging Finds</h2>
     </Link>
+    <div id='logOutArea'>
     {user.id ? <LogOutButton /> : (
     // If there's no user, show login/registration links
       <Link className="navLink" to="/login">
@@ -66,6 +67,8 @@ function Nav() {
       </Link>
     )
     }
+    </div>
+    </div>
   </div>
   );
 }
