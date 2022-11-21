@@ -25,7 +25,6 @@ function AddPin() {
   const [isPrivate, setIsPrivate] = useState(false);
   const [userPosition, setUserPosition] = useState({});
 
-
   const handleCancel = (evt) => {
     evt.preventDefault();
     history.push('/');

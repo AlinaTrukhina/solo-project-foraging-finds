@@ -4,6 +4,7 @@ import loginSaga from './login.saga';
 import pinsSaga from './pins.saga';
 import registrationSaga from './registration.saga';
 import searchSaga from './search.saga';
+import uploadSaga from './upload.saga';
 import userSaga from './user.saga';
 import userPinsSaga from './userPins.saga';
 
@@ -23,5 +24,6 @@ export default function* rootSaga() {
     commentsSaga(),
     searchSaga(),
     userPinsSaga(),
+    uploadSaga()
   ]);
 }
