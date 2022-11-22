@@ -32,11 +32,11 @@ router.post('/', rejectUnauthenticated, upload.single('uploaded_file'), function
   RETURNING "id"
   ;`;
   
-  sqlParams = [`public/upload/`+ req.filename]
+  sqlParams = [`/upload/`+ req.file.filename]
 
-  pool.query(sqlText, sqlParams)
+  pool.query(sqlTextImage, sqlParams)
   // POST route code here
-  res.send('test', filename);
+  res.sendStatus(201).send('test', `/upload/`+ req.file.filename);
   // }).catch(err => {
   //   // catch for second query
   //   console.log('error in first adding pin query', err);

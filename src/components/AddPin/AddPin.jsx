@@ -65,12 +65,14 @@ function AddPin() {
 
   // get user position
   async function getUserPosition1() {
-    await navigator.geolocation.getCurrentPosition((position) => {
-    const userP = {lat: position.coords.latitude, lng: position.coords.longitude}
-    console.log('userP', userP);
-    return userP;
-  }, 
-    () => null)
+    return new Promise((resolve, reject) => {
+
+      navigator.geolocation.getCurrentPosition((position) => {
+        const userP = {lat: position.coords.latitude, lng: position.coords.longitude}
+        console.log('userP', userP);
+        resolve(userP);
+      }, reject);
+    });
       
   }
   // **********************************************
