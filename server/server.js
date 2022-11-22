@@ -17,7 +17,7 @@ const pinsRouter = require('./routes/pins.router');
 const commentsRouter = require('./routes/comments.router');
 const searchRouter = require('./routes/search.router');
 const myPinsRouter = require('./routes/mypins.router')
-const multerRouter = require('./routes/multer.router');
+const uploadRouter = require('./routes/upload.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -41,7 +41,7 @@ app.use('/search', searchRouter);
 // user pins router
 app.use('/mypins', myPinsRouter);
 // multer route
-app.use('/api/multer', multerRouter);
+app.use('/upload', uploadRouter);
 
 
 // Serve static files
