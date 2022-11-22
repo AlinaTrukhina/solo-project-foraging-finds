@@ -100,7 +100,8 @@ function MapComponent() {
   const toUserPosition = React.useCallback((evt) => {
     navigator.geolocation.getCurrentPosition(
       (position) => {   
-        console.log('user position is', {lat: position.coords.latitude, lng: position.coords.longitude})
+        console.log('user position is', 
+        {lat: position.coords.latitude, lng: position.coords.longitude})
         console.log(position);
         setUserPosition({lat: position.coords.latitude, lng: position.coords.longitude});
       }, 

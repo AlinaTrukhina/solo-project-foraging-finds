@@ -2,10 +2,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 require('dotenv').config();
 
-// bring in multer 
-const multer  = require('multer');
-const upload = multer({ dest: 'uploads/' });
-
 const app = express();
 
 const sessionMiddleware = require('./modules/session-middleware');

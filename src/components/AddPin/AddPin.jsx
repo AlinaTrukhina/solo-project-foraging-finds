@@ -24,7 +24,7 @@ function AddPin() {
   const [imgInput, setUrl] = useState('');
   const [textEntryInput, setTextInput] = useState('');
   const [isPrivate, setIsPrivate] = useState(false);
-  const [userPosition, setUserPosition] = useState({});
+  // const [userPosition, setUserPosition] = useState({});
 
   const handleCancel = (evt) => {
     evt.preventDefault();
@@ -51,15 +51,51 @@ function AddPin() {
     setIsPrivate(current=>!current);
   };
 
-  function getUserPosition() {
-    return new Promise(resolve => {navigator.geolocation.getCurrentPosition(
-      (position) => {   
-        setUserPosition({lat: position.coords.latitude, lng: position.coords.longitude});
-      }, 
-      () => null
-    )
-    resolve(userPosition);
-    })
+  // function getUserPosition() {
+  //   return new Promise(resolve => { navigator.geolocation.getCurrentPosition(
+  //     (position) => {   
+  //       setUserPosition({lat: position.coords.latitude, lng: position.coords.longitude});
+  //     }, 
+  //     () => null
+  //   )
+  //   resolve(userPosition);
+    
+  //   })
+  // }
+
+  // get user position
+  async function getUserPosition1() {
+    await navigator.geolocation.getCurrentPosition((position) => {
+    const userP = {lat: position.coords.latitude, lng: position.coords.longitude}
+    console.log('userP', userP);
+    return userP;
+  }, 
+    () => null)
+      
+  }
+  // **********************************************
+
+  async function addPin1(evt) {
+    evt.preventDefault;
+    try {
+      const userP =  await getUserPosition1();
+      
+      //console.log(userP.lat);
+        const newPin = {
+        title: titleInput,
+        latin_name: latinNameInput,
+        date: new Date().toISOString(),
+        img_url: imgInput,
+        text_entry: textEntryInput,
+        lat: userP.lat,
+        lng: userP.lng
+        }
+      console.log('newPin:', newPin);
+      // console.log('userP is ', userP);
+    } catch (error) {
+      console.error('addPin1 error is', error);
+    }
+    
   }
 
   // add pin to database
@@ -67,7 +103,7 @@ function AddPin() {
   // coordinates are from user position
   async function addPin(evt) {
     evt.preventDefault();
-    await getUserPosition();
+    const userP = await getUserPosition1();
       const newPin = {
       title: titleInput,
       latin_name: latinNameInput,
@@ -76,7 +112,6 @@ function AddPin() {
       text_entry: textEntryInput,
       lat: userPosition.lat,
       lng: userPosition.lng
-      // lat: userLocation.lat
     }
     console.log('lat is:', newPin.lat, 'lng is:', newPin.lng);
     console.log('new pin is', newPin);
@@ -89,7 +124,8 @@ function AddPin() {
 
   return (
     <>
-    <Container>
+    <div data-testid='add-pin-test'>
+    <Container >
       <Typography component="h1" variant="h5" align='center'>
         Add Pin
       </Typography>
@@ -144,7 +180,7 @@ function AddPin() {
             >Cancel
           </Button>
           <Button
-            onClick={(evt)=>addPin(evt)}
+            onClick={addPin1}
             type="submit"
             variant="contained"
             size="small"
@@ -155,6 +191,7 @@ function AddPin() {
       </Box>
     </Container>
     <UploadForm />
+    </div>
     </>
   );
 }

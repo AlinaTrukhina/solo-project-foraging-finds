@@ -1,29 +1,46 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from "react-router-dom";
+import FormData from "form-data";
+import axios from 'axios';
+
 
 function UploadForm(){
 
     const dispatch = useDispatch();
 
-    const [selectedFile, setSelectedFile] = useState('');
+    const [selectedFile, setSelectedFile] = useState();
 
     const uploadImage = (evt) => {
       evt.preventDefault();
-      alert('the selected file is', selectedFile);
-      dispatch({
-        type: 'UPLOAD_IMAGE',
-        payload: selectedFile
-      })
+      console.log('the selected file is', selectedFile.file[0]);
+
+      let formData = new FormData();
+      // appends the image to the object
+        // name must match form input name so that this function can reference it
+      formData.append('uploaded_file', selectedFile.file[0]);
+      console.log('form data is ', formData.entries());
+
+      axios.post('/upload', formData);
+
+      // dispatch({
+      //   type: 'UPLOAD_IMAGE',
+      //   payload: selectedFile
+      // })
+    }
+
+    const handleInput = (evt) => {
+      console.log(evt.target.files);
+      setSelectedFile({file: evt.target.files});
+      console.log(selectedFile);
     }
 
     return (
         <>
-        <form onSubmit={uploadImage}>
-          <input type="file" name="uploaded_file"
+        <form onSubmit={uploadImage} 
+        >
+          <input type="file" name="uploaded_file" 
             className="form-file-input" 
-            onChange={(evt)=>setSelectedFile(evt.target.files)}/>
-          <input type="text" className="form-desc-input" name="photo_description" />
+            onChange={handleInput}/>
           <button type="submit">Add Photo</button>
         </form>
         </>
