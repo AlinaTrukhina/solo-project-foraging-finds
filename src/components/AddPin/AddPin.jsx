@@ -26,7 +26,7 @@ function AddPin() {
   const [imgInput, setUrl] = useState('');
   const [textEntryInput, setTextInput] = useState('');
   const [isPrivate, setIsPrivate] = useState(false);
-  // const [userPosition, setUserPosition] = useState({});
+  const [loading, setLoading] = useState(false);;
 
   const handleCancel = (evt) => {
     evt.preventDefault();
@@ -70,7 +70,12 @@ function AddPin() {
   // coordinates are from user position
   async function addPin(evt) {
     evt.preventDefault;
+    if (titleInput === '' || latinNameInput === '') {
+      alert('Please fill in required fields!');
+      return;
+    }
     try {
+      setLoading(true);
       const userP =  await getUserPosition();
       
       const newPin = {
@@ -92,6 +97,7 @@ function AddPin() {
       })
 
       alert('Pin added!');
+      setLoading(false);
     } catch (error) {
       console.error('addPin error is', error);
     }
@@ -160,6 +166,7 @@ function AddPin() {
             type="submit"
             variant="contained"
             size="small"
+            loading={loading}
             >
               Submit
           </LoadingButton>

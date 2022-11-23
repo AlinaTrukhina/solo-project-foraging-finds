@@ -21,7 +21,6 @@ const upload = multer({
   limits: {filesize: 10000000}
 });
 
-
 /**
  * POST route template
  */
