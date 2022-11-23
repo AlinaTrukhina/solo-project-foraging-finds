@@ -18,6 +18,21 @@ function* fetchUserPins() {
   }
 }
 
+// add pin
+function* addPin(action) {
+  try {
+    yield axios.post('/mypins', action.payload);
+
+    const dbResponse = yield axios.get('/pins');
+
+    // set reducer to the data we got from database
+    yield put({ type: 'SET_ALL_PINS', payload: dbResponse.data });    
+  } catch (error) {
+    console.log('Error adding pin:', error);
+    alert('could not add pin!');
+  }
+}
+
 // delete a pin
 function* deletePin(action) {
   try {
@@ -59,6 +74,8 @@ function* saveEditedPin(action){
 
 function* userPinsSaga() {
   yield takeLatest('FETCH_USER_PINS', fetchUserPins);
+
+  yield takeLatest('ADD_PIN', addPin);
 
   yield takeLatest('DELETE_PIN', deletePin);
 

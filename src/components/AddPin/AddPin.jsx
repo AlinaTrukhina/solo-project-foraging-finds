@@ -98,7 +98,8 @@ function AddPin() {
       title: titleInput,
       latin_name: latinNameInput,
       date: new Date().toISOString(),
-      img_url: imgInput,
+      img_id: imgInput.id,
+      img_url: imgInput.url,
       text_entry: textEntryInput,
       lat: userP.lat,
       lng: userP.lng
@@ -152,9 +153,10 @@ function AddPin() {
           Upload Your Photo
         </Button>
         <Dialog open={dialogOpen} onClose={handleClose}>
-          <DialogTitle>Choose Your Photo</DialogTitle>
           <UploadForm />
-          <Button onClick={handleClose}>Done</Button>
+          <Button onClick={handleClose}>
+            Done
+          </Button>
         </Dialog>
         <TextField 
           // onChange={handleUrlChange}

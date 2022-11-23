@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import FormData from "form-data";
 import axios from 'axios';
 
+import Button from '@mui/material/Button';
 
 function UploadForm(){
 
@@ -41,12 +42,18 @@ function UploadForm(){
 
   return (
     <>
-    <form onSubmit={uploadImage} 
+    <form onSubmit={uploadImage} display='flex' flexDirection='column'
+      justifyContent='flex-start'
+      alignContent='center'
+      alignItems='center'
     >
+      <h2>Choose Your Photo</h2>
       <input type="file" name="uploaded_file" 
         className="form-file-input" 
         onChange={handleInput}/>
-      <button type="submit">Add Photo</button>
+      <button 
+      // variant="contained" sx={{color: 'red'}}
+      type="submit">Add Photo</button>
     </form>
     </>
   )
