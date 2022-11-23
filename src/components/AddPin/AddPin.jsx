@@ -12,6 +12,12 @@ import Container from '@mui/material/Container';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import LoadingButton from '@mui/lab/LoadingButton';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+
 import UploadForm from "../UploadForm/UploadForm";
 
 
@@ -26,6 +32,7 @@ function AddPin() {
   const [textEntryInput, setTextInput] = useState('');
   const [isPrivate, setIsPrivate] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   const imgInput = useSelector(store => store.newImage);
 
@@ -33,6 +40,14 @@ function AddPin() {
     evt.preventDefault();
     history.push('/');
   }
+
+  const handleOpen = () => {
+    setDialogOpen(true);
+  };
+  // close the dialog
+  const handleClose = () => {
+    setDialogOpen(false);
+  };
 
   const handleTitleChange = (evt) => {
     setNewTitle(evt.target.value);
@@ -99,6 +114,7 @@ function AddPin() {
 
       alert('Pin added!');
       setLoading(false);
+      dispatch({ type: 'RESET_NEW_IMAGE'});
     } catch (error) {
       console.error('addPin error is', error);
     }
@@ -127,12 +143,19 @@ function AddPin() {
         />
         <TextField onChange={handleLatinChange}
           value={latinNameInput}
-          required
           fullWidth
           id="latinNameInput"
           label="Latin Name"
           size="small"
-        />
+        />  
+        <Button variant="outlined" onClick={handleOpen}>
+          Upload Your Photo
+        </Button>
+        <Dialog open={dialogOpen} onClose={handleClose}>
+          <DialogTitle>Choose Your Photo</DialogTitle>
+          <UploadForm />
+          <Button onClick={handleClose}>Done</Button>
+        </Dialog>
         <TextField 
           // onChange={handleUrlChange}
           fullWidth
@@ -155,7 +178,6 @@ function AddPin() {
           label="Make Pin Private?" 
           size="small"
         />
-        
         <Stack direction='row' justifyContent="space-evenly">
           <Button
             onClick={(evt)=>handleCancel(evt)}
@@ -176,7 +198,6 @@ function AddPin() {
         </Stack>
       </Box>
     </Container>
-    <UploadForm />
     </div>
     </>
   );
