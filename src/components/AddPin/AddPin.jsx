@@ -51,20 +51,8 @@ function AddPin() {
     setIsPrivate(current=>!current);
   };
 
-  // function getUserPosition() {
-  //   return new Promise(resolve => { navigator.geolocation.getCurrentPosition(
-  //     (position) => {   
-  //       setUserPosition({lat: position.coords.latitude, lng: position.coords.longitude});
-  //     }, 
-  //     () => null
-  //   )
-  //   resolve(userPosition);
-    
-  //   })
-  // }
-
   // get user position
-  async function getUserPosition1() {
+  async function getUserPosition() {
     return new Promise((resolve, reject) => {
 
       navigator.geolocation.getCurrentPosition((position) => {
@@ -72,56 +60,39 @@ function AddPin() {
         console.log('userP', userP);
         resolve(userP);
       }, reject);
-    });
-      
-  }
-  // **********************************************
-
-  async function addPin1(evt) {
-    evt.preventDefault;
-    try {
-      const userP =  await getUserPosition1();
-      
-      //console.log(userP.lat);
-        const newPin = {
-        title: titleInput,
-        latin_name: latinNameInput,
-        date: new Date().toISOString(),
-        img_url: imgInput,
-        text_entry: textEntryInput,
-        lat: userP.lat,
-        lng: userP.lng
-        }
-      console.log('newPin:', newPin);
-      // console.log('userP is ', userP);
-    } catch (error) {
-      console.error('addPin1 error is', error);
-    }
-    
+    });  
   }
 
   // add pin to database
   // date is today's date
   // coordinates are from user position
   async function addPin(evt) {
-    evt.preventDefault();
-    const userP = await getUserPosition1();
+    evt.preventDefault;
+    try {
+      const userP =  await getUserPosition();
+      
       const newPin = {
       title: titleInput,
       latin_name: latinNameInput,
       date: new Date().toISOString(),
       img_url: imgInput,
       text_entry: textEntryInput,
-      lat: userPosition.lat,
-      lng: userPosition.lng
-    }
-    console.log('lat is:', newPin.lat, 'lng is:', newPin.lng);
-    console.log('new pin is', newPin);
+      lat: userP.lat,
+      lng: userP.lng
+      }
 
-    dispatch({
-      type: 'ADD_PIN',
-      payload: newPin
-    })
+      console.log('newPin:', newPin);
+      // console.log('userP is ', userP);
+
+      dispatch({
+        type: 'ADD_PIN',
+        payload: newPin
+      })
+
+      alert('Pin added!')
+    } catch (error) {
+      console.error('addPin error is', error);
+    }
   }
 
   return (
@@ -182,7 +153,7 @@ function AddPin() {
             >Cancel
           </Button>
           <Button
-            onClick={addPin1}
+            // onClick={addPin}
             type="submit"
             variant="contained"
             size="small"
