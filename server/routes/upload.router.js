@@ -27,21 +27,33 @@ const upload = multer({
 router.post('/', rejectUnauthenticated, upload.single('uploaded_file'), function (req, res, err) {
 
   const sqlTextImage = `INSERT INTO "images" ("img_url")
-  VALUES ($1)
-  RETURNING "id"
-  ;`;
+    VALUES ($1)
+    ;`;
   
-  sqlParams = [`/upload/`+ req.file.filename]
+  sqlParams = [`/upload/` + req.file.filename]
 
   pool.query(sqlTextImage, sqlParams)
   // POST route code here
-  res.sendStatus(201).send('test', `/upload/`+ req.file.filename);
-  // }).catch(err => {
-  //   // catch for second query
-  //   console.log('error in first adding pin query', err);
-  //   res.sendStatus(500);
-  // });
+  .then(result => {
+    res.sendStatus(201);
+  }).catch(err => {
+    console.log('error in posting image', err);
+    res.sendStatus(500);
+  });
   
 });
+
+// use async/await instead of .then.catch for practice
+router.get('/', rejectUnauthenticated, async (req, res) => {
+  try {
+    let dbRes = await pool.query('SELECT * FROM images ORDER BY ID DESC');
+
+    res.send(dbRes.rows[0]);
+  }
+  catch (err) {
+    console.error('error in GET for last image');
+    res.sendStatus(500);
+  }
+})
 
 module.exports = router;

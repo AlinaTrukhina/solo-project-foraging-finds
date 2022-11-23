@@ -23,10 +23,11 @@ function AddPin() {
   // store inputs in state
   const [titleInput, setNewTitle] = useState('');
   const [latinNameInput, setLatinName] = useState('');
-  const [imgInput, setUrl] = useState('');
   const [textEntryInput, setTextInput] = useState('');
   const [isPrivate, setIsPrivate] = useState(false);
-  const [loading, setLoading] = useState(false);;
+  const [loading, setLoading] = useState(false);
+
+  const imgInput = useSelector(store => store.newImage);
 
   const handleCancel = (evt) => {
     evt.preventDefault();
@@ -132,11 +133,13 @@ function AddPin() {
           label="Latin Name"
           size="small"
         />
-        <TextField onChange={handleUrlChange}
+        <TextField 
+          // onChange={handleUrlChange}
           fullWidth
           id="imgInput"
           label="Image url"
           size="small"
+          value={imgInput.img_url}
         />
         <TextField onChange={handleTextInputChange}
           fullWidth

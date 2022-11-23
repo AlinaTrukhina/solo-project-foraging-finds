@@ -10,7 +10,7 @@ function UploadForm(){
 
     const [selectedFile, setSelectedFile] = useState();
 
-    const uploadImage = (evt) => {
+     async function uploadImage (evt){
       evt.preventDefault();
       console.log('the selected file is', selectedFile.file[0]);
 
@@ -22,10 +22,14 @@ function UploadForm(){
 
       axios.post('/upload', formData);
 
-      // dispatch({
-      //   type: 'UPLOAD_IMAGE',
-      //   payload: selectedFile
-      // })
+      const newImage = await axios.get('/upload');
+
+      console.log('new image is:', newImage);
+
+      dispatch({
+        type: 'SET_NEW_IMAGE',
+        payload: newImage.data
+      })
     }
 
     const handleInput = (evt) => {
