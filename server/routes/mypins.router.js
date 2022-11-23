@@ -29,6 +29,29 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     });
 });
 
+// add pin
+router.post('/', rejectUnauthenticated, (req, res) => {
+  const sqlTextPin = `INSERT INTO "pins" (
+    "title", "latin_name", 
+    "date", "image_id", "text_entry", 
+    "user_id", "lat", "lng")
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+    ;`;
+
+  const sqlParamsPin = [req.body.title, req.body.latin_name, req.body.date, 
+    req.body.img_id, req.body.text_entry, req.user.id, 
+    req.body.lat, req.body.lng];
+
+    pool.query(sqlTextPin, sqlParamsPin)
+          .then(result => {
+            res.sendStatus(201);
+          }).catch(err => {
+            // catch for second query
+            console.log('error in second adding pin query',err);
+            res.sendStatus(500);
+          });
+});
+
 // delete a pin if user is logged in
 router.delete('/', rejectUnauthenticated, (req, res) => {
   if (req.user.id )

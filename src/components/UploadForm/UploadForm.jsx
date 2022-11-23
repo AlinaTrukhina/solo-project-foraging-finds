@@ -42,10 +42,7 @@ function UploadForm(){
 
   return (
     <>
-    <form onSubmit={uploadImage} display='flex' flexDirection='column'
-      justifyContent='flex-start'
-      alignContent='center'
-      alignItems='center'
+    <form onSubmit={uploadImage} display='flex'
     >
       <h2>Choose Your Photo</h2>
       <input type="file" name="uploaded_file" 

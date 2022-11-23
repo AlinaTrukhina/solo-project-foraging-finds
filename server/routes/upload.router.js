@@ -30,7 +30,7 @@ router.post('/', rejectUnauthenticated, upload.single('uploaded_file'), function
     VALUES ($1)
     ;`;
   
-  sqlParams = [`/upload/` + req.file.filename]
+  sqlParams = [`/images/` + req.file.filename]
 
   pool.query(sqlTextImage, sqlParams)
   // POST route code here
