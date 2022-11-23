@@ -11,7 +11,9 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import LoadingButton from '@mui/lab/LoadingButton';
 import UploadForm from "../UploadForm/UploadForm";
+
 
 function AddPin() {
 
@@ -89,7 +91,7 @@ function AddPin() {
         payload: newPin
       })
 
-      alert('Pin added!')
+      alert('Pin added!');
     } catch (error) {
       console.error('addPin error is', error);
     }
@@ -102,7 +104,8 @@ function AddPin() {
       <Typography component="h1" variant="h5" align='center'>
         Add Pin
       </Typography>
-      <Box component="form" onSubmit={(evt)=>addPin(evt)}
+      <Box component="form" 
+      // onSubmit={(evt)=>disable(evt)}
       sx={{
         '& .MuiTextField-root': { marginBottom: 1},
       }}>
@@ -152,14 +155,14 @@ function AddPin() {
             size="small"
             >Cancel
           </Button>
-          <Button
-            // onClick={addPin}
+          <LoadingButton
+            onClick={addPin}
             type="submit"
             variant="contained"
             size="small"
             >
               Submit
-          </Button>
+          </LoadingButton>
         </Stack>
       </Box>
     </Container>
