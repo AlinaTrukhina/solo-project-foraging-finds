@@ -2,10 +2,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 require('dotenv').config();
 
-// bring in multer 
-const multer  = require('multer');
-const upload = multer({ dest: 'uploads/' });
-
 const app = express();
 
 const sessionMiddleware = require('./modules/session-middleware');
@@ -17,7 +13,7 @@ const pinsRouter = require('./routes/pins.router');
 const commentsRouter = require('./routes/comments.router');
 const searchRouter = require('./routes/search.router');
 const myPinsRouter = require('./routes/mypins.router')
-const multerRouter = require('./routes/multer.router');
+const uploadRouter = require('./routes/upload.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -41,7 +37,7 @@ app.use('/search', searchRouter);
 // user pins router
 app.use('/mypins', myPinsRouter);
 // multer route
-app.use('/api/multer', multerRouter);
+app.use('/upload', uploadRouter);
 
 
 // Serve static files

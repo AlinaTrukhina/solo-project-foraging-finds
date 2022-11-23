@@ -11,6 +11,15 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import LoadingButton from '@mui/lab/LoadingButton';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+
+import UploadForm from "../UploadForm/UploadForm";
+
 
 function AddPin() {
 
@@ -20,15 +29,25 @@ function AddPin() {
   // store inputs in state
   const [titleInput, setNewTitle] = useState('');
   const [latinNameInput, setLatinName] = useState('');
-  const [imgInput, setUrl] = useState('');
   const [textEntryInput, setTextInput] = useState('');
   const [isPrivate, setIsPrivate] = useState(false);
-  const [userPosition, setUserPosition] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [dialogOpen, setDialogOpen] = useState(false);
+
+  const imgInput = useSelector(store => store.newImage);
 
   const handleCancel = (evt) => {
     evt.preventDefault();
     history.push('/');
   }
+
+  const handleOpen = () => {
+    setDialogOpen(true);
+  };
+  // close the dialog
+  const handleClose = () => {
+    setDialogOpen(false);
+  };
 
   const handleTitleChange = (evt) => {
     setNewTitle(evt.target.value);
@@ -50,48 +69,67 @@ function AddPin() {
     setIsPrivate(current=>!current);
   };
 
-  function getUserPosition() {
-    return new Promise(resolve => {navigator.geolocation.getCurrentPosition(
-      (position) => {   
-        setUserPosition({lat: position.coords.latitude, lng: position.coords.longitude});
-      }, 
-      () => null
-    )
-    resolve(userPosition);
-    })
+  // get user position
+  async function getUserPosition() {
+    return new Promise((resolve, reject) => {
+
+      navigator.geolocation.getCurrentPosition((position) => {
+        const userP = {lat: position.coords.latitude, lng: position.coords.longitude}
+        console.log('userP', userP);
+        resolve(userP);
+      }, reject);
+    });  
   }
 
   // add pin to database
   // date is today's date
   // coordinates are from user position
   async function addPin(evt) {
-    evt.preventDefault();
-    await getUserPosition();
+    evt.preventDefault;
+    if (titleInput === '' || latinNameInput === '') {
+      alert('Please fill in required fields!');
+      return;
+    }
+    try {
+      setLoading(true);
+      const userP =  await getUserPosition();
+      
       const newPin = {
       title: titleInput,
       latin_name: latinNameInput,
       date: new Date().toISOString(),
-      img_url: imgInput,
+      img_id: imgInput.id,
+      img_url: imgInput.url,
       text_entry: textEntryInput,
-      lat: userPosition.lat,
-      lng: userPosition.lng
-      // lat: userLocation.lat
-    }
-    console.log('lat is:', newPin.lat, 'lng is:', newPin.lng);
-    console.log('new pin is', newPin);
+      lat: userP.lat,
+      lng: userP.lng
+      }
 
-    dispatch({
-      type: 'ADD_PIN',
-      payload: newPin
-    })
+      console.log('newPin:', newPin);
+      // console.log('userP is ', userP);
+
+      dispatch({
+        type: 'ADD_PIN',
+        payload: newPin
+      })
+
+      alert('Pin added!');
+      setLoading(false);
+      dispatch({ type: 'RESET_NEW_IMAGE'});
+    } catch (error) {
+      console.error('addPin error is', error);
+    }
   }
 
   return (
-    <Container>
+    <>
+    <div data-testid='add-pin-test'>
+    <Container >
       <Typography component="h1" variant="h5" align='center'>
         Add Pin
       </Typography>
-      <Box component="form" onSubmit={(evt)=>addPin(evt)}
+      <Box component="form" 
+      // onSubmit={(evt)=>disable(evt)}
       sx={{
         '& .MuiTextField-root': { marginBottom: 1},
       }}>
@@ -106,17 +144,27 @@ function AddPin() {
         />
         <TextField onChange={handleLatinChange}
           value={latinNameInput}
-          required
           fullWidth
           id="latinNameInput"
           label="Latin Name"
           size="small"
-        />
-        <TextField onChange={handleUrlChange}
+        />  
+        <Button variant="outlined" onClick={handleOpen}>
+          Upload Your Photo
+        </Button>
+        <Dialog open={dialogOpen} onClose={handleClose}>
+          <UploadForm />
+          <Button onClick={handleClose}>
+            Done
+          </Button>
+        </Dialog>
+        <TextField 
+          // onChange={handleUrlChange}
           fullWidth
           id="imgInput"
           label="Image url"
           size="small"
+          value={imgInput.img_url}
         />
         <TextField onChange={handleTextInputChange}
           fullWidth
@@ -140,17 +188,20 @@ function AddPin() {
             size="small"
             >Cancel
           </Button>
-          <Button
-            onClick={(evt)=>addPin(evt)}
+          <LoadingButton
+            onClick={addPin}
             type="submit"
             variant="contained"
             size="small"
+            loading={loading}
             >
               Submit
-          </Button>
+          </LoadingButton>
         </Stack>
       </Box>
     </Container>
+    </div>
+    </>
   );
 }
 

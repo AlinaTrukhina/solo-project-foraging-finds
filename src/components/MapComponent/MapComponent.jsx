@@ -100,7 +100,8 @@ function MapComponent() {
   const toUserPosition = React.useCallback((evt) => {
     navigator.geolocation.getCurrentPosition(
       (position) => {   
-        console.log('user position is', {lat: position.coords.latitude, lng: position.coords.longitude})
+        console.log('user position is', 
+        {lat: position.coords.latitude, lng: position.coords.longitude})
         console.log(position);
         setUserPosition({lat: position.coords.latitude, lng: position.coords.longitude});
       }, 
@@ -141,7 +142,7 @@ function MapComponent() {
     <>
       {/* <h5>User Position: {userPosition.lat}, {userPosition.lng}</h5> */}
       {/* <Locate panTo={panTo} /> */}
-      <button>{allPins[0].id ? "Show All Pins" : "Hide All Pins"}</button>
+      {/* <button>{(allPins[0].id === 'undefined') ? "Show All Pins" : "Hide All Pins"}</button> */}
 
       <GoogleMap 
       mapContainerStyle={mapContainerStyle} 
