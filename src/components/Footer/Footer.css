@@ -1,7 +1,11 @@
 footer {
   margin-top: 0px;
+  margin-left: -15px;
   padding: 15px;
   text-align: center;
   font-size: 0.75em;
   background-color: darkolivegreen;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }

@@ -10,8 +10,8 @@ function UserPage() {
 
   return (
     <>
-    <p>Welcome, {user.username}! Your ID is: {user.id}</p>  
-    <p>Your avatar:</p>
+    <p>Welcome, {user.username}!</p>  
+    <p>Your avatar: </p>
     <img src={user.avatar} />
     </>
   );

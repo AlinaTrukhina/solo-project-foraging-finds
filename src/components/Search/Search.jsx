@@ -89,7 +89,8 @@ function Search() {
       >
         <CardHeader 
         title={pin.title} 
-        subheader={format(parseISO(pin.date), 'yyyy-MM-dd')}
+        subheader={pin.latin_name}
+        // subheader={format(parseISO(pin.date), 'yyyy-MM-dd')}
         />
         <CardMedia sx={{maxWidth: '100px'}}
         component="img"

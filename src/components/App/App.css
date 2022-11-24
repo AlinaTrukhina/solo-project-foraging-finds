@@ -119,3 +119,9 @@ img {
   max-width: 250px;
   max-height: 250px;
 }
+
+.mapComponent {
+  position: fixed;
+  bottom: 44.5px;
+}
+

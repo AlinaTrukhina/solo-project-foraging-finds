@@ -70,7 +70,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 });
 
 // get selected pin
-router.get('/:id', rejectUnauthenticated, (req, res) => { 
+router.get('/:id', (req, res) => { 
   sqlParams = [req.params.id];
   // GET route code here
   const sqlText = `SELECT "pins"."id", "title", "latin_name", "date", "text_entry", "lat", "lng", "img_url", "user_id"

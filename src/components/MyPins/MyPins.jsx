@@ -65,7 +65,9 @@ function MyPins() {
     <>  
       <Typography component="h1" variant="h5" align="center">My Pins</Typography>
     {myPins.map(pin => (
-      <Card key={pin.id}>
+      <Card key={pin.id}
+        onClick={()=>dispatch({type: 'SET_SELECTED_PIN', payload: pin})}
+        >
         <CardHeader 
         title={pin.title} 
         subheader={format(parseISO(pin.date), 'yyyy-MM-dd')}

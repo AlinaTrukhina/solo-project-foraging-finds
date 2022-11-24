@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory, useParams,   HashRouter as Router, Link } from 'react-router-dom';
+import { useHistory, useParams, HashRouter as Router, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { format } from 'date-fns';
 import { parseISO } from 'date-fns/esm';
@@ -29,7 +29,7 @@ function DetailsPage() {
   const closeDetails = (evt) => {
     evt.preventDefault();
     dispatch({type: 'SET_SELECTED_PIN', payload: {}});
-    history.push('/');
+    history.goBack();
   }
 
   const addComment = (evt) => {

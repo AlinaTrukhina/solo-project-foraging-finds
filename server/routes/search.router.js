@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
     ;`;
   } else {
     sqlText = `SELECT "pins"."id", LOWER("title") AS "title", 
-    LOWER("latin_name"), "date", "text_entry", 
+    LOWER("latin_name") AS "latin_name", "date", "text_entry", 
     "lat", "lng", "img_url"
     FROM "pins"
     JOIN "images" ON images.id = pins.image_id

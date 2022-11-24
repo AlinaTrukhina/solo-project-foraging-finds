@@ -159,7 +159,7 @@ function App() {
         {/* <Link to="/details">
           Details
         </Link> */}
-        <MapComponent />
+        <MapComponent className='mapComponent' />
         <Footer />
       </div>
     </Router>
