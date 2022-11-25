@@ -21,7 +21,11 @@ function MapComponent() {
   const selectedPin = useSelector(store => store.selectedPin);
   const userPins = useSelector(store => store.userPins);
 
-  useEffect(() => {
+  // state variables go here
+  // store user position in state
+  const [userPosition, setUserPosition] = React.useState({});
+
+  // useEffect(() => {
     // navigator.geolocation.getCurrentPosition(position => {
     //   //const { lat, lng } = position.coords;
     //   // set user position to current position
@@ -29,10 +33,10 @@ function MapComponent() {
     //   console.log('user positon, page load:', userPosition);
     // }, () => null);
 
-    dispatch({
-      type: 'FETCH_PINS'
-    })
-  }, []);
+  //   dispatch({
+  //     type: 'FETCH_PINS'
+  //   })
+  // }, []);
 
   // map options
   // make map take up the whole window
@@ -56,32 +60,6 @@ function MapComponent() {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
   });
-
-  // state variables go here
-  // store user position in state
-  const [userPosition, setUserPosition] = React.useState({});
-
-  // add some map markers to render
-  const myMarkers = [
-    {
-      id: 1,
-      lat: 44.985, 
-      lng: -93.31,
-      title: 'King Bolete'
-    },
-    {     
-      id: 2,
-      lat: 44.985, 
-      lng: -93.33,
-      title: 'Amanita Muscaria'
-    },
-    {     
-      id: 3,
-      lat: 44.94852, 
-      lng: -93.260536,
-      title: 'Honey Mushroom'
-    }
-  ]
 
   // useCallback ishook to avoid re-rendering the map all the time on any action
   // onMapClick will add a marker at position of click to markers array

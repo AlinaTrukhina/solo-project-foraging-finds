@@ -28,6 +28,10 @@ function Search() {
 
   const pins = useSelector(store => store.pins);
 
+  useEffect(() => {
+    dispatch({ type: 'SET_PINS', payload: []});
+  }, []);
+
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
   };

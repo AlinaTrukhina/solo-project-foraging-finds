@@ -32,13 +32,16 @@ router.get('/', (req, res) => {
  */
 router.post('/', rejectUnauthenticated, (req, res) => {
   // POST route code here
-  
+    let imgUrl = req.body.img_url;
+    if (imgUrl === 'undefined') {
+      imgUrl = '/svg/mushroom-colorful-amanita.svg'
+    }
     const sqlTextImage = `INSERT INTO "images" ("img_url")
       VALUES ($1)
       RETURNING "id"
       ;`;
 
-    pool.query(sqlTextImage, [req.body.img_url])
+    pool.query(sqlTextImage, [imgUrl])
       .then(response => {
         console.log('new img id:', response.rows[0].id);
         const newImgId = response.rows[0].id;
@@ -81,7 +84,7 @@ router.get('/:id', (req, res) => {
   pool
     .query(sqlText, sqlParams)
     .then(dbResponse=> {
-      res.send(dbResponse.rows[0])
+      res.send(dbResponse.rows[0]);
     })
     .catch((err) => {
       console.log('get selected pin failed', err);

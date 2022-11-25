@@ -18,20 +18,20 @@ function* fetchPins() {
   }
 }
 
-// add a pin
-// function* addPin(action) {
-//   try {
-//     yield axios.post('/pins', action.payload);
+// add a pin w/o image
+function* addPinNoImg(action) {
+  try {
+    yield axios.post('/pins', action.payload);
 
-//     const dbResponse = yield axios.get('/pins');
+    const dbResponse = yield axios.get('/pins');
 
-//     // set reducer to the data we got from database
-//     yield put({ type: 'SET_ALL_PINS', payload: dbResponse.data });    
-//   } catch (error) {
-//     console.log('Error adding pin:', error);
-//     alert('could not add pin!');
-//   }
-// }
+    // set reducer to the data we got from database
+    yield put({ type: 'SET_ALL_PINS', payload: dbResponse.data });    
+  } catch (error) {
+    console.log('Error adding pin:', error);
+    alert('could not add pin!');
+  }
+}
 
 // Saga: will be fired on FETCH_SELECCTED_PIN
 function* fetchSelectedPin(action) {
@@ -53,7 +53,7 @@ function* fetchSelectedPin(action) {
 function* pinsSaga() {
   yield takeLatest('FETCH_PINS', fetchPins);
 
-//  yield takeLatest('ADD_PIN', addPin);
+  yield takeLatest('ADD_PIN_W_NO_IMG', addPinNoImg);
 
   yield takeLatest('FETCH_SELECTED_PIN', fetchSelectedPin);
 }
