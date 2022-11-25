@@ -19,3 +19,6 @@ function UserPage() {
 
 // this allows us to use <App /> in index.js
 export default UserPage;
+
+
+// '/svg/yep-icon.svg'

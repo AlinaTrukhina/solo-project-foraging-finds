@@ -29,19 +29,19 @@ function Nav() {
     >
       <List>
         <ListItem>
-          <Link to='/search'>Search</Link>
+          <Link to='/search' onClick={() => setIsDrawerOpen(false)}>Search</Link>
         </ListItem>
         <ListItem>
-          <Link to='/addpin'>Add Pin</Link>
+          <Link to='/addpin' onClick={() => setIsDrawerOpen(false)}>Add Pin</Link>
         </ListItem>
         <ListItem>
-          <Link to='/mypins'>My Pins</Link>
+          <Link to='/mypins' onClick={() => setIsDrawerOpen(false)}>My Pins</Link>
         </ListItem>
         <ListItem>
-          <Link to='/user'>My Profile</Link>
+          <Link to='/user' onClick={() => setIsDrawerOpen(false)}>My Profile</Link>
         </ListItem>
         <ListItem>
-          <Link to='/info'>Map</Link>
+          <Link to='/info' onClick={() => setIsDrawerOpen(false)}>Map</Link>
         </ListItem>
       </List>
       <Button 

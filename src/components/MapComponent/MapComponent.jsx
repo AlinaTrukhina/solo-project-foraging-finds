@@ -17,6 +17,7 @@ function MapComponent() {
   const history = useHistory();
 
   // selectors
+  const user = useSelector((store) => store.user);
   const allPins = useSelector(store => store.pins);
   const selectedPin = useSelector(store => store.selectedPin);
   const userPins = useSelector(store => store.userPins);
@@ -96,22 +97,22 @@ function MapComponent() {
 
   // create a function that will pan to user location 
   // pass in latitude and longitude
-  const panTo = React.useCallback(({ lat, lng }) => {
-    mapRef.current.panTo({ lat, lng });
-  }, []);
+  // const panTo = React.useCallback(({ lat, lng }) => {
+  //   mapRef.current.panTo({ lat, lng });
+  // }, []);
   
-  function Locate({ panTo }) {
-    return (
-      <button className="locate"
-      onClick={()=>{panTo({
-        lat: userPosition.lat,
-        lng: userPosition.lng,
-      })}}
-      >
-        Center Map
-      </button>
-    )
-  }
+  // function Locate({ panTo }) {
+  //   return (
+  //     <button className="locate"
+  //     onClick={()=>{panTo({
+  //       lat: userPosition.lat,
+  //       lng: userPosition.lng,
+  //     })}}
+  //     >
+  //       Center Map
+  //     </button>
+  //   )
+  // }
 
   if (loadError) return "Error loading Map";
   if (!isLoaded) return "Loading map";
@@ -134,7 +135,6 @@ function MapComponent() {
       onLoad={onMapLoad}
       //onClick={toUserPosition}
       >
-        <Locate />
         {/* add a marker at the center of map */}
         { userPosition && 
         <Marker
@@ -142,11 +142,11 @@ function MapComponent() {
           userPosition.lat ? {lat: userPosition.lat, lng: userPosition.lng} : 
           center}
           icon={{
-            url: '/svg/yep-icon.svg',
+            url: `${user.avatar}`,
             scaledSize: new window.google.maps.Size(30,30),
             // sets origin to the point where user clicked
             origin: new window.google.maps.Point(0, 0),
-            // sets anchor to half the size so that the icon appears on t
+            // sets anchor to half the size so that the icon appears on click position
             anchor: new window.google.maps.Point(15, 15)
           }}  
         />}
@@ -182,11 +182,11 @@ function MapComponent() {
             // change the icon to a mushroom
             icon={{
               url: '/svg/mushrooms-2-mushrooms.svg',
-              scaledSize: new window.google.maps.Size(30,30),
+              scaledSize: new window.google.maps.Size(20,20),
               // sets origin to the point where user clicked
               origin: new window.google.maps.Point(0, 0),
               // sets anchor to half the size so that the icon center appears on the origin point
-              anchor: new window.google.maps.Point(15, 15)
+              anchor: new window.google.maps.Point(10, 10)
             }}  
             // set the clicked marker as selected
             onClick={()=>{

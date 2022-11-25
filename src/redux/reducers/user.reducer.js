@@ -1,9 +1,9 @@
-const userReducer = (state = {}, action) => {
+const userReducer = (state = {avatar: '/svg/star.svg'}, action) => {
   switch (action.type) {
     case 'SET_USER':
       return action.payload;
     case 'UNSET_USER':
-      return {};
+      return {avatar: '/svg/star.svg'};
     default:
       return state;
   }
