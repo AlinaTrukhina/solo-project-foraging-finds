@@ -115,9 +115,18 @@ input {
 }
 
 img {
-  max-width: 250px;
-  max-height: 250px;
+  max-width: 350px;
+  max-height: 350px;
 }
+
+#addCommentform {
+  margin-top: 20px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+/* Map */
 
 .mapComponent {
   position: fixed;
