@@ -44,7 +44,7 @@ function LoginForm() {
             {errors.loginMessage}
           </h3>
         )}
-        <TextField 
+        <TextField sx={{ marginTop: 1}}
           required
           fullWidth
           id="username"
@@ -55,7 +55,7 @@ function LoginForm() {
           value={username}
           onChange={(event) => setUsername(event.target.value)}
         />
-        <TextField 
+        <TextField sx={{ marginTop: 1}}
         required
         fullWidth
         id="password"
