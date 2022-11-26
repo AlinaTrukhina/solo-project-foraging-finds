@@ -37,7 +37,7 @@ function EditPin() {
     <>
     <Container sx={{margin: '80px 0 40px 0'}}>
       <Typography component="h1" variant="h5" align="center" marginBottom="10px">
-        Edit Pin # {params.id}
+        Edit Pin
       </Typography>
       {pinToEdit.id && (
         <Box component="form"

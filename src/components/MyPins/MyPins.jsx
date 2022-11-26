@@ -56,6 +56,7 @@ function MyPins() {
 
   const editPin = (evt, pin) => {
     evt.preventDefault();
+    dispatch({type: 'RESET_SELECTED_PIN'})
     history.push(`/mypins/${pin.id}/edit`);
   }
 
@@ -66,7 +67,7 @@ function MyPins() {
       <Typography component="h1" variant="h5" align="center" marginBottom="10px">
         My Pins
       </Typography>
-      <Typography align="center">
+      <Typography align="center" marginBottom="5px">
         Click pin title to focus map on pin
       </Typography>
     {myPins.map(pin => (
