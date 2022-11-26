@@ -18,6 +18,7 @@ import Typography from '@mui/material/Typography';
 import { format } from 'date-fns';
 import { parseISO } from 'date-fns/esm';
 import { Button } from '@mui/material';
+import { Container } from '@mui/system';
 
 function MyPins() {
   // declare hooks here
@@ -63,7 +64,13 @@ function MyPins() {
   return (
     // render pins in a list of Material UI cards
     <>  
-      <Typography component="h1" variant="h5" align="center">My Pins</Typography>
+    <Container sx={{margin: '20px 0px'}}>
+      <Typography component="h1" variant="h5" align="center" marginBottom="10px">
+        My Pins
+      </Typography>
+      <Typography>
+        Click on a pin to focus map
+      </Typography>
     {myPins.map(pin => (
       <Card key={pin.id}
         onClick={()=>dispatch({type: 'SET_SELECTED_PIN', payload: pin})}
@@ -86,7 +93,7 @@ function MyPins() {
         </CardContent>
         <CardActions>
           <Button size="small" onClick={(evt)=>goToDeteails(evt, pin)}>Details</Button>
-          <Button size="small">Share</Button>
+          <Button size="small" disabled>Share</Button>
           <Button size="small" onClick={(evt)=>editPin(evt, pin)}>Edit</Button>
           <Button size="small" onClick={handleClickOpen}>Delete</Button>
             <Dialog
@@ -113,6 +120,7 @@ function MyPins() {
         </CardActions>
       </Card>
     ))}
+    </Container>
     </>
   )
 }

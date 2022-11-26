@@ -30,6 +30,7 @@ function Search() {
 
   useEffect(() => {
     dispatch({ type: 'SET_PINS', payload: []});
+    dispatch({ type: 'RESET_SELECTED_PIN', payload: []});
   }, []);
 
   const handleChange = (event) => {
