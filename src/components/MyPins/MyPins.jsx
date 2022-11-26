@@ -6,9 +6,6 @@ import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
-import Collapse from '@mui/material/Collapse';
-import Avatar from '@mui/material/Avatar';
-import IconButton from '@mui/material/IconButton';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -19,6 +16,7 @@ import { format } from 'date-fns';
 import { parseISO } from 'date-fns/esm';
 import { Button } from '@mui/material';
 import { Container } from '@mui/system';
+import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 
 function MyPins() {
   // declare hooks here
@@ -35,14 +33,14 @@ function MyPins() {
   }, []);
 
   // set original open state for the delete dialog window to false
-  const [open, setOpen] = useState(false);
+  const [deleteOpen, setDeleteOpen] = useState(false);
   //open the delete diolog
   const handleClickOpen = () => {
-    setOpen(true);
+    setDeleteOpen(true);
   };
   // close the delete dialog
   const handleClose = () => {
-    setOpen(false);
+    setDeleteOpen(false);
   };
 
   const goToDeteails = (evt, pin) => {
@@ -53,7 +51,7 @@ function MyPins() {
   const deletePin = (evt, pin) => {
     evt.preventDefault();
     dispatch({type: 'DELETE_PIN', payload: pin})
-    setOpen(false);
+    setDeleteOpen(false);
   }
 
   const editPin = (evt, pin) => {
@@ -68,14 +66,14 @@ function MyPins() {
       <Typography component="h1" variant="h5" align="center" marginBottom="10px">
         My Pins
       </Typography>
-      <Typography>
-        Click on a pin to focus map
+      <Typography align="center">
+        Click pin title to focus map on pin
       </Typography>
     {myPins.map(pin => (
       <Card key={pin.id}
-        onClick={()=>dispatch({type: 'SET_SELECTED_PIN', payload: pin})}
         >
         <CardHeader 
+        onClick={()=>dispatch({type: 'SET_SELECTED_PIN', payload: pin})}
         title={pin.title} 
         subheader={format(parseISO(pin.date), 'yyyy-MM-dd')}
         />
@@ -97,7 +95,7 @@ function MyPins() {
           <Button size="small" onClick={(evt)=>editPin(evt, pin)}>Edit</Button>
           <Button size="small" onClick={handleClickOpen}>Delete</Button>
             <Dialog
-            open={open}
+            open={deleteOpen}
             onClose={handleClose}
             aria-labelledby="delete-dialog"
             aria-describedby="delete-dialog-description"

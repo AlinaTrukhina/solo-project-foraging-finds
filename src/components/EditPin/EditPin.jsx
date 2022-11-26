@@ -2,9 +2,9 @@ import { useHistory, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { Container } from '@mui/system';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -35,7 +35,8 @@ function EditPin() {
 
   return (
     <>
-      <Typography component="h1" variant="h5" align='center'>
+    <Container sx={{margin: '20px 0px'}}>
+      <Typography component="h1" variant="h5" align="center" marginBottom="10px">
         Edit Pin # {params.id}
       </Typography>
       {pinToEdit.id && (
@@ -96,6 +97,7 @@ function EditPin() {
           </Button>
         </Stack>
       </Box>)}
+      </Container>
     </>
   )
 }
