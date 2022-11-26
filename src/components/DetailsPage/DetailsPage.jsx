@@ -68,7 +68,7 @@ function DetailsPage() {
 
   return (
     <>
-    <Container sx={{margin: '80px 0 40px 0'}}>
+    <Container sx={{margin: '80px 0 40px 0', height: '100vh'}}>
       <Typography component="h1" variant="h5" align="center" marginBottom="10px">
         Details Page
       </Typography>
@@ -87,7 +87,7 @@ function DetailsPage() {
           <Typography component="h4" variant="h7">Description: </Typography>
           <Typography paragraph>{selectedPin.text_entry}</Typography>
         </section>
-        <Typography component="h3" variant="h6" >Comments</Typography>
+        <Typography component="h3" variant="h6" marginBottom="-10px">Comments</Typography>
         <section id="commentSection" style={{display: 'flex', flexDirection: 'column', alignContent: 'space-around'
           }}>
           {comments.map(comment => (
@@ -117,7 +117,6 @@ function DetailsPage() {
             name='comment' 
             label='Add comment'
             multiline
-            rows="2" cols="33"
             >
           </TextField>
            :
