@@ -43,7 +43,7 @@ function MapComponent() {
   // make map take up the whole window
   const mapContainerStyle = {
     width: "100vw",
-    height: "70vh",
+    height: "69.5vh",
   };
   // create a center point
   const center = {

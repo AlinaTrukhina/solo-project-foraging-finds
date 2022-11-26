@@ -107,19 +107,19 @@ function AddPin() {
 
       console.log('newPin:', newPin);
       // console.log('userP is ', userP);
-      newPin.img_id ?
-        dispatch({
-          type: 'ADD_PIN_W_NO_IMG',
-          payload: newPin
-        })
-      :
-        dispatch({
-          type: 'ADD_PIN',
-          payload: newPin
-        })
+      dispatch({
+        type: 'ADD_PIN',
+        payload: newPin
+      })
 
       setLoading(false);
+      alert('Added pin!');
+
       dispatch({ type: 'RESET_NEW_IMAGE'});
+
+      setNewTitle('');
+      setLatinName('');
+      setTextInput('');
     } catch (error) {
       console.error('addPin error is', error);
     }
@@ -174,6 +174,7 @@ function AddPin() {
           value={imgInput.img_url}
         /> */}
         <TextField onChange={handleTextInputChange}
+          value={textEntryInput}
           fullWidth
           id="textEntryInput"
           label="any comments?"

@@ -70,7 +70,7 @@ function DetailsPage() {
     <>
     <Container sx={{margin: '80px 0 40px 0', height: '100vh'}}>
       <Typography component="h1" variant="h5" align="center" marginBottom="10px">
-        Details Page
+        Details
       </Typography>
       <Button 
         onClick={(evt)=>{closeDetails(evt)}}

@@ -3,6 +3,9 @@ import { useHistory, useParams, HashRouter as Router, Link } from 'react-router-
 import { useDispatch, useSelector } from 'react-redux';
 
 import { styled } from '@mui/material/styles';
+import { Global } from '@emotion/react';
+import { grey } from '@mui/material/colors';
+import Box from '@mui/material/Box';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
 import Card from '@mui/material/Card';
@@ -23,7 +26,7 @@ import { Container } from '@mui/system';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 
-function MyPins() {
+function MyPins(props) {
   // declare hooks here
   const dispatch = useDispatch();
   const history = useHistory();
@@ -66,7 +69,6 @@ function MyPins() {
   }
 
   // expand more content 
-  
   const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
     return <IconButton {...other} />;
@@ -83,21 +85,83 @@ function MyPins() {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-  
   // end expand more
+
+
+  // swipable drawer
+  const Root = styled('div')(({ theme }) => ({
+    height: '100%',
+    backgroundColor:
+      theme.palette.mode === 'light' ? grey[100] : theme.palette.background.default,
+  }));
+
+  const StyledBox = styled(Box)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === 'light' ? '#fff' : grey[800],
+  }));
+
+  const Puller = styled(Box)(({ theme }) => ({
+    width: 30,
+    height: 6,
+    backgroundColor: theme.palette.mode === 'light' ? grey[300] : grey[900],
+    borderRadius: 3,
+    position: 'absolute',
+    top: 8,
+    left: 'calc(50% - 15px)',
+  }));
+
+  const drawerBleeding = 50;
+
+  const { window } = props;
+  const [swipableOpen, setSwipeableOpen] = useState(false);
+
+  const toggleDrawer = (newOpen) => () => {
+    setSwipeableOpen(newOpen);
+  };
+
+  const container = window !== undefined ? () => window().document.body : undefined;
+  // end swipable drawer
+
 
   return (
     // render pins in a list of Material UI cards
     <>  
-    <Container sx={{margin: '80px 0 40px 0'}}>
+    <Container sx={{margin: '80px 0 30px 0'}} >
       <Typography component="h1" variant="h5" align="center" marginBottom="10px">
-        My Pins
+          My Pins
       </Typography>
       <Typography align="center" marginBottom="5px">
-        Click pin title to focus map on pin
+          Click pin title to focus map on pin
       </Typography>
-    {myPins.map(pin => (
+    
+    {/* <Root> */}
+    {/* <Box sx={{ textAlign: 'center', pt: 1 }}>
+      <Button onClick={toggleDrawer(true)}>Open</Button>
+    </Box> */}
+    {/* <SwipeableDrawer
+      disableBackdropTransition
+      sx={{marginTop: '80px'}}
+      styles={{
+        '.MuiDrawer-root > .MuiPaper-root': {
+          height: `calc(80% - ${drawerBleeding}px)`,
+          maxWidth: '80px',
+          overflow: 'visible',
+        },
+      }}
+      container={container}
+      anchor="top"
+      open={swipableOpen}
+      onClose={toggleDrawer(false)}
+      onOpen={toggleDrawer(true)}
+      swipeAreaWidth={drawerBleeding}
+      disableSwipeToOpen={false}
+      ModalProps={{
+        keepMounted: true,
+      }}
+    > */}
+        
+      {myPins.map(pin => (
       <Card key={pin.id}
+        width="80%"
         >
         <CardHeader 
         onClick={()=>dispatch({type: 'SET_SELECTED_PIN', payload: pin})}
@@ -155,6 +219,9 @@ function MyPins() {
         </CardActions>
       </Card>
     ))}
+        {/* <Puller />
+      </SwipeableDrawer>
+    </Root> */}
     </Container>
     </>
   )
