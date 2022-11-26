@@ -58,6 +58,7 @@ function LoginForm() {
         <TextField sx={{ marginTop: 1}}
         required
         fullWidth
+        type="password"
         id="password"
         label="password"
         name="password"

@@ -18,13 +18,14 @@
   font-weight: 500;
   color: #f2f2f2;
   margin-left: 75px;
-  
+
   padding: 0px;
   text-align: center;
 }
 
 .navLink {
   display: inline-block;
+  margin: -10px;
   color: #f2f2f2;
   background-color: darkolivegreen;
   text-align: center;

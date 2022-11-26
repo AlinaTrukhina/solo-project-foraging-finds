@@ -9,15 +9,14 @@ function UserPage() {
 
   return (
     <>
-    <p>Welcome, {user.username}!</p>  
-    <p>Your avatar: </p>
-    <img src={user.avatar} />
+    <h1 className='welcomeMessage'>Welcome, {user.username}!</h1>  
+    <div className='avatarConatainer'>
+      <p>Your avatar: </p>
+      <img className='userAvatar' src={user.avatar} />
+    </div>
     </>
   );
 }
 
 // this allows us to use <App /> in index.js
 export default UserPage;
-
-
-// '/svg/yep-icon.svg'

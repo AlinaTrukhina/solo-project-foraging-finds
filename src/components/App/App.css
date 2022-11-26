@@ -126,3 +126,22 @@ img {
 .component {
   margin-bottom: 10px;
 }
+
+/* user page */
+.welcomeMessage {
+  font: 1.5em sans-serif;
+  text-align: center;
+}
+
+.avatarConatainer {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.userAvatar {
+  height: 3em;
+  margin-left: 5px;
+}
