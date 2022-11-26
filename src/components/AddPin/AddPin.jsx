@@ -153,7 +153,8 @@ function AddPin() {
           label="Latin Name"
           size="small"
         />  
-        <Button variant="outlined" onClick={handleOpen}>
+        <Button variant="outlined" size="small"
+        onClick={handleOpen} sx={{marginBottom:"10px"}}>
           Upload Your Photo
         </Button>
         <Dialog open={dialogOpen} onClose={handleClose}>
@@ -163,7 +164,7 @@ function AddPin() {
           </Button>
         </Dialog>
         <img src={imgInput.img_url} />
-        <TextField 
+        {/* <TextField 
           // onChange={handleUrlChange}
           label="Image url"
           disabled
@@ -171,7 +172,7 @@ function AddPin() {
           id="imgInput"
           size="small"
           value={imgInput.img_url}
-        />
+        /> */}
         <TextField onChange={handleTextInputChange}
           fullWidth
           id="textEntryInput"
