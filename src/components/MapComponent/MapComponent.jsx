@@ -143,11 +143,11 @@ function MapComponent() {
           center}
           icon={{
             url: `${user.avatar}`,
-            scaledSize: new window.google.maps.Size(30,30),
+            scaledSize: new window.google.maps.Size(20, 20),
             // sets origin to the point where user clicked
             origin: new window.google.maps.Point(0, 0),
             // sets anchor to half the size so that the icon appears on click position
-            anchor: new window.google.maps.Point(15, 15)
+            anchor: new window.google.maps.Point(10, 10)
           }}  
         />}
 
@@ -182,11 +182,11 @@ function MapComponent() {
             // change the icon to a mushroom
             icon={{
               url: '/svg/mushrooms-2-mushrooms.svg',
-              scaledSize: new window.google.maps.Size(20,20),
+              scaledSize: new window.google.maps.Size(30, 30),
               // sets origin to the point where user clicked
               origin: new window.google.maps.Point(0, 0),
               // sets anchor to half the size so that the icon center appears on the origin point
-              anchor: new window.google.maps.Point(10, 10)
+              anchor: new window.google.maps.Point(15, 15)
             }}  
             // set the clicked marker as selected
             onClick={()=>{
@@ -202,11 +202,11 @@ function MapComponent() {
         {selectedPin.id ? (<InfoWindow position={{
           lat: Number(selectedPin.lat), lng: Number(selectedPin.lng)}} 
           onCloseClick={() => dispatch({
-          type: 'SET_SELECTED_PIN', 
-          payload: {}
+          type: 'RESET_SELECTED_PIN'
           })}>
           <div>
             <h4>{selectedPin.title}</h4>
+            <p>location coordinates:</p>
             <p>{selectedPin.lat}, {selectedPin.lng}</p>
               
               <Router>
