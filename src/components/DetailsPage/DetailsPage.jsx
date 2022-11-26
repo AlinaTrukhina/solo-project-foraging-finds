@@ -4,11 +4,25 @@ import { useDispatch, useSelector } from 'react-redux';
 import { format } from 'date-fns';
 import { parseISO } from 'date-fns/esm';
 
+import { Container } from '@mui/system';
+import { Button } from '@mui/material';
+import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
+import Card from '@mui/material/Card';
+import CardHeader from '@mui/material/CardHeader';
+import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
+import Avatar from '@mui/material/Avatar';
+import { Box } from '@mui/system';
+
 function DetailsPage() {
   // declare hooks here
   const params = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
+
+  const [commentInput, setCommentInput] = useState('');
 
   // react hooks
   // TODO: prevent page errors on reload
@@ -26,6 +40,10 @@ function DetailsPage() {
   const user = useSelector(store => store.user);
   const comments = useSelector(store => store.comments);
 
+  const handleCommentChange = (evt) => {
+    setCommentInput(evt.target.value);
+  };
+
   const closeDetails = (evt) => {
     evt.preventDefault();
     dispatch({type: 'SET_SELECTED_PIN', payload: {}});
@@ -36,7 +54,7 @@ function DetailsPage() {
     evt.preventDefault();
     // build object to send
     const newComment = {
-      comment: evt.target.commentInputTextarea.value,
+      comment: commentInput,
       date: new Date().toISOString(),
       user_id: user.id,
       pin_id: params.id
@@ -46,64 +64,97 @@ function DetailsPage() {
     dispatch({
       type: 'ADD_COMMENT',
       payload: newComment
-    })
+    });
+
+    setCommentInput('');
   }
 
   return (
     <>
-      <h1>Details Page</h1>
-      <button onClick={(evt)=>{closeDetails(evt)}}>Close Details</button>
+    <Container sx={{margin: '80px 0 40px 0', height: '100vh', overflow: 'hidden'}}>
+    <Box textAlign='center' marginBottom='10px'>
+      <Button 
+        onClick={(evt)=>{closeDetails(evt)}}
+        variant="outlined"
+        size="small"
+      >
+        Close Details
+      </Button>
+    </Box>
       <section>
-        <h2>{selectedPin.title}</h2>
-        <h3>{selectedPin.latin_name}</h3>
+        <Typography component="h2" variant="h5" marginTop="10px">
+          {selectedPin.title}
+        </Typography>
+        <Typography component="h3" variant="h6">
+          {selectedPin.latin_name}
+        </Typography>
         {/* <h4>{format(parseISO(selectedPin.date), 'yyyy-MM-dd')}</h4> */}
         <img src={selectedPin.img_url} alt={selectedPin.title}/>
-        <p>Description: {selectedPin.text_entry}</p>
+        <Typography component="h4" variant="h7">Description: </Typography>
+        <Typography paragraph>{selectedPin.text_entry}</Typography>
       </section>
-      <h2>Comments</h2>
-      <section id="commentSection" style={{display: 'flex', flexDirection: 'column', alignContent: 'space-around'
+      <Typography component="h3" variant="h6" marginBottom="5px">
+        Comments
+      </Typography>
+      <section id="commentSection" 
+      style={{display: 'flex', flexDirection: 'column', alignContent: 'space-around'
         }}>
         {comments.map(comment => (
-          <div style={{display: 'flex', flexDirection: 'row', justifyContent:'space-around', alignItems:'center'}} 
-          key={comment.comment_id} > 
-            <h5>{comment.username}</h5>
-            <h6>{format(parseISO(comment.date), 'yyyy-MM-dd')}</h6>
-            <p>{comment.comment}</p>
-          </div>))}
+          <Card key={comment.comment_id}>
+            <CardHeader
+              avatar={
+                <Avatar aria-label="userAvatar" src={comment.avatar} sx={{ width: 30, height: 30 }}>
+                </Avatar>}
+              title={comment.username}
+              subheader={format(parseISO(comment.date), 'yyyy-MM-dd')}
+            />
+            <CardContent>
+              <Typography variant="body" color="text.secondary">
+                {comment.comment}
+              </Typography>
+            </CardContent>
+          </Card>
+          ))}
       </section>
       <form id='addCommentform' action='post'
-        onSubmit={addComment}>
-        <label htmlFor='commentInputTextarea'>Add Comment</label>
-        { user.id ?
-          <textarea 
-            id='commentInputTextarea' 
-            name='comment' 
-            placeholder='add comment'
-            rows="5" cols="33"
-            >
-          </textarea>
-           :
-          <textarea 
-            id='commentInputTextarea' 
-            name='comment' 
-            placeholder='add comment'
-            rows="5" cols="33"
-            disabled
-            >
-          </textarea>
-        }
-        {/* conditional rendering depending on whether user is logged in */}
-        { user.id ? 
-        <button>Add comment</button>
-        : 
-        <h5>        
-          <Router>
-            <Link to="/login"
-            >Log In</Link>
-          </Router> In to add comment
-        </h5>
-        }
+      onSubmit={addComment}>
+      { user.id ?
+        <TextField 
+          sx={{width: '60%'}}
+          value={commentInput}
+          onChange={handleCommentChange}
+          id='commentInputTextarea' 
+          name='comment' 
+          label='Add comment'
+          multiline
+          >
+        </TextField>
+          :
+        <TextField 
+          sx={{width: '60%'}}
+          value={commentInput}
+          id='commentInputTextarea' 
+          name='comment' 
+          label='Add comment'
+          width='50%'
+          multiline
+          disabled
+          >
+        </TextField>
+      }
+      {/* conditional rendering depending on whether user is logged in */}
+      { user.id ? 
+      <Button onClick={addComment} variant="contained">Add comment</Button>
+      : 
+      <h5>        
+        <Router>
+          <Link to="/login"
+          >Log In</Link>
+        </Router> In to add comment
+      </h5>
+      }
       </form>
+    </Container>
     </>
   );
 }

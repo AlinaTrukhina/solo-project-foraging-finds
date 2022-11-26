@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from "react-router-dom";
 
@@ -16,8 +16,6 @@ import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
-import { format } from 'date-fns';
-import { parseISO } from 'date-fns/esm';
 
 function Search() {
 
@@ -27,11 +25,6 @@ function Search() {
   const [searchBy, setSearchBy] = useState('title');
 
   const pins = useSelector(store => store.pins);
-
-  useEffect(() => {
-    dispatch({ type: 'SET_PINS', payload: []});
-    dispatch({ type: 'RESET_SELECTED_PIN', payload: []});
-  }, []);
 
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
@@ -58,7 +51,7 @@ function Search() {
 
   return (
     <>
-    <Container sx={{margin: '20px 0px'}}>
+    <Container sx={{margin: '80px 0 40px 0'}}>
       <Typography component="h1" variant="h5" align="center" marginBottom='10px'>
         Search
       </Typography>
@@ -88,16 +81,17 @@ function Search() {
         Search
       </Button>
       </Box>
+      {pins[0] ? null : <Typography marginTop="10px" align="center">
+        No entries found.
+      </Typography>}
       </Container>
 
       {pins.map(pin => (
-      <Card key={pin.id}
-        onClick={()=>dispatch({type: 'SET_SELECTED_PIN', payload: pin})}
-      >
+      <Card key={pin.id}>
         <CardHeader 
+        onClick={()=>dispatch({type: 'SET_SELECTED_PIN', payload: pin})}
         title={pin.title} 
         subheader={pin.latin_name}
-        // subheader={format(parseISO(pin.date), 'yyyy-MM-dd')}
         />
         <CardMedia sx={{maxWidth: '100px'}}
         component="img"

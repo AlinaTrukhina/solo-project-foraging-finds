@@ -107,19 +107,19 @@ function AddPin() {
 
       console.log('newPin:', newPin);
       // console.log('userP is ', userP);
-      newPin.img_id ?
-        dispatch({
-          type: 'ADD_PIN_W_NO_IMG',
-          payload: newPin
-        })
-      :
-        dispatch({
-          type: 'ADD_PIN',
-          payload: newPin
-        })
+      dispatch({
+        type: 'ADD_PIN',
+        payload: newPin
+      })
 
       setLoading(false);
+      alert('Added pin!');
+
       dispatch({ type: 'RESET_NEW_IMAGE'});
+
+      setNewTitle('');
+      setLatinName('');
+      setTextInput('');
     } catch (error) {
       console.error('addPin error is', error);
     }
@@ -128,7 +128,7 @@ function AddPin() {
   return (
     <>
     <div data-testid='add-pin-test'>
-    <Container sx={{margin: '20px 0px'}}>
+    <Container sx={{margin: '80px 0 40px 0'}}>
       <Typography component="h1" variant="h5" align='center' marginBottom='10px'>
         Add Pin
       </Typography>
@@ -174,6 +174,7 @@ function AddPin() {
           value={imgInput.img_url}
         /> */}
         <TextField onChange={handleTextInputChange}
+          value={textEntryInput}
           fullWidth
           id="textEntryInput"
           label="any comments?"

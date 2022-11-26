@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 // drop-down list for navigation
 import Box from '@mui/material/Box';
@@ -13,11 +14,24 @@ import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 
 function Nav() {
+  const dispatch = useDispatch();
+
   const user = useSelector((store) => store.user);
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   // TODO: research MUI menu as a different nav option
+
+  const handleSearchClick = (evt) => {
+    dispatch({ type: 'SET_PINS', payload: []});
+    dispatch({type: 'RESET_SELECTED_PIN'})
+    setIsDrawerOpen(false);
+  }
+
+  const handleInfoClick = (evt) => {
+    dispatch({type: 'FETCH_PINS' });
+    setIsDrawerOpen(false);
+  }
 
   return (
     <div className="nav-container" id="landing-page">
@@ -29,7 +43,7 @@ function Nav() {
     >
       <List>
         <ListItem>
-          <Link to='/search' onClick={() => setIsDrawerOpen(false)}>Search</Link>
+          <Link to='/search' onClick={handleSearchClick}>Search</Link>
         </ListItem>
         <ListItem>
           <Link to='/addpin' onClick={() => setIsDrawerOpen(false)}>Add Pin</Link>
@@ -41,7 +55,7 @@ function Nav() {
           <Link to='/user' onClick={() => setIsDrawerOpen(false)}>My Profile</Link>
         </ListItem>
         <ListItem>
-          <Link to='/info' onClick={() => setIsDrawerOpen(false)}>Map</Link>
+          <Link to='/info' onClick={handleInfoClick}>Map</Link>
         </ListItem>
       </List>
       <Button 

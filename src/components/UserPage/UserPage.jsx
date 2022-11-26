@@ -9,11 +9,14 @@ function UserPage() {
 
   return (
     <>
-    <h1 className='welcomeMessage'>Welcome, {user.username}!</h1>  
-    <div className='avatarConatainer'>
-      <p>Your avatar: </p>
-      <img className='userAvatar' src={user.avatar} />
+    <div className='container'>
+      <h1 className='welcomeMessage'>Welcome, {user.username}!</h1>  
+      <div className='avatarConatainer'>
+        <p>Your avatar: </p>
+        <img className='userAvatar' src={user.avatar} />
+      </div> 
     </div>
+
     </>
   );
 }

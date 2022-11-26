@@ -25,7 +25,6 @@
 
 .navLink {
   display: inline-block;
-  margin: -10px;
   color: #f2f2f2;
   background-color: darkolivegreen;
   text-align: center;
@@ -35,6 +34,7 @@
 
 .navLink h2 {
   padding: 0;
+  margin-top: -10px;
 }
 
 /* .navLink:hover {
@@ -42,6 +42,9 @@
 } */
 
 .nav-container {
+  position: fixed;
+  width: 100vw;
+  top: 0;
   background-color: darkolivegreen;
   height: 60px;
 }
@@ -56,4 +59,9 @@
   top: 0px;
   right: 0px;
   height: 60px;
+}
+
+#logOutButton {
+  padding: 0 5px;
+  margin-top: 1em;
 }
