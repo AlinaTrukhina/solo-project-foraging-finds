@@ -28,6 +28,11 @@ function Nav() {
     setIsDrawerOpen(false);
   }
 
+  const handleInfoClick = (evt) => {
+    dispatch({type: 'FETCH_PINS' });
+    setIsDrawerOpen(false);
+  }
+
   return (
     <div className="nav-container" id="landing-page">
     <Drawer 
@@ -50,7 +55,7 @@ function Nav() {
           <Link to='/user' onClick={() => setIsDrawerOpen(false)}>My Profile</Link>
         </ListItem>
         <ListItem>
-          <Link to='/info' onClick={() => setIsDrawerOpen(false)}>Map</Link>
+          <Link to='/info' onClick={handleInfoClick}>Map</Link>
         </ListItem>
       </List>
       <Button 
