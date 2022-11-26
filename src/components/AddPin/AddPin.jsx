@@ -128,8 +128,8 @@ function AddPin() {
   return (
     <>
     <div data-testid='add-pin-test'>
-    <Container >
-      <Typography component="h1" variant="h5" align='center'>
+    <Container sx={{margin: '20px 0px'}}>
+      <Typography component="h1" variant="h5" align='center' marginBottom='10px'>
         Add Pin
       </Typography>
       <Box component="form" 

@@ -58,7 +58,9 @@ function Search() {
   return (
     <>
     <Container sx={{margin: '20px 0px'}}>
-      <Typography component="h1" variant="h5" align="center">Search</Typography>
+      <Typography component="h1" variant="h5" align="center" marginBottom='10px'>
+        Search
+      </Typography>
       <Box component="form" onSubmit={(evt)=>submitSearch(evt)}>
       <TextField onChange={handleChange}
         size="small"
