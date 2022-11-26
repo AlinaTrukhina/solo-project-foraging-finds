@@ -34,7 +34,7 @@ function LoginForm() {
   }; // end login
 
   return (
-    <Container sx={{marginBottom:'20px'}}>
+    <Container sx={{margin: '80px 0 40px 0'}}>
       <form className="formPanel" onSubmit={login}>
         <Typography component="h1" variant="h5" align='center'>
           Login

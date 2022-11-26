@@ -62,7 +62,7 @@ function MyPins() {
   return (
     // render pins in a list of Material UI cards
     <>  
-    <Container sx={{margin: '20px 0px'}}>
+    <Container sx={{margin: '80px 0 40px 0'}}>
       <Typography component="h1" variant="h5" align="center" marginBottom="10px">
         My Pins
       </Typography>

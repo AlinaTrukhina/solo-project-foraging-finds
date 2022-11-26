@@ -58,7 +58,7 @@ function Search() {
 
   return (
     <>
-    <Container sx={{margin: '20px 0px'}}>
+    <Container sx={{margin: '80px 0 40px 0'}}>
       <Typography component="h1" variant="h5" align="center" marginBottom='10px'>
         Search
       </Typography>
@@ -88,6 +88,9 @@ function Search() {
         Search
       </Button>
       </Box>
+      {pins[0] ? null : <Typography marginTop="10px" align="center">
+        No entries found.
+      </Typography>}
       </Container>
 
       {pins.map(pin => (
