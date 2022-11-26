@@ -36,7 +36,9 @@ function LoginForm() {
   return (
     <Container sx={{marginBottom:'20px'}}>
       <form className="formPanel" onSubmit={login}>
-        <h2 className='login-title'>Login</h2>
+        <Typography component="h1" variant="h5" align='center'>
+          Login
+        </Typography>
         {errors.loginMessage && (
           <h3 className="alert" role="alert">
             {errors.loginMessage}

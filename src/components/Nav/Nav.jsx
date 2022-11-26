@@ -51,19 +51,20 @@ function Nav() {
       </Button>
     </Drawer>
     <div className='navTopContainer'>
-    <Button sx={{ color: 'white' }}
+    <Button sx={{ color: 'white', height: '60px'}}
       onClick={() => setIsDrawerOpen(true)}
     >
       Menu
     </Button>
-    <Link to="/home">
+    <Link to="/home" className='navLink'>
       <h2 className="nav-title">Foraging Finds</h2>
     </Link>
     <div id='logOutArea'>
     {user.id ? <LogOutButton /> : (
     // If there's no user, show login/registration links
       <Link className="navLink" to="/login">
-        Login / Register
+        <p>Login / </p>
+        <p>Register</p> 
       </Link>
     )
     }
