@@ -198,6 +198,18 @@ function MapComponent() {
             />
           ))}
 
+        <Marker key={selectedPin.id} 
+          position={{lat: Number(selectedPin.lat), lng: Number(selectedPin.lng)}}
+          // change the icon to a mushroom
+          icon={{
+            url: '/svg/mushrooms-2-mushrooms.svg',
+            scaledSize: new window.google.maps.Size(30, 30),
+            // sets origin to the point where user clicked
+            origin: new window.google.maps.Point(0, 0),
+            // sets anchor to half the size so that the icon center appears on the origin point
+            anchor: new window.google.maps.Point(15, 15)
+          }}
+        />
         {/* opens up info window for the selected marker */}
         {selectedPin.id ? (<InfoWindow position={{
           lat: Number(selectedPin.lat), lng: Number(selectedPin.lng)}} 

@@ -14,6 +14,7 @@ import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Avatar from '@mui/material/Avatar';
+import { Box } from '@mui/system';
 
 function DetailsPage() {
   // declare hooks here
@@ -63,15 +64,15 @@ function DetailsPage() {
     dispatch({
       type: 'ADD_COMMENT',
       payload: newComment
-    })
+    });
+
+    setCommentInput('');
   }
 
   return (
     <>
-    <Container sx={{margin: '80px 0 40px 0', height: '100vh'}}>
-      <Typography component="h1" variant="h5" align="center" marginBottom="10px">
-        Details
-      </Typography>
+    <Container sx={{margin: '80px 0 40px 0', height: '100vh', overflow: 'hidden'}}>
+    <Box textAlign='center' marginBottom='10px'>
       <Button 
         onClick={(evt)=>{closeDetails(evt)}}
         variant="outlined"
@@ -79,69 +80,80 @@ function DetailsPage() {
       >
         Close Details
       </Button>
-        <section>
-          <Typography component="h2" variant="h5" marginTop="10px">{selectedPin.title}</Typography>
-          <Typography component="h3" variant="h6">{selectedPin.latin_name}</Typography>
-          {/* <h4>{format(parseISO(selectedPin.date), 'yyyy-MM-dd')}</h4> */}
-          <img src={selectedPin.img_url} alt={selectedPin.title}/>
-          <Typography component="h4" variant="h7">Description: </Typography>
-          <Typography paragraph>{selectedPin.text_entry}</Typography>
-        </section>
-        <Typography component="h3" variant="h6" marginBottom="-10px">Comments</Typography>
-        <section id="commentSection" style={{display: 'flex', flexDirection: 'column', alignContent: 'space-around'
-          }}>
-          {comments.map(comment => (
-            <Card key={comment.comment_id}>
-              <CardHeader
-                avatar={
-                  <Avatar aria-label="userAvatar" src={user.avatar} sx={{ width: 30, height: 30 }}>
-                  </Avatar>}
-                title={comment.username}
-                subheader={format(parseISO(comment.date), 'yyyy-MM-dd')}
-              />
-              <CardContent>
-                <Typography variant="body" color="text.secondary">
-                  {comment.comment}
-                </Typography>
-              </CardContent>
-            </Card>
-            ))}
-        </section>
-        <form id='addCommentform' action='post'
-        onSubmit={addComment}>
-        { user.id ?
-          <TextField 
-            value={commentInput}
-            onChange={handleCommentChange}
-            id='commentInputTextarea' 
-            name='comment' 
-            label='Add comment'
-            multiline
-            >
-          </TextField>
-           :
-          <TextField 
-            value={commentInput}
-            id='commentInputTextarea' 
-            name='comment' 
-            label='Add comment'
-            multiline
-            disabled
-            >
-          </TextField>
-        }
-        {/* conditional rendering depending on whether user is logged in */}
-        { user.id ? 
-        <Button onClick={addComment} variant="contained">Add comment</Button>
-        : 
-        <h5>        
-          <Router>
-            <Link to="/login"
-            >Log In</Link>
-          </Router> In to add comment
-        </h5>
-        }
-        </form>
+    </Box>
+      <section>
+        <Typography component="h2" variant="h5" marginTop="10px">
+          {selectedPin.title}
+        </Typography>
+        <Typography component="h3" variant="h6">
+          {selectedPin.latin_name}
+        </Typography>
+        {/* <h4>{format(parseISO(selectedPin.date), 'yyyy-MM-dd')}</h4> */}
+        <img src={selectedPin.img_url} alt={selectedPin.title}/>
+        <Typography component="h4" variant="h7">Description: </Typography>
+        <Typography paragraph>{selectedPin.text_entry}</Typography>
+      </section>
+      <Typography component="h3" variant="h6" marginBottom="5px">
+        Comments
+      </Typography>
+      <section id="commentSection" 
+      style={{display: 'flex', flexDirection: 'column', alignContent: 'space-around'
+        }}>
+        {comments.map(comment => (
+          <Card key={comment.comment_id}>
+            <CardHeader
+              avatar={
+                <Avatar aria-label="userAvatar" src={comment.avatar} sx={{ width: 30, height: 30 }}>
+                </Avatar>}
+              title={comment.username}
+              subheader={format(parseISO(comment.date), 'yyyy-MM-dd')}
+            />
+            <CardContent>
+              <Typography variant="body" color="text.secondary">
+                {comment.comment}
+              </Typography>
+            </CardContent>
+          </Card>
+          ))}
+      </section>
+      <form id='addCommentform' action='post'
+      onSubmit={addComment}>
+      { user.id ?
+        <TextField 
+          sx={{width: '60%'}}
+          value={commentInput}
+          onChange={handleCommentChange}
+          id='commentInputTextarea' 
+          name='comment' 
+          label='Add comment'
+          multiline
+          >
+        </TextField>
+          :
+        <TextField 
+          sx={{width: '60%'}}
+          value={commentInput}
+          id='commentInputTextarea' 
+          name='comment' 
+          label='Add comment'
+          width='50%'
+          multiline
+          disabled
+          >
+        </TextField>
+      }
+      {/* conditional rendering depending on whether user is logged in */}
+      { user.id ? 
+      <Button onClick={addComment} variant="contained">Add comment</Button>
+      : 
+      <h5>        
+        <Router>
+          <Link to="/login"
+          >Log In</Link>
+        </Router> In to add comment
+      </h5>
+      }
+      </form>
     </Container>
     </>
   );
