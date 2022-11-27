@@ -13,5 +13,4 @@ const JumpToTop = () => {
     );
 }
 
-
 export default JumpToTop;

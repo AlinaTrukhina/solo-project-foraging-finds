@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams, HashRouter as Router, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import JumpToMap from '../JumpToMap/JumpToMap';
-import JumpToTop from '../JumpToTop/JumpToTop';
+import helpers from '../helpers.js';
 
 import { styled } from '@mui/material/styles';
 import { grey } from '@mui/material/colors';
@@ -68,6 +67,11 @@ function MyPins(props) {
     history.push(`/mypins/${pin.id}/edit`);
   }
 
+  const selectPin = (pin) => {
+    dispatch({type: 'SET_SELECTED_PIN', payload: pin});
+    helpers.scrollToMap()
+  }
+
   // expand more content 
   const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -88,45 +92,10 @@ function MyPins(props) {
   // end expand more
 
 
-  // swipable drawer
-  const Root = styled('div')(({ theme }) => ({
-    height: '100%',
-    backgroundColor:
-      theme.palette.mode === 'light' ? grey[100] : theme.palette.background.default,
-  }));
-
-  const StyledBox = styled(Box)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'light' ? '#fff' : grey[800],
-  }));
-
-  const Puller = styled(Box)(({ theme }) => ({
-    width: 30,
-    height: 6,
-    backgroundColor: theme.palette.mode === 'light' ? grey[300] : grey[900],
-    borderRadius: 3,
-    position: 'absolute',
-    top: 8,
-    left: 'calc(50% - 15px)',
-  }));
-
-  const drawerBleeding = 50;
-
-  const { window } = props;
-  const [swipableOpen, setSwipeableOpen] = useState(false);
-
-  const toggleDrawer = (newOpen) => () => {
-    setSwipeableOpen(newOpen);
-  };
-
-  const container = window !== undefined ? () => window().document.body : undefined;
-  // end swipable drawer
-
-
   return (
     // render pins in a list of Material UI cards
     <>  
     <Container sx={{margin: '80px 0 30px 0'}} >
-    <JumpToMap />
       <Typography component="h1" variant="h5" align="center" marginBottom="10px">
           My Pins
       </Typography>
@@ -138,7 +107,7 @@ function MyPins(props) {
       <Card key={pin.id}
         >
         <CardHeader 
-        onClick={()=>dispatch({type: 'SET_SELECTED_PIN', payload: pin})}
+        onClick={()=>selectPin(pin)}
         title={pin.title} 
         subheader={format(parseISO(pin.date), 'yyyy-MM-dd')}
         />
@@ -194,10 +163,12 @@ function MyPins(props) {
       </Card>
     ))}
     </Container>
-    <JumpToTop />
+    <Button onClick={helpers.scrollToTop}
+    variant="outlined"
+    size="small"
+    >back to top</Button>
     </>
   )
 }
 
 export default MyPins;
-
