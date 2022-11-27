@@ -47,6 +47,7 @@
   top: 0;
   background-color: darkolivegreen;
   height: 60px;
+  z-index: 2;
 }
 
 .navLink p {

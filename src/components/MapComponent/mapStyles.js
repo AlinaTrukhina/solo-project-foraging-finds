@@ -1,4 +1,4 @@
-[
+export default [
     {
         "featureType": "administrative",
         "elementType": "geometry.stroke",

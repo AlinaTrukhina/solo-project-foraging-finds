@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams, HashRouter as Router, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import JumpToMap from '../JumpToMap/JumpToMap';
+import JumpToTop from '../JumpToTop/JumpToTop';
 
 import { styled } from '@mui/material/styles';
-import { Global } from '@emotion/react';
 import { grey } from '@mui/material/colors';
 import Box from '@mui/material/Box';
 import Collapse from '@mui/material/Collapse';
@@ -24,7 +25,6 @@ import { parseISO } from 'date-fns/esm';
 import { Button } from '@mui/material';
 import { Container } from '@mui/system';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 
 function MyPins(props) {
   // declare hooks here
@@ -126,42 +126,16 @@ function MyPins(props) {
     // render pins in a list of Material UI cards
     <>  
     <Container sx={{margin: '80px 0 30px 0'}} >
+    <JumpToMap />
       <Typography component="h1" variant="h5" align="center" marginBottom="10px">
           My Pins
       </Typography>
       <Typography align="center" marginBottom="5px">
           Click pin title to focus map on pin
       </Typography>
-    
-    {/* <Root> */}
-    {/* <Box sx={{ textAlign: 'center', pt: 1 }}>
-      <Button onClick={toggleDrawer(true)}>Open</Button>
-    </Box> */}
-    {/* <SwipeableDrawer
-      disableBackdropTransition
-      sx={{marginTop: '80px'}}
-      styles={{
-        '.MuiDrawer-root > .MuiPaper-root': {
-          height: `calc(80% - ${drawerBleeding}px)`,
-          maxWidth: '80px',
-          overflow: 'visible',
-        },
-      }}
-      container={container}
-      anchor="top"
-      open={swipableOpen}
-      onClose={toggleDrawer(false)}
-      onOpen={toggleDrawer(true)}
-      swipeAreaWidth={drawerBleeding}
-      disableSwipeToOpen={false}
-      ModalProps={{
-        keepMounted: true,
-      }}
-    > */}
-        
+  
       {myPins.map(pin => (
       <Card key={pin.id}
-        width="80%"
         >
         <CardHeader 
         onClick={()=>dispatch({type: 'SET_SELECTED_PIN', payload: pin})}
@@ -219,10 +193,8 @@ function MyPins(props) {
         </CardActions>
       </Card>
     ))}
-        {/* <Puller />
-      </SwipeableDrawer>
-    </Root> */}
     </Container>
+    <JumpToTop />
     </>
   )
 }

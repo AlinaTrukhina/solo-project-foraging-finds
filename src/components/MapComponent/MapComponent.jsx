@@ -10,6 +10,7 @@ import {
   } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import mapStyles from "./mapStyles";
+import mapStylesLight from "./mapStylesLight";
 
 function MapComponent() {
 
@@ -44,6 +45,8 @@ function MapComponent() {
   const mapContainerStyle = {
     width: "100vw",
     height: "69.5vh",
+    // position: "absolute",
+    // bottom: "0px"
   };
   // create a center point
   const center = {
@@ -54,7 +57,7 @@ function MapComponent() {
   const options = {
     disableDefaultUI: true,
     zoomControl: true,
-    styles: mapStyles
+    styles: mapStylesLight
   }
 
   // load script - load the map, or show error message
@@ -95,35 +98,13 @@ function MapComponent() {
     toUserPosition();
   }, []);
 
-  // create a function that will pan to user location 
-  // pass in latitude and longitude
-  // const panTo = React.useCallback(({ lat, lng }) => {
-  //   mapRef.current.panTo({ lat, lng });
-  // }, []);
-  
-  // function Locate({ panTo }) {
-  //   return (
-  //     <button className="locate"
-  //     onClick={()=>{panTo({
-  //       lat: userPosition.lat,
-  //       lng: userPosition.lng,
-  //     })}}
-  //     >
-  //       Center Map
-  //     </button>
-  //   )
-  // }
 
   if (loadError) return "Error loading Map";
   if (!isLoaded) return "Loading map";
 
   return (
     <>
-      {/* <h5>User Position: {userPosition.lat}, {userPosition.lng}</h5> */}
-      {/* <Locate panTo={panTo} /> */}
-      {/* <button>{(allPins[0].id === 'undefined') ? "Show All Pins" : "Hide All Pins"}</button> */}
-
-      <GoogleMap 
+      <GoogleMap mapContainerClassName="mapContainer"
       mapContainerStyle={mapContainerStyle} 
       zoom={12} 
       // conditional rendering: if userPosition is loaded, center map on user; 
@@ -158,7 +139,7 @@ function MapComponent() {
           position={{lat: Number(marker.lat), lng: Number(marker.lng)}}
           // change the icon to a mushroom
           icon={{
-            url: '/svg/musroom-colored-mypin.svg',
+            url: '/svg/mushrooms-2-mushrooms.svg',
             scaledSize: new window.google.maps.Size(30,30),
             // sets origin to the point where user clicked
             origin: new window.google.maps.Point(0, 0),
@@ -230,9 +211,9 @@ function MapComponent() {
           </div>
         </InfoWindow>) : null}
       </GoogleMap>
+      <div id="mapBottom"><p></p></div>
     </>
   );
 }
-
 
 export default MapComponent;

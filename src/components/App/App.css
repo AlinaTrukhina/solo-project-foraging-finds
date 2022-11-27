@@ -115,12 +115,11 @@ input {
 }
 
 img {
-  max-width: 350px;
+  max-width: 100%;
   max-height: 350px;
 }
 
 #addCommentform {
-  margin-top: 20px;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -128,10 +127,11 @@ img {
 
 /* Map */
 
-.mapComponent {
-  position: fixed;
-  bottom: 44.5px;
+.mapContainer {
+  margin-bottom: 44.5px;
 }
+
+/* Components */
 
 .component {
   margin: 80px 0 10px 0;
@@ -154,4 +154,14 @@ img {
 .userAvatar {
   height: 3em;
   margin-left: 5px;
+}
+
+/* 
+---------------------------------------------------------------------------
+
+*/
+
+#mapBottom {
+  height: 2px;
+  background-color: darkolivegreen;
 }

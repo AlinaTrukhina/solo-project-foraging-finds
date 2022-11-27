@@ -71,7 +71,7 @@ function DetailsPage() {
 
   return (
     <>
-    <Container sx={{margin: '80px 0 40px 0', height: '100vh', overflow: 'hidden'}}>
+    <Container sx={{margin: '80px 0 40px 0', overflow: 'hidden'}}>
     <Box textAlign='center' marginBottom='10px'>
       <Button 
         onClick={(evt)=>{closeDetails(evt)}}

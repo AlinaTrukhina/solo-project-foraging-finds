@@ -23,7 +23,7 @@ function Nav() {
   // TODO: research MUI menu as a different nav option
 
   const handleSearchClick = (evt) => {
-    dispatch({ type: 'SET_PINS', payload: []});
+    dispatch({ type: 'SET_ALL_PINS', payload: []});
     dispatch({type: 'RESET_SELECTED_PIN'})
     setIsDrawerOpen(false);
   }
