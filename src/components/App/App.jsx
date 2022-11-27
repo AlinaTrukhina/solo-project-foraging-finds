@@ -11,9 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
-
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
@@ -28,6 +26,7 @@ import MyPins from '../MyPins/MyPins';
 import EditPin from '../EditPin/EditPin';
 import './App.css';
 
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 function App() {
   const dispatch = useDispatch();
@@ -38,7 +37,31 @@ function App() {
     dispatch({ type: 'FETCH_USER' });
   }, [dispatch]);
 
+  // add custom theme for Material UI
+  const theme = createTheme({
+    palette: {
+      type: 'light',
+      primary: {
+        main: '#556b2f',
+        light: '#6e893c'
+      },
+      secondary: {
+        main: '#e8d776',
+        light: '#f9fbe7',
+        dark: '#A29652',
+      },
+    },
+    components: {
+      MuiButton: {
+        styleOverrides: {
+          color: '#FFF'
+        },
+      },
+    },
+  });
+
   return (
+    <ThemeProvider theme={theme}>
     <Router>
       <div>
         <Nav />
@@ -163,6 +186,7 @@ function App() {
         <Footer />
       </div>
     </Router>
+    </ThemeProvider>
   );
 }
 

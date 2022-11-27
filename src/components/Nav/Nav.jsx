@@ -6,7 +6,6 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 
 // drop-down list for navigation
-import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
 import List from '@mui/material/List';
@@ -41,21 +40,26 @@ function Nav() {
       // Called when clicking outside the drawer
       onClose={() => setIsDrawerOpen(false)}
     >
-      <List>
-        <ListItem>
-          <Link to='/search' onClick={handleSearchClick}>Search</Link>
+      <List className='navList'>
+        <ListItem className='navListItem'>
+          <Link to='/search' className='navListItemLink' 
+          onClick={handleSearchClick} >SEARCH</Link>
         </ListItem>
-        <ListItem>
-          <Link to='/addpin' onClick={() => setIsDrawerOpen(false)}>Add Pin</Link>
+        <ListItem className='navListItem'>
+          <Link to='/addpin'  className='navListItemLink'
+          onClick={() => setIsDrawerOpen(false)}>ADD PIN</Link>
         </ListItem>
-        <ListItem>
-          <Link to='/mypins' onClick={() => setIsDrawerOpen(false)}>My Pins</Link>
+        <ListItem className='navListItem'>
+          <Link to='/mypins' className='navListItemLink'
+          onClick={() => setIsDrawerOpen(false)}>MY PINS</Link>
         </ListItem>
-        <ListItem>
-          <Link to='/user' onClick={() => setIsDrawerOpen(false)}>My Profile</Link>
+        <ListItem className='navListItem'>
+          <Link to='/user' className='navListItemLink'
+          onClick={() => setIsDrawerOpen(false)}>USER PROFILE</Link>
         </ListItem>
-        <ListItem>
-          <Link to='/info' onClick={handleInfoClick}>Map</Link>
+        <ListItem className='navListItem'>
+          <Link to='/info' className='navListItemLink'
+          onClick={handleInfoClick}>MAP</Link>
         </ListItem>
       </List>
       <Button 
