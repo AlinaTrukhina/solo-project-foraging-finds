@@ -9,14 +9,16 @@ function AboutPage() {
   return (
     <div className="container">
       <div>
-        <h3>Built by Alina Trukhina</h3>
-        <a href="https://www.linkedin.com/in/alina-trukhina/">Connect on LinkedIn</a>
+        <h2>Built by Alina Trukhina</h2>
+        <h3>LinkedIn:</h3>
+        <a href="https://www.linkedin.com/in/alina-trukhina/">www.linkedin.com/in/alina-trukhina</a>
         <h3>Source Code:</h3>
         <a href="https://github.com/AlinaTrukhina/solo-project-foraging-finds">Foraging Finds on Github</a>
         <h3>Challenges:</h3>
         <ul>
+          <li>Integraing GoogleMaps API</li>
+          <li>Uploading images</li>
           <li>Uploading entry based on user location</li>
-          <li></li>
         </ul>
         <h3>Technologies used: </h3>
         <ul>
