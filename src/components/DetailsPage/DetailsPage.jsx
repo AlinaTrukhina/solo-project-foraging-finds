@@ -150,7 +150,7 @@ function DetailsPage() {
         <Router>
           <Link to="/login"
           >Log In</Link>
-        </Router> In to add comment
+        </Router> to add comment
       </h5>
       }
       </form>

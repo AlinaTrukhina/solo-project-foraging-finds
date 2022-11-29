@@ -68,12 +68,13 @@ function Nav() {
       </Button>
     </Drawer>
     <div className='navTopContainer'>
-    <Button sx={{ color: 'white', height: '60px'}}
+    <Button sx={{ color: 'white', height: '60px'}}d
       onClick={() => setIsDrawerOpen(true)}
     >
       Menu
     </Button>
-    <Link to="/home" className='navLink'>
+    <Link to="/info" className='navLink'
+    onClick={handleInfoClick}>
       <h2 className="nav-title">Foraging Finds</h2>
     </Link>
     <div id='logOutArea'>

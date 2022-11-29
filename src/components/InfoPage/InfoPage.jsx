@@ -9,6 +9,10 @@ function InfoPage() {
 
   const allPins = useSelector(store => store.pins);
 
+  useEffect(() => {
+    dispatch({type: 'FETCH_PINS'})
+  }, [])
+
   return (
     <>
     <div data-testid='infopage-test' className='component' >
