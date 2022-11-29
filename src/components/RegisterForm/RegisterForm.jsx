@@ -1,3 +1,4 @@
+import { Container } from '@mui/system';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './RegisterForm.css';
@@ -23,6 +24,7 @@ function RegisterForm() {
   }; // end registerUser
 
   return (
+    <Container sx={{margin: '80px 0 30px 0'}}>
     <form className="formPanel" onSubmit={registerUser}>
       <h2>Register User</h2>
       {errors.registrationMessage && (
@@ -100,6 +102,7 @@ function RegisterForm() {
         <input className="btn" type="submit" name="submit" value="Register" />
       </div>
     </form>
+    </Container>
   );
 }
 

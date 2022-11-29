@@ -93,14 +93,14 @@ function Search() {
         title={pin.title} 
         subheader={pin.latin_name}
         />
-        <CardMedia sx={{maxWidth: '100px'}}
+        <CardMedia sx={{maxWidth: '100px', marginLeft: '20px'}}
         component="img"
         image={pin.img_url}
         alt={pin.title} />
         <CardContent>
-          <Typography>
+          {/* <Typography>
             {pin.latin_name}
-          </Typography>
+          </Typography> */}
           <Typography paragraph>
             {pin.text_entry}
           </Typography>

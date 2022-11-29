@@ -60,6 +60,10 @@ function Nav() {
           <Link to='/info' className='navListItemLink'
           onClick={handleInfoClick}>MAP</Link>
         </ListItem>
+        <ListItem className='navListItem'>
+          <Link to='/about' className='navListItemLink'
+          onClick={() => setIsDrawerOpen(false)}>ABOUT</Link>
+        </ListItem>
       </List>
       <Button 
         onClick={() => setIsDrawerOpen(false)}
