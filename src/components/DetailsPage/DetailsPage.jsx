@@ -10,9 +10,7 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
 import Avatar from '@mui/material/Avatar';
 import { Box } from '@mui/system';
 
@@ -146,7 +144,7 @@ function DetailsPage() {
       { user.id ? 
       <Button onClick={addComment} variant="contained">Add comment</Button>
       : 
-      <h5>        
+      <h5 className='loginMessage'>        
         <Router>
           <Link to="/login"
           >Log In</Link>

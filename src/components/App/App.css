@@ -138,6 +138,11 @@ img {
   margin: 80px 0 10px 0;
 }
 
+.loginMessage {
+  margin-left: 10px;
+  margin-top: 0px;
+}
+
 /* user page */
 .welcomeMessage {
   font: 1.5em sans-serif;
@@ -159,10 +164,9 @@ img {
 
 /* 
 ---------------------------------------------------------------------------
-
 */
 
 #mapBottom {
   height: 2px;
-  background-color: darkolivegreen;
+  background-color: white;
 }

@@ -85,23 +85,11 @@ INSERT INTO "pins" ("title", "latin_name", "date", "image_id", "text_entry", "us
 VALUES ('White Mushroom', 'unknown', '2021-08-14', 1, 'mushroom found in BWCA', 1, 44.9572739, -93.2561296),
 ('King Bolete', 'Boletus Edulis', '2022-08-14', 2, 'A large King Bolete', 1, 44.985, -93.33),
 ('Morel', 'Morchella esculenta', '2022-04-10', 3, 'baby morel', 1, 44.94852, -93.260536),
-('Golden Chanterelle', 'Cantharellus cibarius', '2021-07-29', 'beautiful golden chanterelle, delicious on their own', 1, 4, 44.94306991431049, -93.30413328554685),
+('Golden Chanterelle', 'Cantharellus cibarius', 4, '2021-07-29', 'beautiful golden chanterelle, delicious on their own', 1, 44.94306991431049, -93.30413328554685),
 ('Hat-food Russula', 'Russula vesca', '2021-08-13', 5, 'good to fry up in a stir fry', 1, 44.93164745184415, -93.29795347597654),
 ('Nameko', 'Pholiota malicola', '2021-08-11', 6, 'delicious when marinated', 1, 44.920365382428464, -93.24230798984377),
 ('Giant puffball', 'Calvatia gigantea', '2021-08-12', 7, 'put this one on the grill!', 1, 45.00878674174073, -93.21827539707033),
 ('Honey Mushroom', 'Armillaria mellea', '2021-08-15', 8, 'aka "opyata"', 1, 44.92356361764407, -93.37002405429689),
 ('Oyster Mushroom', 'Pleurotus ostreatus', '2021-08-16', 9, 'has a distinct oyster mushroom smell', 1, 44.83914963537265, -93.36659082675783),
 ('Fly Agairc', 'Amanita muscaria', '2021-08-17', 10, 'most recognizable mushroom in the world', 1, 44.87273544742319, -93.2938064029297)
-;
-
-	
-SELECT "pins"."id", "title", "latin_name", "date", "text_entry", "lat", "lng", "img_url"
-FROM "pins"
-JOIN "images" ON images.id = pins.image_id
-;
-
-SELECT "user".id, "user".username, "user".avatar, "comments".id AS "comment_id", "comments".date, "comments"."comment", "comments".pin_id
-  FROM "comments"
-JOIN "user" ON "user".id = user_id
-WHERE pin_id = 4
 ;

@@ -28,6 +28,7 @@ function AboutPage() {
           <li>PostgreSQL</li>
           <li>GoogleMaps API</li>
           <li>Multer</li>
+          <li>Material UI</li>
         </ul>
         <h3>Future goals</h3>
         <ul>

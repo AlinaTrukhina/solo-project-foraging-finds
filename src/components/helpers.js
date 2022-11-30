@@ -1,3 +1,4 @@
+// helper functions to scroll the window up or down
 const helpers = {
 
     scrollToTop: () => {
