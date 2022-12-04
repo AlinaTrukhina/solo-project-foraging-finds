@@ -4,7 +4,6 @@ const router = express.Router();
 const {
   rejectUnauthenticated,
 } = require('../modules/authentication-middleware');
-const { response } = require('express');
 
 /**
  * GET all pins from database

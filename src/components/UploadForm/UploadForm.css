@@ -1,0 +1,11 @@
+button {
+    color: darkolivegreen;
+    background-color: white;
+    margin-left: 5px;
+    border: 1px solid darkolivegreen;
+    border-radius: 5px;
+}
+
+input #file-upload-button {
+    color: darkolivegreen;
+}

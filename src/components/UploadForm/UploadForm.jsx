@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import FormData from "form-data";
 import axios from 'axios';
+import './UploadForm.css';
 
 import Button from '@mui/material/Button';
 
@@ -49,7 +50,6 @@ function UploadForm(){
         className="form-file-input" 
         onChange={handleInput}/>
       <button 
-      // variant="contained" sx={{color: 'red'}}
       type="submit">Add Photo</button>
     </form>
     </>
