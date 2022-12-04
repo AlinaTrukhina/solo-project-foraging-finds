@@ -31,11 +31,6 @@ router.get('/', (req, res) => {
  * POST route to add pin
  */
 router.post('/', rejectUnauthenticated, (req, res) => {
-  // POST route code here
-  const sqlTextImage = `INSERT INTO "images" ("img_url")
-  VALUES ($1)
-  RETURNING "id"
-  ;`;
 
   pool.query(sqlTextImage, [req.body.img_url])
   .then(response => {
