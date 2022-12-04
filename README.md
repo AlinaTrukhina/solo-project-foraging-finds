@@ -11,7 +11,17 @@ _Duration: 2 Week Sprint_
 
 ## Screen Shots
 
-[]
+#### Registration
+![foraging-finds-register-gif](https://user-images.githubusercontent.com/46235932/205517000-5e612ffd-55f4-47e2-918a-a87c60a52eb4.gif)
+
+#### Map
+![foraging-finds-map-gif](https://user-images.githubusercontent.com/46235932/205517002-66b8ecd1-bd24-402b-8dfe-94bf01681f1c.gif)
+
+#### Add
+![ff-add-gif](https://user-images.githubusercontent.com/46235932/205517033-bb740ea9-c23f-4b9b-9f4b-d0dad4309184.gif)
+
+#### Edit 
+![ff-edit-gif](https://user-images.githubusercontent.com/46235932/205517044-1be4abf6-80e4-4ae2-af35-3844c558a034.gif)
 
 ## Prerequisites
 
