@@ -56,19 +56,30 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 // delete a pin if user is logged in
 router.delete('/', rejectUnauthenticated, (req, res) => {
   console.log('delete request for pin', req.body.id);
-  const sqlDeleteText = `DELETE FROM "pins" 
-  WHERE pins.id= $1 AND pins.user_id = $2;`;
-  const sqlDeleteParams = [req.body.id, req.user.id];
+  const sqlDeleteParams = [req.body.id];
+  const sqlDeleteCommentsText = `DELETE FROM "comments"
+  WHERE pin_id = $1;` ;
 
-  pool.query(sqlDeleteText, sqlDeleteParams)
+  pool.query(sqlDeleteCommentsText, sqlDeleteParams)
   .then(response => {
-    res.sendStatus(200);
+    const sqlDeleteText = `DELETE FROM "pins" 
+    WHERE pins.id= $1 AND user_id = $2 ;`;
+    const sqlDeleteParams = [req.body.id, req.user.id];
+
+    pool.query(sqlDeleteText, sqlDeleteParams)
+    .then(response => {
+      res.sendStatus(204);
+    })
+    .catch(err => {
+      console.error('error deleting pin');
+      res.sendStatus(500);
+    })
   })
   .catch(err => {
     // catch for delete pin
-    console.log('error deleting pin', err);
+    console.log('error deleting pin comments', err);
     res.sendStatus(500);
-  })
+  });
 });
 
 // get pin to edit

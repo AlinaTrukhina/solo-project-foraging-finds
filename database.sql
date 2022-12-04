@@ -10,15 +10,6 @@ CREATE TABLE "user" (
   OIDS=FALSE
 );
 
-CREATE TABLE "location" (
-	"id" serial NOT NULL,
-	"lat" varchar(255) NOT NULL,
-	"lng" varchar(255) NOT NULL,
-	CONSTRAINT "location_pk" PRIMARY KEY ("id")
-) WITH (
-  OIDS=FALSE
-);
-
 CREATE TABLE "pins" (
 	"id" serial NOT NULL,
 	"title" TEXT NOT NULL,
