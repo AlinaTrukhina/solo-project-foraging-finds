@@ -107,7 +107,7 @@ function AddPin() {
 
       console.log('newPin:', newPin);
       // console.log('userP is ', userP);
-      dispatch({
+      await dispatch({
         type: 'ADD_PIN',
         payload: newPin
       })
