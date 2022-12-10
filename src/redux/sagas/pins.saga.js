@@ -38,8 +38,6 @@ function* fetchSelectedPin(action) {
 function* pinsSaga() {
   yield takeLatest('FETCH_PINS', fetchPins);
 
-  yield takeLatest('ADD_PIN_W_NO_IMG', addPinNoImg);
-
   yield takeLatest('FETCH_SELECTED_PIN', fetchSelectedPin);
 }
 

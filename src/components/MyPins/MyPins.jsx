@@ -4,8 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import helpers from '../helpers.js';
 
 import { styled } from '@mui/material/styles';
-import { grey } from '@mui/material/colors';
-import Box from '@mui/material/Box';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
 import Card from '@mui/material/Card';
@@ -42,7 +40,8 @@ function MyPins(props) {
   // set original open state for the delete dialog window to false
   const [deleteOpen, setDeleteOpen] = useState(false);
   //open the delete diolog
-  const handleClickOpen = () => {
+  const handleClickOpen = (evt, pin) => {
+    evt.preventDefault();
     setDeleteOpen(true);
   };
   // close the delete dialog
@@ -137,7 +136,7 @@ function MyPins(props) {
           <Button size="small" onClick={(evt)=>goToDeteails(evt, pin)}>Details</Button>
           <Button size="small" disabled>Share</Button>
           <Button size="small" onClick={(evt)=>editPin(evt, pin)}>Edit</Button>
-          <Button size="small" onClick={handleClickOpen}>Delete</Button>
+          <Button size="small" onClick={(evt)=>handleClickOpen(evt, pin)}>Delete</Button>
             <Dialog
             open={deleteOpen}
             onClose={handleClose}
