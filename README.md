@@ -9,7 +9,9 @@ This version uses React, Redux, Express, Passport, and PostgreSQL (a full list o
 
 _Duration: 2 Week Sprint_
 
-## Screen Shots
+## Demo
+
+See the ![deployed version of the app here](https://foraging-finds.herokuapp.com/).
 
 #### Registration
 ![foraging-finds-register-gif](https://user-images.githubusercontent.com/46235932/205517000-5e612ffd-55f4-47e2-918a-a87c60a52eb4.gif)
