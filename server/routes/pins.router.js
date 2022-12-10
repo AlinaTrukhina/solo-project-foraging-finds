@@ -26,41 +26,6 @@ router.get('/', (req, res) => {
     });
 });
 
-/**
- * POST route to add pin
- */
-router.post('/', rejectUnauthenticated, (req, res) => {
-
-  pool.query(sqlTextImage, [req.body.img_url])
-  .then(response => {
-    console.log('new img id:', response.rows[0].id);
-    const newImgId = response.rows[0].id;
-    
-    const sqlTextPin = `INSERT INTO "pins" (
-      "title", "latin_name", 
-      "date", "image_id", "text_entry", 
-      "user_id", "lat", "lng")
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
-      ;`;
-
-    const sqlParamsPin = [req.body.title, req.body.latin_name, req.body.date, newImgId,
-      req.body.text_entry, req.user.id, req.body.lat, req.body.lng];
-    // second query to add pin
-    pool.query(sqlTextPin, sqlParamsPin)
-      .then(result => {
-        // send status: 'created' when both queries are done
-        res.sendStatus(201);
-      }).catch(err => {
-        // catch for second query
-        console.log('error in second adding pin query',err);
-        res.sendStatus(500);
-      })
-  }).catch(err => {
-    // catch for second query
-    console.log('error in first adding pin query', err);
-    res.sendStatus(500);
-  })
-});
 
 // get selected pin
 router.get('/:id', (req, res) => { 

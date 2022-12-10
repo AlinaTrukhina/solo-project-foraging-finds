@@ -6,6 +6,6 @@ button {
     border-radius: 5px;
 }
 
-input #file-upload-button {
+#file-upload-button {
     color: darkolivegreen;
 }
