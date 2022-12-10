@@ -163,15 +163,6 @@ function AddPin() {
           </Button>
         </Dialog>
         <img src={imgInput.img_url} />
-        {/* <TextField 
-          // onChange={handleUrlChange}
-          label="Image url"
-          disabled
-          fullWidth
-          id="imgInput"
-          size="small"
-          value={imgInput.img_url}
-        /> */}
         <TextField onChange={handleTextInputChange}
           value={textEntryInput}
           fullWidth
