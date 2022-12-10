@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
       res.send(dbResponse.rows)
     })
     .catch((err) => {
-      console.log('get all pins failed', err);
+      console.error('get all pins failed', err);
       res.sendStatus(500);
     });
 });
@@ -42,7 +42,7 @@ router.get('/:id', (req, res) => {
       res.send(dbResponse.rows[0]);
     })
     .catch((err) => {
-      console.log('get selected pin failed', err);
+      console.error('get selected pin failed', err);
       res.sendStatus(500);
     });
 })

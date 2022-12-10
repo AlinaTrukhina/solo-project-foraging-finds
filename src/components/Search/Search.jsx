@@ -31,7 +31,6 @@ function Search() {
   };
 
   const handleSearchByChange = (evt) => {
-    console.log('search by', evt.target.value);
     setSearchBy(evt.target.value);
   }
 
@@ -42,7 +41,6 @@ function Search() {
       searchTerm: searchTerm.toLowerCase(),
       searchBy: searchBy
     }
-    console.log('search params are', searchParams)
     dispatch({
       type: 'SEARCH_PINS',
       payload: searchParams

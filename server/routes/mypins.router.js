@@ -24,7 +24,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
       res.send(dbResponse.rows)
     })
     .catch((err) => {
-      console.log('get all pins failed', err);
+      console.error('get all pins failed', err);
       res.sendStatus(500);
     });
 });
@@ -48,14 +48,14 @@ router.post('/', rejectUnauthenticated, (req, res) => {
             res.sendStatus(201);
           }).catch(err => {
             // catch for second query
-            console.log('error in second adding pin query',err);
+            console.error('error in second adding pin query',err);
             res.sendStatus(500);
           });
 });
 
 // delete a pin if user is logged in
 router.delete('/', rejectUnauthenticated, (req, res) => {
-  console.log('delete request for pin', req.body.id);
+  // console.log('delete request for pin', req.body.id);
   const sqlDeleteParams = [req.body.id];
   const sqlDeleteCommentsText = `DELETE FROM "comments"
   WHERE pin_id = $1;` ;
@@ -77,7 +77,7 @@ router.delete('/', rejectUnauthenticated, (req, res) => {
   })
   .catch(err => {
     // catch for delete pin
-    console.log('error deleting pin comments', err);
+    console.error('error deleting pin comments', err);
     res.sendStatus(500);
   });
 });
@@ -97,7 +97,7 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
       res.send(dbResponse.rows[0])
     })
     .catch((err) => {
-      console.log('get pin to edit failed', err);
+      console.error('get pin to edit failed', err);
       res.sendStatus(500);
     });
 })
@@ -118,7 +118,7 @@ router.put('/:id/edit', rejectUnauthenticated, (req, res) => {
   })
   .catch(err => {
     // catch for delete pin
-    console.log('error editing pin', err);
+    console.error('error editing pin', err);
     res.sendStatus(500);
   })
 });

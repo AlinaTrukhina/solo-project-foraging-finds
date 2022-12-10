@@ -14,19 +14,19 @@ function UploadForm(){
 
     async function uploadImage (evt){
     evt.preventDefault();
-    console.log('the selected file is', selectedFile.file[0]);
+    // console.log('the selected file is', selectedFile.file[0]);
 
     let formData = new FormData();
     // appends the image to the object
       // name must match form input name so that this function can reference it
     formData.append('uploaded_file', selectedFile.file[0]);
-    console.log('form data is ', formData.entries());
+    // console.log('form data is ', formData.entries());
 
     axios.post('/upload', formData);
 
     const newImage = await axios.get('/upload');
 
-    console.log('new image is:', newImage);
+    // console.log('new image is:', newImage);
 
     dispatch({
       type: 'SET_NEW_IMAGE',
@@ -38,7 +38,7 @@ function UploadForm(){
   const handleInput = (evt) => {
     console.log(evt.target.files);
     setSelectedFile({file: evt.target.files});
-    console.log(selectedFile);
+    // console.log(selectedFile);
   }
 
   return (

@@ -51,13 +51,6 @@ function App() {
         dark: '#A29652',
       },
     },
-    components: {
-      MuiButton: {
-        styleOverrides: {
-          color: '#FFF'
-        },
-      },
-    },
   });
 
   return (

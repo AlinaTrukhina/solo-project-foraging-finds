@@ -25,7 +25,7 @@ router.get('/:id', (req, res) => {
       res.send(dbResponse.rows);
     })
     .catch((err) => {
-      console.log('get all comments failed', err);
+      console.error('get all comments failed', err);
       res.sendStatus(500);
     });
 });
@@ -48,7 +48,7 @@ pool.query(sqlText, sqlParams)
     res.sendStatus(201);
   })
   .catch((err) => {
-    console.log('post comment failed', err);
+    console.error('post comment failed', err);
     res.sendStatus(500);
   });
 })

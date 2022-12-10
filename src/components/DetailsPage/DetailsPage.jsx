@@ -57,7 +57,6 @@ function DetailsPage() {
       user_id: user.id,
       pin_id: params.id
     }
-    console.log('new comment:', newComment);
 
     dispatch({
       type: 'ADD_COMMENT',

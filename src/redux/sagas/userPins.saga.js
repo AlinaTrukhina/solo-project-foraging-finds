@@ -3,17 +3,16 @@ import axios from 'axios';
 
 // worker Saga: will be fired on "REGISTER" actions
 function* fetchUserPins() {
-  console.log('in fetch pins');
   try {
     // request to server to get all pins from database
     const dbResponse = yield axios.get('/mypins');
-    console.log('db response after GET request is:', dbResponse);
+    // console.log('db response after GET request is:', dbResponse);
 
     // set reducer to the data we got from database
     yield put({ type: 'SET_USER_PINS', payload: dbResponse.data });
 
   } catch (error) {
-    console.log('Error fetching user pins:', error);
+    console.error('Error fetching user pins:', error);
     alert('could not load your pins!');
   }
 }
@@ -28,7 +27,7 @@ function* addPin(action) {
     // set reducer to the data we got from database
     yield put({ type: 'SET_ALL_PINS', payload: dbResponse.data });    
   } catch (error) {
-    console.log('Error adding pin:', error);
+    console.error('Error adding pin:', error);
     alert('could not add pin!');
   }
 }
@@ -36,7 +35,7 @@ function* addPin(action) {
 // delete a pin
 function* deletePin(action) {
   try {
-    console.log('in delete pin saga, pin is', action.payload);
+    // console.log('in delete pin saga, pin is', action.payload);
     yield axios.delete(`/mypins`, {data: action.payload});
 
     yield put({
@@ -44,7 +43,7 @@ function* deletePin(action) {
     });    
     yield put ({type: 'FETCH_USER_PINS'})
   } catch (error) {
-    console.log('Error deleting pin:', error);
+    console.error('Error deleting pin:', error);
     alert('could not delete pin!');
   }
 }
@@ -53,11 +52,11 @@ function* deletePin(action) {
 function* editPin(action){
   try {
     const pinToEdit = yield axios.get(`/mypins/${action.payload}`);
-    console.log('pin to edit is', {pinToEdit});
+    // console.log('pin to edit is', {pinToEdit});
 
     yield put ({type: 'SET_EDIT PIN', payload: pinToEdit.data})
   } catch (error) {
-    console.log('Error edit pin:', error);
+    console.error('Error edit pin:', error);
     alert('could not edit pin!');
   }
 }
@@ -67,7 +66,7 @@ function* saveEditedPin(action){
     yield axios.put(`/mypins/${action.payload.id}/edit`, action.payload)
     alert('your pin is updated!')
   } catch (error) {
-    console.log('Error saving updated pin:', error);
+    console.error('Error saving updated pin:', error);
     alert('could not save updated pin!');
   }
 }

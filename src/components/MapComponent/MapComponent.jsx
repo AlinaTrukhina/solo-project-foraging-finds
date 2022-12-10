@@ -67,24 +67,22 @@ function MapComponent() {
 
   // useCallback ishook to avoid re-rendering the map all the time on any action
   // onMapClick will add a marker at position of click to markers array
-  const onMapClick = React.useCallback((evt) => { 
-    setMarkers((current) => [
-      ...current, 
-      {
-      lat: evt.latLng.lat(),
-      lng: evt.latLng.lng(),
-      time: new Date(),
-      },
-    ]);
-  //console.log('markers are', markers);
-  }, []);
+  // const onMapClick = React.useCallback((evt) => { 
+  //   setMarkers((current) => [
+  //     ...current, 
+  //     {
+  //     lat: evt.latLng.lat(),
+  //     lng: evt.latLng.lng(),
+  //     time: new Date(),
+  //     },
+  //   ]);
+  // }, []);
 
   const toUserPosition = React.useCallback((evt) => {
     navigator.geolocation.getCurrentPosition(
       (position) => {   
-        console.log('user position is', 
-        {lat: position.coords.latitude, lng: position.coords.longitude})
-        console.log(position);
+        // console.log('user position is', 
+        // {lat: position.coords.latitude, lng: position.coords.longitude});
         setUserPosition({lat: position.coords.latitude, lng: position.coords.longitude});
       }, 
       () => null

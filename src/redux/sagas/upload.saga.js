@@ -3,7 +3,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 import FormData from "form-data";
 
 function* uploadImage(action) {
-    console.log('uploading images:', action.payload);
+    // console.log('uploading images:', action.payload);
 
     // make FormData object
     let formData = new FormData();
@@ -11,7 +11,7 @@ function* uploadImage(action) {
         // name must match form input name so that this function can reference it
       formData.append('uploaded_file', action.payload[0]);
 
-    console.log('formData', formData.entries());
+    // console.log('formData', formData.entries());
 
   try {
       // POST route to server

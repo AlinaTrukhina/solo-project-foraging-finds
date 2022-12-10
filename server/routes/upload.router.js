@@ -25,7 +25,7 @@ const upload = multer({
  * POST route template
  */
 router.post('/', rejectUnauthenticated, upload.single('uploaded_file'), function (req, res, err) {
-
+  // add the image to image table
   const sqlTextImage = `INSERT INTO "images" ("img_url")
     VALUES ($1)
     ;`;
@@ -33,11 +33,10 @@ router.post('/', rejectUnauthenticated, upload.single('uploaded_file'), function
   sqlParams = [`/images/` + req.file.filename]
 
   pool.query(sqlTextImage, sqlParams)
-  // POST route code here
   .then(result => {
     res.sendStatus(201);
   }).catch(err => {
-    console.log('error in posting image', err);
+    console.error('error in posting image', err);
     res.sendStatus(500);
   });
   

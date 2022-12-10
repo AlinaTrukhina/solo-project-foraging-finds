@@ -75,7 +75,7 @@ function AddPin() {
 
       navigator.geolocation.getCurrentPosition((position) => {
         const userP = {lat: position.coords.latitude, lng: position.coords.longitude}
-        console.log('userP', userP);
+        // console.log('userP', userP);
         resolve(userP);
       }, reject);
     });  
@@ -105,8 +105,7 @@ function AddPin() {
       lng: userP.lng
       }
 
-      console.log('newPin:', newPin);
-      // console.log('userP is ', userP);
+      // console.log('newPin:', newPin);
       await dispatch({
         type: 'ADD_PIN',
         payload: newPin
