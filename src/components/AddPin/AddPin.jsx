@@ -86,8 +86,8 @@ function AddPin() {
   // coordinates are from user position
   async function addPin(evt) {
     evt.preventDefault;
-    if (titleInput === '' || latinNameInput === '') {
-      alert('Please fill in required fields!');
+    if (titleInput === '') {
+      alert('Please fill in title!');
       return;
     }
     try {
