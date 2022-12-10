@@ -57,7 +57,7 @@ function Nav() {
           onClick={() => setIsDrawerOpen(false)}>USER PROFILE</Link>
         </ListItem>
         <ListItem className='navListItem'>
-          <Link to='/info' className='navListItemLink'
+          <Link to='/map' className='navListItemLink'
           onClick={handleInfoClick}>MAP</Link>
         </ListItem>
         <ListItem className='navListItem'>
@@ -77,7 +77,7 @@ function Nav() {
     >
       Menu
     </Button>
-    <Link to="/info" className='navLink'
+    <Link to="/map" className='navLink'
     onClick={handleInfoClick}>
       <h2 className="nav-title">Foraging Finds</h2>
     </Link>

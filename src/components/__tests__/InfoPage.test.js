@@ -7,17 +7,3 @@ afterEach(() => {
     cleanup();
 })
 
-// info page test
-test('should render info page component', () => {
-    render(<InfoPage />);
-    const InfoPageComponent = screen.getByTestId('infopage-test');
-    expect(InfoPageComponent).toBeInTheDocument();
-    //expect(InfoPageComponent).toHaveTextContent('Info');
-});
-
-// Add Pin test
-test('should render Add Pin component', () => {
-    render(<AddPin />);
-    const AddPinComponent = screen.getByTestId('add-pin-test');
-    expect(AddPinComponent).toBeInTheDocument();
-})
