@@ -50,8 +50,8 @@ function MapComponent() {
   };
   // create a center point
   const center = {
-    lat: 44.986255478183345, 
-    lng: -93.32462156101973
+    lat: 44.9862, 
+    lng: -93.3246
   };
   // disable UI and add in the zoom controls
   const options = {
@@ -81,8 +81,8 @@ function MapComponent() {
   const toUserPosition = React.useCallback((evt) => {
     navigator.geolocation.getCurrentPosition(
       (position) => {   
-        // console.log('user position is', 
-        // {lat: position.coords.latitude, lng: position.coords.longitude});
+        console.log('user position is', 
+        {lat: position.coords.latitude.toFixed(4), lng: position.coords.longitude.toFixed(4)});
         setUserPosition({lat: position.coords.latitude, lng: position.coords.longitude});
       }, 
       () => null

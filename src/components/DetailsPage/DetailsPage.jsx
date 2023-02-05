@@ -33,7 +33,7 @@ function DetailsPage() {
     })
   }, [params.id]);
 
-  //TODO: figure out how to pass the selected object to DetailsPage
+  
   const selectedPin = useSelector(store => store.selectedPin);
   const user = useSelector(store => store.user);
   const comments = useSelector(store => store.comments);
@@ -79,6 +79,7 @@ function DetailsPage() {
       </Button>
     </Box>
       <section>
+        
         <Typography component="h2" variant="h5" marginTop="10px">
           {selectedPin.title}
         </Typography>
