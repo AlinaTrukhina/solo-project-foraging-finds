@@ -81,7 +81,7 @@
   font-weight: bold;
 }
 
-#logOutArea {
+.logOutArea {
   position: absolute;
   top: 0px;
   right: 10px;

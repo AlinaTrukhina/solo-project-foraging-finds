@@ -32,7 +32,7 @@ function Nav() {
   }
 
   return (
-    <div className="nav-container" id="landing-page">
+    <div className="nav-container landing-page">
     <Drawer 
       anchor="top"
       open={isDrawerOpen}
@@ -81,7 +81,7 @@ function Nav() {
     onClick={handleInfoClick}>
       <h2 className="nav-title">Foraging Finds</h2>
     </Link>
-    <div id='logOutArea'>
+    <div className='logOutArea'>
     {user.id ? <LogOutButton /> : (
     // If there's no user, show login/registration links
       <Link className="navLink" to="/login">

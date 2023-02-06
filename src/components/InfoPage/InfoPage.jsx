@@ -11,6 +11,7 @@ function InfoPage() {
 
   useEffect(() => {
     dispatch({type: 'FETCH_PINS'})
+    console.log(allPins);
   }, [])
 
   return (
