@@ -120,7 +120,8 @@ function MapComponent() {
           A pretty CSS3 popup. <br /> Easily customizable.
         </Popup>
       </Marker>
-      {allPins.map(marker => (
+      if (!userPins[0]) {
+      allPins.map(marker => (
             <Marker key={marker.id} 
             position={[Number(marker.lat), Number(marker.lng)]}
             // change the icon to a mushroom
@@ -132,61 +133,44 @@ function MapComponent() {
               })
             }}>
               <Popup>
-                Details
+                {marker.title} <br />
+                <Router>
+                <Link  to={`/details/${marker.id}`}> 
+                  Details
+                </Link>
+                </Router>
+                <br />
+                {Number(marker.lat).toFixed(4)}, {Number(marker.lng).toFixed(4)}
               </Popup>
             </Marker>
-          ))}
-    </MapContainer>
-{/*     
-        {/* add a marker at the center of map */}
-
-
-{/* Conditional rendering to either put user pins or all pins on map */}
-          {/* puts user pins on map */}
-          {/* {userPins.map(marker => (
+          )) }
+          // {/* Conditional rendering to either put user pins or all pins on map */}
+          // {/* puts user pins on map */}
+          {userPins.map(marker => (
           <Marker key={marker.id} 
-          position={{lat: Number(marker.lat), lng: Number(marker.lng)}}
+          position={[Number(marker.lat), Number(marker.lng)]}
           // change the icon to a mushroom
-          icon={{
-            url: '/svg/mushrooms-2-mushrooms.svg',
-            scaledSize: new window.google.maps.Size(30,30),
-            // sets origin to the point where user clicked
-            origin: new window.google.maps.Point(0, 0),
-            // sets anchor to half the size so that the icon center appears on the origin point
-            anchor: new window.google.maps.Point(15, 15)
-          }}  
           // set the clicked marker as selected
           onClick={()=>{
             dispatch({
               type: 'SET_SELECTED_PIN',
               payload: marker
             })
-          }}
-          />
-          ))} */}
-
-          {/* render all pins from store on map */}
-          {/* {allPins.map(marker => (
-            <Marker key={marker.id} 
-            position={{lat: Number(marker.lat), lng: Number(marker.lng)}}
-            // change the icon to a mushroom
-            icon={{
-              url: '/svg/mushrooms-2-mushrooms.svg',
-              scaledSize: new window.google.maps.Size(30, 30),
-              // sets origin to the point where user clicked
-              origin: new window.google.maps.Point(0, 0),
-              // sets anchor to half the size so that the icon center appears on the origin point
-              anchor: new window.google.maps.Point(15, 15)
-            }}  
-            // set the clicked marker as selected
-            onClick={()=>{
-              dispatch({
-                type: 'SET_SELECTED_PIN',
-                payload: marker
-              })
-            }}
-            />
-          ))} */}
+          }}>
+            <Popup>
+              {marker.title} <br />
+              <Router>
+              <Link  to={`/details/${marker.id}`}> 
+                Details
+              </Link>
+              </Router>
+              <br />
+              {Number(marker.lat).toFixed(4)}, {Number(marker.lng).toFixed(4)}
+            </Popup>
+          </Marker>))}
+    </MapContainer>
+{/*  
+        {/* add a marker at the center of map */}
 
         {/* <Marker key={selectedPin.id} 
           position={{lat: Number(selectedPin.lat), lng: Number(selectedPin.lng)}}
