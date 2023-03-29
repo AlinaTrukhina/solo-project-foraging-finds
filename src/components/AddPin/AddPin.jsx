@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from "react-router-dom";
+import axios from "axios";
 
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
@@ -19,6 +20,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
 import UploadForm from "../UploadForm/UploadForm";
+import newImage from "../../redux/reducers/newImage.reducer";
 
 
 function AddPin() {
@@ -57,9 +59,9 @@ function AddPin() {
     setLatinName(evt.target.value);
   };
 
-  const handleUrlChange = (evt) => {
-    setUrl(evt.target.value);
-  };
+  // const handleUrlChange = (evt) => {
+  //   setUrl(evt.target.value);
+  // };
 
   const handleTextInputChange = (evt) => {
     setTextInput(evt.target.value);
@@ -93,17 +95,19 @@ function AddPin() {
     try {
       setLoading(true);
       const userP =  await getUserPosition();
-      
+
+      const newImage = await axios.get('/upload');
+      const newImageId = newImage.data.id;
       const newPin = {
       title: titleInput,
       latin_name: latinNameInput,
       date: new Date().toISOString(),
-      img_id: imgInput.id,
-      img_url: imgInput.url,
+      img_id: newImageId,
+      // img_url: newImage.url,
       text_entry: textEntryInput,
       lat: userP.lat,
       lng: userP.lng
-      }
+      } 
 
       // console.log('newPin:', newPin);
       await dispatch({

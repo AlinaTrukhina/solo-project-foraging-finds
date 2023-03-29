@@ -28,12 +28,15 @@ router.post('/', rejectUnauthenticated, upload.single('uploaded_file'), function
   // add the image to image table
   const sqlTextImage = `INSERT INTO "images" ("img_url")
     VALUES ($1)
+    RETURNING id
     ;`;
   
-  sqlParams = [`/images/` + req.file.filename]
-
+  sqlParams = [`/images/` + req.file.filename];
+  console.log(sqlParams);
   pool.query(sqlTextImage, sqlParams)
   .then(result => {
+    console.log(result.rows);
+    // res.send(result.rows);
     res.sendStatus(201);
   }).catch(err => {
     console.error('error in posting image', err);
@@ -45,7 +48,10 @@ router.post('/', rejectUnauthenticated, upload.single('uploaded_file'), function
 // use async/await instead of .then.catch for practice
 router.get('/', rejectUnauthenticated, async (req, res) => {
   try {
-    let dbRes = await pool.query('SELECT * FROM images ORDER BY ID DESC');
+    let dbRes = await pool.query(`SELECT * FROM images 
+    ORDER BY ID DESC
+    LIMIT 1;
+    `);
 
     res.send(dbRes.rows[0]);
   }

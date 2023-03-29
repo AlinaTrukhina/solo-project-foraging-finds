@@ -65,7 +65,7 @@ function MapComponent() {
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
   });
 
-  // useCallback ishook to avoid re-rendering the map all the time on any action
+  // useCallback is hook to avoid re-rendering the map all the time on any action
   // onMapClick will add a marker at position of click to markers array
   // const onMapClick = React.useCallback((evt) => { 
   //   setMarkers((current) => [

@@ -32,6 +32,21 @@ function* addPin(action) {
   }
 }
 
+// add pin image
+function* addPinImage(action) {
+  try {
+    yield axios.post('/mypins/image', action.payload);
+
+    const dbResponse = yield axios.get('/pins');
+
+    // set reducer to the data we got from database
+    yield put({ type: 'SET_ALL_PINS', payload: dbResponse.data });    
+  } catch (error) {
+    console.error('Error adding pin image:', error);
+    alert('could not add pin!');
+  }
+}
+
 // delete a pin
 function* deletePin(action) {
   try {
@@ -75,6 +90,8 @@ function* userPinsSaga() {
   yield takeLatest('FETCH_USER_PINS', fetchUserPins);
 
   yield takeLatest('ADD_PIN', addPin);
+
+  yield takeLatest('ADD_PIN_IMAGE', addPinImage);
 
   yield takeLatest('DELETE_PIN', deletePin);
 

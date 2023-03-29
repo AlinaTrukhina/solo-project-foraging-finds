@@ -1,15 +1,10 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
-const {
-  rejectUnauthenticated,
-} = require('../modules/authentication-middleware');
 
-/**
- * GET all pins from database
- */
+//GET all pins from database
 router.get('/', (req, res) => {
-  // GET route code here
+  // sql query:
   const sqlText = `SELECT "pins"."id", "title", "latin_name", "date", "text_entry", "lat", "lng", "img_url"
   FROM "pins"
   JOIN "images" ON images.id = pins.image_id

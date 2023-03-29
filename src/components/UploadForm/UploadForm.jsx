@@ -22,13 +22,13 @@ function UploadForm(){
     formData.append('uploaded_file', selectedFile.file[0]);
     // console.log('form data is ', formData.entries());
 
-    axios.post('/upload', formData);
+    await axios.post('/upload', formData);
 
     const newImage = await axios.get('/upload');
 
     // console.log('new image is:', newImage);
 
-    dispatch({
+    await dispatch({
       type: 'SET_NEW_IMAGE',
       payload: newImage.data
     })
