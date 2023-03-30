@@ -1,4 +1,5 @@
 const express = require('express');
+var path = require('path');
 const bodyParser = require('body-parser');
 require('dotenv').config();
 
@@ -41,7 +42,12 @@ app.use('/upload', uploadRouter);
 
 
 // Serve static files
-app.use(express.static('build'));
+// app.use(express.static('build'));
+app.use("/", express.static(path.join(__dirname, 'build')));
+
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
 // App Set //
 const PORT = process.env.PORT || 5001;
