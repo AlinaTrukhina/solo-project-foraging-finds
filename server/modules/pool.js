@@ -1,5 +1,3 @@
-
-
 const pg = require('pg');
 let pool;
 
