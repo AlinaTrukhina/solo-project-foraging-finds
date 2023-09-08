@@ -126,6 +126,7 @@ function AddPin() {
       setTextInput('');
     } catch (error) {
       console.error('addPin error is', error);
+      alert('error uploading image', error);
     }
   }
 
@@ -167,7 +168,9 @@ function AddPin() {
             Done
           </Button>
         </Dialog>
-        <img src={imgInput.img_url} />
+        {/* <img src={imgInput.img_url} /> */}
+        <p>{imgInput.img_url}</p>
+        <img src={imgInput.img_url} alt="" />
         <TextField onChange={handleTextInputChange}
           value={textEntryInput}
           fullWidth
