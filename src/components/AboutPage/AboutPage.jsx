@@ -1,5 +1,5 @@
 import React from 'react';
-import image from './/..//..//img/rodo-redwoods_big.jpg';
+import image from './/..//..//img/lake-profile-picture.jpg';
 
 // This is one of our simplest components
 // It doesn't have local state,
@@ -37,7 +37,7 @@ function AboutPage() {
           <li>Search for mushrooms by features – color, cap type, grows on wood or ground</li>
         </ul>
         <p>Thanks to Prime Digital Academy, my classmates in the Ramirez cohort, and my family and friends for their support</p>
-        {/* <img src={image} alt="photo" /> */}
+        <img src={image} alt="photo" />
       </div>
     </div>
   );

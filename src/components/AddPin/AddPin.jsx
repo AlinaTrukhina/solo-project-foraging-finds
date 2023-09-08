@@ -18,8 +18,6 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
 import UploadForm from "../UploadForm/UploadForm";
-import newImage from "../../redux/reducers/newImage.reducer";
-
 import scrollToTop from './/..//helpers';
 
 
@@ -168,9 +166,8 @@ function AddPin() {
             Done
           </Button>
         </Dialog>
-        {/* <img src={imgInput.img_url} /> */}
+        <img src={process.env.PUBLIC_URL + imgInput.img_url} />
         <p>{imgInput.img_url}</p>
-        <img src={imgInput.img_url} alt="" />
         <TextField onChange={handleTextInputChange}
           value={textEntryInput}
           fullWidth

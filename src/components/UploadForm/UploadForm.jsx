@@ -26,7 +26,7 @@ function UploadForm(){
 
     const newImage = await axios.get('/upload');
 
-    // console.log('new image is:', newImage);
+    console.log('new image is:', newImage);
 
     await dispatch({
       type: 'SET_NEW_IMAGE',
