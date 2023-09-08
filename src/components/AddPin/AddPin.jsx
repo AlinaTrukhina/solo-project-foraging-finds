@@ -4,9 +4,7 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
@@ -21,6 +19,8 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 import UploadForm from "../UploadForm/UploadForm";
 import newImage from "../../redux/reducers/newImage.reducer";
+
+import scrollToTop from './/..//helpers';
 
 
 function AddPin() {
@@ -88,6 +88,7 @@ function AddPin() {
   // coordinates are from user position
   async function addPin(evt) {
     evt.preventDefault;
+    scrollToTop();
     if (titleInput === '') {
       alert('Please fill in title!');
       return;

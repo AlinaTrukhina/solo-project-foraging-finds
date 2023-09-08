@@ -23,6 +23,8 @@ import { Button } from '@mui/material';
 import { Container } from '@mui/system';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
+import scrollToTop from './/..//helpers';
+
 function MyPins(props) {
   // declare hooks here
   const dispatch = useDispatch();
@@ -68,7 +70,7 @@ function MyPins(props) {
 
   const selectPin = (pin) => {
     dispatch({type: 'SET_SELECTED_PIN', payload: pin});
-    helpers.scrollToMap()
+    helpers.scrollToMap();
   }
 
   // expand more content 
