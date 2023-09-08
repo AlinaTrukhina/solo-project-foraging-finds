@@ -18,7 +18,6 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
 import UploadForm from "../UploadForm/UploadForm";
-import scrollToTop from './/..//helpers';
 
 
 function AddPin() {
@@ -86,7 +85,6 @@ function AddPin() {
   // coordinates are from user position
   async function addPin(evt) {
     evt.preventDefault;
-    scrollToTop();
     if (titleInput === '') {
       alert('Please fill in title!');
       return;
@@ -167,6 +165,7 @@ function AddPin() {
           </Button>
         </Dialog>
         <img src={process.env.PUBLIC_URL + imgInput.img_url} />
+        <img src="" alt="" />
         <p>{imgInput.img_url}</p>
         <TextField onChange={handleTextInputChange}
           value={textEntryInput}

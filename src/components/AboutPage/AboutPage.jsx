@@ -1,5 +1,5 @@
 import React from 'react';
-import image from './/..//..//img/lake-profile-picture.jpg';
+import image from './/..//../img/lake-profile-picture.jpg';
 
 // This is one of our simplest components
 // It doesn't have local state,
