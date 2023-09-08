@@ -5,16 +5,16 @@ require('dotenv').config();
 
 const app = express();
 
-const sessionMiddleware = require('./modules/session-middleware');
-const passport = require('./strategies/user.strategy');
+const sessionMiddleware = require('./server/modules/session-middleware');
+const passport = require('./server/strategies/user.strategy');
 
 // Route includes
-const userRouter = require('./routes/user.router');
-const pinsRouter = require('./routes/pins.router');
-const commentsRouter = require('./routes/comments.router');
-const searchRouter = require('./routes/search.router');
-const myPinsRouter = require('./routes/mypins.router')
-const uploadRouter = require('./routes/upload.router');
+const userRouter = require('./server/routes/user.router');
+const pinsRouter = require('./server/routes/pins.router');
+const commentsRouter = require('./server/routes/comments.router');
+const searchRouter = require('./server/routes/search.router');
+const myPinsRouter = require('./server/routes/mypins.router')
+const uploadRouter = require('./server/routes/upload.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
