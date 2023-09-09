@@ -164,8 +164,7 @@ function AddPin() {
             Done
           </Button>
         </Dialog>
-        <img src={process.env.PUBLIC_URL + imgInput.img_url} />
-        <img src="" alt="" />
+        <img src={process.env.PUBLIC_URL + imgInput.img_url} /> 
         <p>{imgInput.img_url}</p>
         <TextField onChange={handleTextInputChange}
           value={textEntryInput}

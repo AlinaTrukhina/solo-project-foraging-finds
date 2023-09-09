@@ -10,6 +10,7 @@ const {
 // set up storage folder for image upload with file name
 const storage = multer.diskStorage({
   destination: 'public/images/' ,
+  // destination: './/..//..//src/img/',
   filename: function (req, file, cb) {
     cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
   }
@@ -31,6 +32,7 @@ router.post('/', rejectUnauthenticated, upload.single('uploaded_file'), function
     RETURNING id
     ;`;
   
+    // sqlParams = [`.//..//../src/img/` + req.file.filename];
   sqlParams = [`/images/` + req.file.filename];
   console.log(sqlParams);
   pool.query(sqlTextImage, sqlParams)
