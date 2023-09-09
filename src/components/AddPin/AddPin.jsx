@@ -165,7 +165,7 @@ function AddPin() {
           </Button>
         </Dialog>
         <img src={process.env.PUBLIC_URL + imgInput.img_url} /> 
-        <p>{imgInput.img_url}</p>
+        {console.log(imgInput.img_url)}
         <TextField onChange={handleTextInputChange}
           value={textEntryInput}
           fullWidth
